@@ -1,0 +1,173 @@
+$wapClass:'.wap';
+$webClass:'.web';
+
+//$wapClass:'';
+//$webClass:'';
+
+//区分app和区分pc
+//$if($CssSwitchPC){
+//  &#{$pcClass}{}
+//}
+//$if($CssSwitchApp){
+//  &#{$appClass}{}
+//}
+
+
+//app主导航高度
+$wap-mainNav-height:49px;
+//app logo高度
+$wap-log-height:50px;
+
+//web主导航高度
+$web-mainNav-height:90px;
+$web-max-screen-width:1920px;
+$web-default-screen-width:1200px;
+
+
+$font-size-px:            0.0625rem; // ~1px
+$rem:            0.0625rem; // ~1px
+
+//单位(暂时用只用px)
+$unit:px;
+$unit_px:px;
+$unit_em:em;
+$unit_rem:rem;
+
+$font-size-h1:            ($rem * 24);
+$font-size-h2:            ($rem * 18);
+$font-size-h3:            ($rem * 14);
+$font-size-h4:            ($rem * 12);
+$font-size-h5:            ($rem * 10);
+$font-size-h6:            ($rem * 8);
+
+@function unitRem($size){
+  @return ($rem * $size);
+}
+
+$font-size-h1-px:            (24px);
+$font-size-h2-px:            (18px);
+$font-size-h3-px:            (14px);
+$font-size-h4-px:            (12px);
+$font-size-h5-px:            (10px);
+$font-size-h6-px:            (8px);
+
+$font-size-h1-px-web:            (26px);
+$font-size-h2-px-web:            (20px);
+$font-size-h3-px-web:            (16px);
+$font-size-h4-px-web:            (14px);
+$font-size-h5-px-web:            (12px);
+$font-size-h6-px-web:            (10px);
+
+$font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-serif:       Georgia, "Times New Roman", Times, serif;
+$font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
+$font-family-base:        $font-family-sans-serif;
+
+$zindex-navbar:            10000;
+$zindex-dropdown:          10000;
+$zindex-popover:           10060;
+$zindex-tooltip:           10070;
+$zindex-navbar-fixed:      10030;
+$zindex-modal-background:  10040;
+$zindex-modal:             10050;
+$zindex-detail-view:       11000;
+
+
+//主题色
+$theme-color-one:#ff6357;
+$theme-color-two: #fcff46;
+//字体颜色
+$theme-font-active-color: $theme-color-one;
+$theme-font-color:#555;
+$theme-font-disable-color:#999;
+
+$theme-font-big-title-size: $font-size-h2-px;
+$theme-font-title-size: $font-size-h3-px;
+$theme-font-small-title-size: ($font-size-h3-px - ($font-size-h3-px - $font-size-h4-px) / 2);
+$theme-font-value-size:$font-size-h4-px;
+$theme-font-detail-size:$font-size-h5-px;
+
+$theme-font-big-title-size-web: $font-size-h2-px-web;
+$theme-font-title-size-web: $font-size-h3-px-web;
+$theme-font-small-title-size-web: ($font-size-h3-px-web - ($font-size-h3-px-web - $font-size-h4-px-web) / 2);
+$theme-font-value-size-web:$font-size-h4-px-web;
+$theme-font-detail-size-web:$font-size-h5-px-web;
+
+
+//主导航字体颜色
+$mainNav-font-color:#666;
+$mainNav-font-active-color:$theme-font-active-color;
+
+//初始化
+*{outline:none;
+  font-family: $font-family-monospace;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select:auto;
+  -moz-user-select:text;
+}
+body,div,ul,dl,li,ol,h1,h2,h3,h4,h5,h6,dt,dd,img,a,span,p,table,td,i,input,button,textarea,form{padding:0;margin:0;border:none;}
+ul,li,dl,dt,dd,ol{list-style:none;}
+h1,h2,h3,h4{color:#333;}
+a,span,p,font,b,i,strong{font-size:inherit;font-weight: normal;}
+em{font-style:normal;}
+i{font-style:normal;}
+a{color:#333;text-decoration:none;}
+img{max-height: 100%;max-width: 100%};
+
+a:link { text-decoration: none;}
+a:active { text-decoration:blink}
+a:hover { text-decoration:none;}
+a:visited { text-decoration: none;}
+html{
+  font-size: 12px;
+  font-weight: 400;
+  color: $theme-font-color;
+}
+body{
+  font-size: 12px;
+}
+html,body{
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 720px){
+  .adaption-auto{width: 100%;height: 100%;}
+  #J_Main{width: 100%;height: 100%;}
+}
+
+@media (max-width: 320px) {
+  html{font-size: 16px}
+}
+@media (min-width: 321px) and (max-width: 340px) {
+  html{font-size: 17px}
+}
+@media (min-width: 341px) and (max-width: 360px) {
+  html{font-size: 18px}
+}
+@media (min-width: 361px) and (max-width: 380px) {
+  html{font-size: 19px}
+}
+@media (min-width: 381px) and (max-width: 400px) {
+  html{font-size: 20px}
+}
+@media (min-width: 401px) and (max-width: 420px) {
+  html{font-size: 21px}
+}
+@media (min-width: 421px) and (max-width: 440px) {
+  html{font-size: 22px}
+}
+@media (min-width: 441px) and (max-width: 460px) {
+  html{font-size: 23px}
+}
+@media (min-width: 461px) and (max-width: 480px) {
+  html{font-size: 24px}
+}
+@media (min-width: 481px) and (max-width: 767px) {
+  html{font-size: 28px}
+}
+@media (min-width: 768px) {
+  html{font-size: 36px}
+}
+

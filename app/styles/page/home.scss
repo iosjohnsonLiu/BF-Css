@@ -1,0 +1,61 @@
+@mixin home-web(){
+
+}
+
+@mixin home-wap(){
+
+  .flex-fullscreen{
+    @include square(100%);
+    @include displayFlex();
+    @include flexDirectionColumn();
+    .menu-box{
+      height: auto;
+      @include flex(1);
+    }
+  }
+  .menu-box{
+    position: relative;
+    height: calc( 100% - 66.7vw - #{$wap-log-height});
+    ul{
+      $space:4px;
+      @include clearfix();
+      @include square(100%);
+      padding: ($space/2);
+      >li{
+        @include square(50%);
+        float: left;
+        padding: ($space/2);
+        display: table;
+        a{
+          @include square(100%);
+          display: table-cell;
+          vertical-align: middle;
+          text-align: center;
+          color: #fff;
+        }
+        @each $index, $color in (1, #f8c560),(2, #76c8d0),(3, #67bc94),(4, #f58b99) {
+          &:nth-child(#{$index})>a{
+            background-color: $color;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+@mixin home(){
+  @if($CssSwitchWeb){
+    &#{$webClass}{
+      @include home-web();
+    }
+  }
+  @if($CssSwitchWap){
+    &#{$wapClass}{
+      @include home-wap();
+    }
+  }
+}
+.m-home{
+  @include home();
+}

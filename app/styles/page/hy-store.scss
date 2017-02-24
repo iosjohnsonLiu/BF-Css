@@ -1,0 +1,194 @@
+@mixin hy-store-web(){
+  .store-list-box{
+    width: $web-default-screen-width;
+    margin: 30px auto;
+    >.title,>.sift-box{
+      background-color: #fff;
+    }
+
+    >.title{
+      position: relative;
+      font-size: $theme-font-big-title-size;
+      padding: {
+        top: 20px;
+        left: 10px;
+      };
+      vertical-align: middle;
+      &:before{
+        content: " ";
+        display: inline-block;
+        margin-right: 4px;
+        height: 16px;
+        width: 3px;
+        vertical-align: middle;
+        background-color: $theme-color-one;
+      }
+    }
+    >.sift-box{
+      padding: {
+        bottom: 20px;
+        left: 10px;
+      };
+      @include clearfix();
+      >li{
+        float: left;
+        padding: 4px 12px;
+        font-size: $font-size-h4-px-web;
+        border: 1px solid #ccc;
+        color: #666;
+        font-weight: 400;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: {
+          top: 10px;
+          right: 10px;
+        };
+        &.active{
+          color: $theme-font-active-color;
+          border-color: $theme-font-active-color;
+        }
+      }
+    }
+    >.item-list{
+      @include list($colum:3,$space:20px,$margin:0px,$photo-scale:2/3,$info-h:140px);
+      margin-top: 30px;
+      li{
+        background-color: #fff;
+        $space:10px;
+        .info-box{
+          padding: $space $space*2;
+          padding-bottom: $space + 30px;
+          position: relative;
+        }
+        .title{ font-size:$theme-font-title-size-web;margin-bottom: $space;display: block;}
+        .address{
+          margin-bottom: ($space/2);
+          color: $theme-font-color;font-size: $theme-font-value-size-web;display: block;
+          &:before{
+            content: "门店地址:";
+            color: $theme-font-disable-color;
+          }
+        }
+        .tel{
+          margin-bottom: ($space/2);
+          color: $theme-color-one;font-size: $theme-font-value-size-web;display: block;
+          &:before{
+            content: "联系电话:";
+            color: $theme-font-disable-color;
+          }
+        }
+        .map{
+          cursor: pointer;
+          position: absolute;
+          bottom: $space;
+          left: $space*2;
+          background-color: transparent;
+          color: $theme-color-one;
+          &:before{
+            content: "[查看地图]";
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin hy-store-wap(){
+  .store-list-box{
+    >.title{ display: none;}
+    >.sift-box{
+      padding: 20px 10px;
+      @include clearfix();
+      >li{
+        float: left;
+        padding: 3px 8px;
+        font-size: $font-size-h4-px;
+        border: 1px solid #ccc;
+        color: #666;
+        font-weight: 400;
+        border-radius: 4px;
+        margin: {
+          bottom: 4px;
+          right: 4px;
+        };
+        &.active{
+          color: $theme-font-active-color;
+          border-color: $theme-font-active-color;
+        }
+      }
+    }
+    >.item-list{
+      >li{
+        border-bottom: 1px solid #ccc;
+        &:last-child{border-bottom-style: none;}
+        a{
+          @include displayFlex();
+        }
+        $space:5px;
+        .photo-box{
+          padding:$space;
+          width: 40%;
+          min-height: calc(40vw / 3 * 2 + #{$space * 2});
+          @include displayFlex();
+          @include justifyContentCenter();
+          @include alignItemsCenter();
+        }
+        .info-box{
+          @include flex(1);
+          @include displayFlex();
+          @include flexDirectionColumn();
+          padding: $space;
+          position: relative;
+          .title{ font-size:$theme-font-title-size;margin-bottom: 5px;@include order(2);}
+          .address{color: $theme-font-color;font-size: $theme-font-value-size;@include order(3);}
+          .tel{
+            color: $theme-color-one;font-size: $theme-font-value-size;@include order(5);
+            &:before{
+              content: "tel:";
+            }
+          }
+          &:before{
+            content: "";
+            display: block;
+            @include flex(1);
+            @include order(4);
+          }
+          .map{
+            background-color: transparent;
+            &:before{
+              content: "地图";
+            }
+            position: absolute;
+            bottom: $space;
+            right: $space;
+          }
+        }
+      }
+    }
+  }
+  .map-box{
+    .map{height: 66.67vw;width: 100%;}
+    padding: 10px;
+    >.title{
+      font-size: $theme-font-small-title-size;color: $theme-font-color;
+      line-height: 20px;
+    }
+  }
+}
+
+@mixin hy-store(){
+
+  @if($CssSwitchWeb){
+    &#{$webClass}{
+      @include hy-store-web();
+    }
+  }
+  @if($CssSwitchWap){
+    &#{$wapClass}{
+      @include hy-store-wap();
+    }
+  }
+}
+.m-hy-store{
+  @include hy-store();
+}

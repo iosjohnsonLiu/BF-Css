@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <title>金色百年订单管理系统</title>
+  <!-- Bootstrap -->
+  <link href="./styles/run.css" rel="stylesheet">
+  <link href="./styles/run-app.css" rel="stylesheet">
+  <link href="./styles/run-pc.css" rel="stylesheet">
+
+  <link href="./plugin/lightGallery/css/lightgallery.css" type="text/css"/>
+
+
+  <!--<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>-->
+
+  <script type="text/javascript" src="./plugin/jquery.min.js"></script>
+  <script type="text/javascript" src="./plugin/jquery.mousewheel.min.js"></script>
+
+  <script type="text/javascript" src="./plugin/picturefill.min.js"></script>
+  <script type="text/javascript" src="./plugin/lightGallery/js/lightgallery.min.js"></script>
+  <script type="text/javascript" src="./plugin/lightGallery/js/lg-fullscreen.min.js"></script>
+  <script type="text/javascript" src="./plugin/lightGallery/js/lg-thumbnail.min.js"></script>
+  <script type="text/javascript" src="./plugin/lightGallery/js/lg-video.min.js"></script>
+  <script type="text/javascript" src="./plugin/lightGallery/js/lg-autoplay.min.js"></script>
+  <script type="text/javascript" src="./plugin/lightGallery/js/lg-zoom.min.js"></script>
+  <script type="text/javascript" src="./plugin/lightGallery/js/lg-hash.min.js"></script>
+  <script type="text/javascript" src="./plugin/lightGallery/js/lg-pager.min.js"></script>
+
+</head>
+
+<body>
+<div id="root" class="adaption-auto">
+
+  <div onclick="lightGalleryShow()">点击打开全屏图集</div>
+  <div id="lightgallery"></div>
+</div>
+
+
+<!--<script src="http://cdn.bootcss.com/flexie/1.0.3/flexie.min.js"></script>-->
+
+<script type="text/javascript">
+  $(document).ready(function () {});
+  function lightGalleryShow() {
+    $('#lightgallery').lightGallery(
+      {
+        dynamic: true,
+        dynamicEl: [
+          {
+//            responsive:"img/1-375.jpg 375, img/1-480.jpg 480, img/1.jpg 800",
+            src: "http://image.izhaowo.com/1_4f149fe6-5344-4038-8b56-bf1474f0edc0.jpeg",
+            subHtml: "<h4>Bowness Bay</h4><p>A beautiful Sunrise this morning taken En-route to Keswick not one as planned but I'm extremely happy I was passing the right place at the right time....</p>",
+            thumb: "http://image.izhaowo.com/1_4f149fe6-5344-4038-8b56-bf1474f0edc0.jpeg@100w_1e_1c_0l",
+          },
+          {
+//            responsive:"img/2-375.jpg 375, img/2-480.jpg 480, img/2.jpg 800",
+            src: "http://image.izhaowo.com/1_4f149fe6-5344-4038-8b56-bf1474f0edc0.jpeg",
+            subHtml: "<h4>Bowness Bay</h4><p>A beautiful Sunrise this morning taken En-route to Keswick not one as planned but I'm extremely happy I was passing the right place at the right time....</p>",
+            thumb: "http://image.izhaowo.com/1_4f149fe6-5344-4038-8b56-bf1474f0edc0.jpeg@100w_1e_1c_0l",
+          },
+          {
+//            responsive:"img/13-375.jpg 375, img/13-480.jpg 480, img/13.jpg 800",
+            src: "http://image.izhaowo.com/1_4f149fe6-5344-4038-8b56-bf1474f0edc0.jpeg",
+            subHtml: "<h4>Bowness Bay</h4><p>A beautiful Sunrise this morning taken En-route to Keswick not one as planned but I'm extremely happy I was passing the right place at the right time....</p>",
+            thumb: "http://image.izhaowo.com/1_4f149fe6-5344-4038-8b56-bf1474f0edc0.jpeg@100w_1e_1c_0l",
+          },
+          {
+//            responsive:"img/4-375.jpg 375, img/4-480.jpg 480, img/4.jpg 800",
+            src: "http://image.izhaowo.com/1_4f149fe6-5344-4038-8b56-bf1474f0edc0.jpeg",
+            subHtml: "<h4>Bowness Bay</h4><p>A beautiful Sunrise this morning taken En-route to Keswick not one as planned but I'm extremely happy I was passing the right place at the right time....</p>",
+            thumb: "http://image.izhaowo.com/1_4f149fe6-5344-4038-8b56-bf1474f0edc0.jpeg@100w_1e_1c_0l",
+          },
+        ],
+      }
+    );
+  }
+</script>
+</body>
+</html>

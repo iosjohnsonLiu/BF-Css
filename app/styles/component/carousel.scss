@@ -1,0 +1,44 @@
+.u-carousel{
+  .picture-list{
+    font-size: 0;
+    >li{
+      display: inline-block;
+    }
+  }
+  .point-box{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    padding: 4px;
+    >li{
+      display: inline-block;
+      @include square(10px);
+      border-radius: 50%;
+      background-color: rgba(#fff,0.5);
+      &.active{
+        background-color: rgba(#000,0.5);
+      }
+    }
+  }
+  position: relative;
+
+  //轮播广告
+  &.adv{
+    height: (100vw / 3 * 1);
+  }
+  @if($CssSwitchWap){
+    &#{$wapClass}{
+      //轮播图片
+      &.picture{  height: (100vw / 3 * 2);}
+    }
+  }
+  @if($CssSwitchWeb){
+    &#{$webClass}{
+      &.picture{  height: (100vw / 3 * 1);}
+    }
+  }
+
+  overflow: hidden;
+}

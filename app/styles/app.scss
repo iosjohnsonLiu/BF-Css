@@ -1,0 +1,16 @@
+
+$CssSwitchWeb:true;
+$CssSwitchWap:true;
+
+//框架工具
+@import "bootstrap/mixins";
+//字体icon
+@import "fontIcon";
+//公用混合函数
+@import "mixin";
+//初始化样式
+@import "initialize";
+//公共组件
+@import "component";
+//定制界面
+@import "page";

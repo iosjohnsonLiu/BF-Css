@@ -1,0 +1,17 @@
+/**
+* $familyName  字体名称
+* $fileName    文件名
+* $path        路径
+*/
+@mixin lg($familyName,$fileName,$path){
+  @font-face {
+    font-family: $familyName;
+    src: url("#{$path}#{$fileName}.eot?n1z373");
+    src: url("#{$path}#{$fileName}.eot?#iefixn1z373") format("embedded-opentype"),
+    url("#{$path}#{$fileName}.woff?n1z373") format("woff"),
+    url("#{$path}#{$fileName}.ttf?n1z373") format("truetype"),
+    url("#{$path}#{$fileName}.svg?n1z373#lg") format("svg");
+    font-weight: normal;
+    font-style: normal;
+  }
+}

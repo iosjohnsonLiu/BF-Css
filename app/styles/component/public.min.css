@@ -1,0 +1,1 @@
+body:before{white-space:pre;font-family:monospace;content:"Error: Undefined variable: \"$web-default-screen-width\".\A         on line 2 of public.scss\A \A 1: .home-title-box{\A 2:   width: $web-default-screen-width;\A 3:   margin: 20px auto;\A 4:   h1{\A 5:     color: #000;\A 6:     font-size: $theme-font-big-title-size;\A 7:   }"}

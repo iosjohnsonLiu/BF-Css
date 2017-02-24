@@ -1,0 +1,102 @@
+//模块首页标题
+.home-title-box{
+  width: $web-default-screen-width;
+  margin: 40px auto;
+  text-align: center;
+  h1{
+    color: #000;
+    font-size: 28px;
+  }
+  i{
+    $line-w:120px;
+    font-size: 26px;
+    color: $theme-font-disable-color;
+    display: inline-block;
+    font-family: $font-family-serif;
+    word-spacing: 10px;
+    letter-spacing: 2px;
+    padding: 4px $line-w;
+    position: relative;
+    border: {
+      left: 1px solid $theme-font-disable-color;
+      right: 1px solid $theme-font-disable-color;
+    };
+    &:before,&:after{
+      content: " ";
+      display: block;
+      position: absolute;
+      top:50%;
+      width: ($line-w - 20);
+      height: 1px;
+      background-color: $theme-font-disable-color;
+    }
+    &:after{
+      right: 0;
+    }
+    &:before{
+      left: 0;
+    }
+  }
+  span{
+    font-size: $theme-font-big-title-size;
+    display: block;
+    color: $theme-font-disable-color;
+    position: relative;
+    padding: 8px;
+    &:before{
+      $line-width:90px;
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      margin-left: -($line-width / 2);
+      width: $line-width;
+      height: 2px;
+      background-color: $theme-font-disable-color;
+      z-index: 10;
+    }
+  }
+
+}
+//模块首页分割线
+.home-space-line{
+  background-color: #999;
+  height: 1px;
+  width: $web-default-screen-width;
+  margin: 5px auto;
+  position: relative;
+  &:before{
+    content: "";
+    display: block;
+    $size:18px;
+    @include square($size);
+    border-radius: 50%;
+    background-color: rgba(#000,0.3);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -($size / 2);
+    margin-top:  -($size / 2);
+    z-index: 10;
+  }
+  &:after{
+    $size:6px;
+    content: "";
+    display: block;
+    border: $size solid transparent;
+    border-bottom-width: 0;
+    border-top-color: #fff;
+    position: absolute;
+    z-index: 20;
+    top: 50%;
+    left: 50%;
+    margin-left: -($size );
+    margin-top:  -($size / 2);
+  }
+}
+
+//.photo-box{
+//  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+//  border-radius: 4px;
+//  overflow: hidden;
+//}

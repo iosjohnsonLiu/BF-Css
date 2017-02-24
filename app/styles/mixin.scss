@@ -1,0 +1,56 @@
+//列表
+@mixin list(
+  $width:$web-default-screen-width,
+  $colum:2,
+  $space:0,
+  $padding:0,
+  $margin:0,
+  $photo-scale:0,
+  $info-h:0,
+  $item-h:0
+){
+  @include clearfix();
+  width: $web-default-screen-width;
+  margin: 0 auto;
+  @if ($margin >0){
+    padding: $margin;
+  }
+  $item-w:(($web-default-screen-width - ($margin * 2) - ($colum * $space - $space))/$colum);
+  li{
+    float: left;
+    width: $item-w;
+    @if($item-h > 0){
+      height: $item-h;
+    }
+    @if($space > 0){
+      margin-left: $space;
+      &:nth-child(#{$colum}n + 1){
+        margin-left: 0;
+      }
+      &:nth-child(n + #{$colum + 1}){
+        margin-top: $space;
+      }
+    }
+    @if($photo-scale > 0 ){
+     .photo-box{
+       width: ($item-w - $padding*2);
+       height: ($item-w * $photo-scale - $padding*2);
+     }
+    }
+    @if($info-h > 0 ){
+      .info-box{
+        height: $info-h;
+      }
+    }
+  }
+}
+
+@mixin inlineMiddle(){
+  &:after{
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 0;
+    vertical-align: middle;
+  }
+}
