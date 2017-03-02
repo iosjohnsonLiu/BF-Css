@@ -1,8 +1,33 @@
 .u-carousel{
+  position: relative;
+  width: 100%;
+  .carousel-picture{@include square(100%);}
   .picture-list{
+    @include square(100%);
     font-size: 0;
+    overflow: hidden;
+    position: relative;
     >li{
-      display: inline-block;
+      display: inline-table;
+      @include square(100%);
+      >.img-box{
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+      }
+      position: absolute;
+      top:0;
+      left: -100%;
+      @include transition(0.6s);
+      @include square(100%);
+      z-index: 8;
+      &.active{
+        left: 0;
+        z-index: 10;
+        &~li{
+          left: 100%;
+        }
+      }
     }
   }
   .point-box{
@@ -12,31 +37,47 @@
     bottom: 0;
     text-align: center;
     padding: 4px;
+    z-index: 20;
     >li{
       display: inline-block;
-      @include square(10px);
+      font-size: 8px;
+      @include square(1em);
       border-radius: 50%;
-      background-color: rgba(#fff,0.5);
+      background-color: rgba(#fff,0.7);
+      margin-right: 0.8em;
+      cursor: pointer;
       &.active{
-        background-color: rgba(#000,0.5);
+        background-color: rgba($theme-color-one,0.7);
+      }
+      &:hover{
+        background-color: rgba($theme-color-two,0.7);
       }
     }
   }
-  position: relative;
 
-  //轮播广告
-  &.adv{
-    height: (100vw / 3 * 1);
-  }
+
   @if($CssSwitchWap){
     &#{$wapClass}{
       //轮播图片
       &.picture{  height: (100vw / 3 * 2);}
+      //轮播广告
+      &.adv{
+        $pdg:5px;
+        $img-scale:1/3;
+        padding: $pdg;
+        height: calc(((100vw - #{$pdg * 2}) * #{$img-scale} + #{$pdg * 2}));
+      }
     }
   }
   @if($CssSwitchWeb){
     &#{$webClass}{
-      &.picture{  height: (100vw / 3 * 1);}
+      width: $web-max-screen-width ;
+      left: 50% !important;
+      margin-left: -($web-max-screen-width / 2) !important;
+      height: $web-max-screen-width / 3;
+      .point-box{
+        >li{font-size: 20px;}
+      }
     }
   }
 

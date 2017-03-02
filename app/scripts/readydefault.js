@@ -6,15 +6,15 @@ $(document).ready(function () {
 
   //barcode();
 
-  if ($(".u-carousel.picture.wap").length > 0 ){
-    $(".u-carousel.picture").mobileSlider({during:6000,width:$(window).width(),height:$(window).width()/3*2});
-  }
-  if ($(".u-carousel.adv.wap").length > 0 ){
-    $(".u-carousel.adv").mobileSlider({during:6000,width:($(window).width() - 20),height:($(window).width()/3*1 - 20)});
-  }
-  if ($(".u-carousel.web").length > 0 ){
-    $(".u-carousel.picture").mobileSlider({during:6000,width:1920,height:1920/3});
-  }
+  //if ($(".u-carousel.picture.wap").length > 0 ){
+  //  $(".u-carousel.picture").mobileSlider({during:6000,width:$(window).width(),height:$(window).width()/3*2});
+  //}
+  //if ($(".u-carousel.adv.wap").length > 0 ){
+  //  $(".u-carousel.adv").mobileSlider({during:6000,width:($(window).width() - 20),height:($(window).width()/3*1 - 20)});
+  //}
+  //if ($(".u-carousel.web").length > 0 ){
+  //  $(".u-carousel.picture").mobileSlider({during:6000,width:1920,height:1920/3});
+  //}
 });
 
 
@@ -65,12 +65,6 @@ function insertMainnav() {
           title:"婚庆",
           icon:"",
           subtitle:"",
-          submenu:[
-            {
-              url:"'hq-home"+ platClass +".html'",
-              title:"婚庆",
-            }
-          ]
         },
         {
           url:"'hy-home"+ platClass +".html'",
@@ -97,19 +91,45 @@ function insertMainnav() {
           url:"'hy-home"+ platClass +".html'",
           title:"婚宴",
           icon:"",
-          subtitle:"wedding banquet"
+          subtitle:"wedding banquet",
+          submenu:[
+            {
+              url:"'hy-store-list"+ platClass +".html'",
+              title:"婚宴酒店",
+            },
+            {
+              url:"'hy-hall-list"+ platClass +".html'",
+              title:"宴会厅",
+            },
+            {
+              url:"'hy-menu-list"+ platClass +".html'",
+              title:"菜品套系",
+            },
+          ]
         },
         {
           url:"'hq-home"+ platClass +".html'",
           title:"婚庆",
           icon:"",
-          subtitle:"wedding"
+          subtitle:"wedding",
+          submenu:[
+            {
+              url:"'hy-store-list"+ platClass +".html'",
+              title:"婚宴酒店",
+            },
+          ]
         },
         {
           url:"'lf-home"+ platClass +".html'",
           title:"婚纱礼服",
           icon:"",
-          subtitle:"Wedding dress"
+          subtitle:"Wedding dress",
+          submenu:[
+            {
+              url:"'hy-store-list"+ platClass +".html'",
+              title:"婚宴酒店",
+            },
+          ]
         },
         {
           url:"#",
@@ -122,13 +142,29 @@ function insertMainnav() {
 
     var liArray="";
     for (var i in menuList){
+      var submenuHtml='';
+      var submenuList=menuList[i].submenu;
+      if (submenuList){
+        var subLi="";
+        for (var index in submenuList){
+          subLi +=
+          " <li>  "+
+          "   <a href= "+ submenuList[index].url +"> "+
+          "     <span class='title'>"+ submenuList[index].title +"</span> "+
+          "   </a>  "+
+          " </li> ";
+        }
+        if (subLi.length>0){
+          submenuHtml = " <ul class='submenu' > " + subLi + " </ul> ";
+        }
+      }
       liArray+=
         " <li>  "+
         "   <a href= "+ menuList[i].url +"> "+
         "     <i class='icon'>"+ menuList[i].icon +"</i>  "+
         "     <span class='title'>"+ menuList[i].title +"</span> "+
         "     <span class='sub-title'>"+ menuList[i].subtitle +"</span> "+
-        "   </a>  "+
+        "   </a>  "+submenuHtml+
         " </li> ";
     }
     var insertMainNav =
@@ -146,8 +182,12 @@ function insertMainnav() {
     $(insertMainNav).prependTo($mainNav);
     var pathNmae = window.location.pathname;
     var fileName = pathNmae.substring(pathNmae.lastIndexOf('/') + 1, pathNmae.length);
-    $($mainNav).find("li.active").removeClass("active");
-    $($mainNav).find("li>a[href='" + fileName + "']").parent().addClass("active");
+    var modelName= fileName.substring(0,fileName.indexOf('-'));
+    console.log("["+modelName+"]","["+fileName+"]","["+pathNmae+"]");
+
+    $($mainNav).find("li>a[href^='" + fileName + "']").parent().addClass("active");
+    $($mainNav).find(".nav-box>ul>li>a[href^='" + modelName + "']").parent().addClass("active");
+
   }
 
 }
@@ -167,7 +207,10 @@ function insertCarousel() {
     var $carouselAdv = $(".u-carousel.adv"+platClass)[0];
     var $carouselPicture = $(".u-carousel.picture"+platClass)[0];
     var imageArray=[];
+
+    var active = "";
     if ($carouselPicture){
+      imageArray=[];
       if ($($carouselPicture).hasClass('web')){
         imageArray=[
           "http://img2.jsbn.com/venus/vda/20170209/14866093553445685_1920x680.jpg",
@@ -183,16 +226,8 @@ function insertCarousel() {
           "http://img2.jsbn.com/venus/cases/20161213/14816091978737484_900x600.jpg@640w_95q",
         ];
       }
-      var liList="";
-      for(var i in imageArray){
-        liList +=
-          " <li class='picture-item'>  "+
-          "   <a href= '#'> "+
-          "   <img src='" + imageArray[i] + "'>"+
-          "   </a>  "+
-          " </li> ";
-      }
-      insertCarousel = "<ul class='picture-list'> "+liList+"</ul>";
+
+      insertCarousel=getCarouselHtml(imageArray);
       if (insertCarousel){
         $(insertCarousel).prependTo($carouselPicture);
       }
@@ -213,21 +248,69 @@ function insertCarousel() {
           "http://img2.jsbn.com/venus/vda/20170207/14864371388686494_1920x680.jpg@640w_95q",
         ];
       }
-
-      var liList="";
-      for(var i in imageArray){
-        liList +=
-          " <li class='picture-item'>  "+
-          "   <a href= '#'> "+
-          "   <img src='" + imageArray[i] + "'>"+
-          "   </a>  "+
-          " </li> ";
-      }
-      insertCarousel = "<ul class='picture-list'> "+liList+"</ul>";
+      insertCarousel=getCarouselHtml(imageArray);
       if (insertCarousel){
         $(insertCarousel).prependTo($carouselAdv);
       }
     }
+
+    var autoActiveFun=function( findClassPath){
+      if($(findClassPath).length>0){
+        var pictureActive=$(findClassPath)[0];
+        if ($(pictureActive).next().length>0){
+          $(pictureActive).removeClass('active').next().addClass('active');
+        }else{
+          $(pictureActive).removeClass('active').prevAll().last().addClass('active');
+        }
+      }
+    }
+    var time = window.setInterval(function(){
+      var carouselList=$('.u-carousel');
+      if (carouselList&&carouselList.length>0){
+        for (var i in carouselList){
+          if (carouselList[i].className&&carouselList[i].className.length>0){
+            var carouselClass="";
+            var classList=carouselList[i].className.split(" ");
+            for (var index in classList){
+              if (classList[index].length > 0){
+                carouselClass += '.'+classList[index];
+              }
+            }
+            if (carouselClass.length > 0){
+              autoActiveFun(carouselClass+' .picture-list li.active');
+              autoActiveFun(carouselClass+' .point-box li.active');
+            }
+          }
+        }
+      }
+    },3000);
+
+    ////去掉定时器的方法
+    //window.clearInterval(time);
   }
+}
+
+function getCarouselHtml(imageArray){
+  var liList="";
+  var pointList="";
+  for(var i in imageArray){
+    active=i==0?' active':'';
+    liList +=
+      " <li class='picture-item "+active+"'>  "+
+      "   <div class='img-box'>" +
+      "     <div class='u-load'><div class='load-box'><div class='load-img'><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>" +
+      "     <a href= '#'> "+
+      "      <img src='" + imageArray[i] + "'>"+
+      "     </a>  "+
+      "   </div>"+
+      " </li> ";
+    pointList += "<li class='point "+active+"'></li>";
+  }
+  insertCarousel =
+    "<div class='carousel-picture'>" +
+    " <ul class='picture-list'> "+liList+"</ul>" +
+    " <ul class='point-box'> "+pointList+"</ul>" +
+    "</div>";
+  return insertCarousel;
 }
 

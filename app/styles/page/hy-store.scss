@@ -1,6 +1,9 @@
 @mixin hy-store-web(){
+
+  //酒店列表页面
   .store-list-box{
-    width: $web-default-screen-width;
+    $store-list-w:$web-default-screen-width;
+    width: $store-list-w;
     margin: 30px auto;
     >.title,>.sift-box{
       background-color: #fff;
@@ -34,7 +37,7 @@
         float: left;
         padding: 4px 12px;
         font-size: $font-size-h4-px-web;
-        border: 1px solid #ccc;
+        border: 1px solid $theme-border-color;
         color: #666;
         font-weight: 400;
         border-radius: 4px;
@@ -50,14 +53,13 @@
       }
     }
     >.item-list{
-      @include list($colum:3,$space:20px,$margin:0px,$photo-scale:2/3,$info-h:140px);
+      @include list($width:$store-list-w,$colum:3,$space:20px,$margin:0px,$photo-scale:2/3,$info-size:120px);
       margin-top: 30px;
       li{
         background-color: #fff;
         $space:10px;
         .info-box{
           padding: $space $space*2;
-          padding-bottom: $space + 30px;
           position: relative;
         }
         .title{ font-size:$theme-font-title-size-web;margin-bottom: $space;display: block;}
@@ -81,29 +83,265 @@
           cursor: pointer;
           position: absolute;
           bottom: $space;
-          left: $space*2;
+          right: $space*2;
           background-color: transparent;
           color: $theme-color-one;
-          &:before{
-            content: "[查看地图]";
+
+        }
+      }
+    }
+  }
+
+  //酒店列表详情
+  $content-w:1100px;
+  $photo-w:720px;
+  $photo-h:0;
+  $colum:6;
+  .header-box{
+    width: 100%;
+    padding:{
+      top: 20px;
+      bottom: 20px;
+    }
+    background-color: #fff;
+  }
+  $scale:2/3;
+
+  $space:10px;
+  .photo-preview-box{
+    @include photo-preview-box($big-w:$photo-w,$img-scale:$scale,$small-count:$colum,$space:$space,$small-space:$space);
+    //计算高度
+    $photo-h:get-photo-preview-value($value-type:$photoPreviewValue-Height,$big-w:$photo-w,$img-scale:$scale,$small-count:$colum,$space:$space,$small-space:$space);
+    float: left;
+    .big-img-box{
+      cursor: pointer;
+      background-color: #eee;
+    }
+    .small-img-box{
+      li{
+        cursor: pointer;
+        background-color: #eee;
+      }
+      .last-item{
+        position: relative;
+        span{
+          position: absolute;
+          top: 0;
+          left: 0;
+          color: #fff;
+          @include square(100%);
+          text-align: center;
+          @include inlineMiddle();
+          background-color: rgba(#000,0.4);
+          font-size: $theme-font-small-title-size-web;
+        }
+      }
+    }
+  }
+
+  .hotel-info-box{
+    $hotel-info-w:$content-w;
+    width: $hotel-info-w;
+    height: $photo-h;
+    margin: 0 auto;
+    @include clearfix();
+    position: relative;
+    .info-box{
+      $mgf:20px;
+      $mgb:8px;
+      padding: 20px 10px;
+      height: 100%;
+      margin-left: $mgf;
+      float: left;
+      display: table;
+      width: $hotel-info-w - $photo-w - $mgf;
+
+      .vertical-middle{display: table-cell;vertical-align: middle;}
+      h1{
+        text-align: center;
+        font-size: $font-size-h1-px-web;
+        color: #555;
+        margin-bottom: $mgb;
+      }
+      .detail-text{
+        font-size: $theme-font-detail-size-web;
+        color: $theme-font-disable-color;
+        margin-bottom: $mgb;
+      }
+      .discount-box{
+        margin-top: $mgb;
+        li{
+          padding: 5px 0;
+        }
+       .title{
+         background-color: $theme-color-one;
+         position: relative;
+         padding: 4px;
+         border-radius: 4px;
+         margin-right: 8px;
+         font-size: ($theme-font-detail-size-web);
+         color: #fff;
+         &:after{
+           $size:6px;
+           content: "";
+           position: absolute;
+           border: $size solid transparent;
+           border-right-width:0;
+           border-left-color: $theme-color-one;
+           display: block;
+           top:50%;
+           left:100%;
+           margin-top: -$size;
+         }
+       }
+        .value{
+          color: $theme-font-detail-size-web;
+        }
+      }
+      .address-box{
+        border: {
+          top:1px dashed $theme-border-color;
+          bottom: 1px dashed $theme-border-color;
+        }
+        padding: 10px 0;
+        margin-bottom: $mgb*2;
+        margin-top: $mgb*2;
+        .address{font-size: $theme-font-value-size-web;color: #666;}
+      }
+      .contact-box{
+        margin-bottom: $mgb*2;
+        margin-top: $mgb*2;
+        .tel{
+          font-size: $font-size-h1-px-web;
+          color: $theme-color-one;
+          line-height: 43px;
+        }
+        button{
+          cursor: pointer;
+          line-height: 34px;
+          min-width: 120px;
+          border: 1px solid $theme-color-one;
+          color: $theme-color-one;
+        }
+      }
+      .label-box{
+        margin-bottom: $mgb;
+        font-size: 0;
+        .title{ font-size: $theme-font-detail-size-web;}
+        ul{
+          display: inline-block;
+          li{
+            display: inline-block;
+            font-size: $theme-font-detail-size-web;
+            background-color: #eee;
+            border-radius: 4px;
+            padding: 4px 8px;
+            margin: {
+              left:$mgb;
+              bottom: $mgb;
+            };
+          }
+        }
+      }
+      .hall-count{
+        margin-bottom: $mgb*2;
+        margin-top: $mgb*2;
+        padding: 10px 12px;
+        background-color: #eee;
+        color: #666;
+        font-size: $theme-font-value-size-web;
+        .count{
+          color: $theme-color-one;
+        }
+        border-radius: 4px;
+      }
+    }
+  }
+
+  .hall-list-box{
+    width: $content-w;
+    margin: 30px auto;
+    .hall-list{
+      @include list($width:$content-w,$colum:2,$space:30px,$infoDirectionColum:false,$info-size:250px,$photo-scale:2/3);
+      li{
+        background-color: #fff;
+        .info-box{
+          padding:20px;
+          .name{
+            font-size: $theme-font-big-title-size-web;
+            display: block;
+            border-bottom: 1px dashed $theme-border-color;
+            color: #777;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+          }
+          >ul{
+            width: 100%;
+            @include clearfix();
+            >li{
+              float: left;
+              width: 50%;
+              span{font-size: $theme-font-detail-size-web;color: #777;}
+              padding: 6px 0;
+            }
+          }
+          >button{
+            width: 100%;
+            height: 44px;
+            margin: 15px 0;
+            border: 1px solid $theme-color-one;
+            font-size: 16px;
+            color: $theme-color-one;
+            cursor: pointer;
+            &:hover{
+              background-color: $theme-color-one;
+              color: #fff;
+            }
           }
         }
       }
     }
   }
+  .map-box{
+    width: $content-w;
+    margin: 20px auto;
+    .map{
+      width: 100%;
+      height: $content-w/3;
+    }
+    img{
+      max-width: inherit;
+      max-height: inherit;
+      width: inherit;
+      height: inherit;
+    }
+  }
+
+  .map-box,
+  .title-box{
+    @include title-style-a();
+  }
 }
 
 @mixin hy-store-wap(){
+
+  overflow: auto;
+  -webkit-overflow-scrolling : touch;
+
+  //酒店列表页面
   .store-list-box{
-    >.title{ display: none;}
+    >.title{
+      position: relative;
+      left: 5px;
+    }
     >.sift-box{
-      padding: 20px 10px;
+      padding: 5px;
       @include clearfix();
       >li{
         float: left;
         padding: 3px 8px;
         font-size: $font-size-h4-px;
-        border: 1px solid #ccc;
+        border: 1px solid $theme-border-color;
         color: #666;
         font-weight: 400;
         border-radius: 4px;
@@ -119,7 +357,7 @@
     }
     >.item-list{
       >li{
-        border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid $theme-border-color;
         &:last-child{border-bottom-style: none;}
         a{
           @include displayFlex();
@@ -155,9 +393,8 @@
           }
           .map{
             background-color: transparent;
-            &:before{
-              content: "地图";
-            }
+            font-size: $theme-font-detail-size;
+            //&:before{ content: "地图";}
             position: absolute;
             bottom: $space;
             right: $space;
@@ -166,13 +403,134 @@
       }
     }
   }
-  .map-box{
-    .map{height: 66.67vw;width: 100%;}
-    padding: 10px;
-    >.title{
-      font-size: $theme-font-small-title-size;color: $theme-font-color;
-      line-height: 20px;
+
+
+  //酒店列表详情
+  $mgb:8px;
+  .hotel-info-box {
+    .info-box{
+      background-color: #fff;
+      margin-bottom: $mgb * 2;
+      padding:{
+        top:$mgb * 2;
+        bottom: $mgb;
+        left: $mgb;
+        right: $mgb;
+      };
+      h1{
+        text-align: center;
+        font-size: $theme-font-big-title-size;
+        margin-bottom: $mgb;
+      }
+
+      .detail-text{
+        margin-bottom: $mgb;
+        color: $theme-font-detail-color;
+      }
+
+      .label-box{
+        margin-top: $mgb*2;
+        margin-bottom: $mgb;
+        text-align: left;
+        font-size: 0;
+        .title{font-size: $theme-font-value-size;}
+        ul{
+          display: inline-block;
+          li{
+            display: inline-block;
+            background-color: #eee;
+            border-radius: 3px;
+            padding: 3px 6px;
+            margin-left: 6px;
+            font-size: $theme-font-value-size;
+          }
+        }
+      }
+      .hall-count{
+        text-align: center;
+        margin-bottom: $mgb;
+        color: #999;
+        font-size: $theme-font-value-size;
+        .count{
+          color: $theme-color-one;
+        }
+      }
     }
+    >ul{
+      background-color: #fff;
+      margin-bottom: $mgb * 2;
+      li{
+        padding: $mgb;
+        @include displayFlex();
+        @include alignContentCenter();
+
+        &:before{
+          content: "";
+          display: block;
+          @include flex(1);
+          @include order(5);
+        }
+        .title,.value{line-height: 30px;font-size: $theme-font-value-size;}
+        .title{color: $theme-font-disable-color;@include order(2);}
+        .value{color: $theme-font-color;@include order(6);}
+        &:nth-child(n + 2){
+          border-top: 1px solid $theme-border-color;
+        }
+        &.contact-item{
+          >.value{
+            color: $theme-color-one;
+            font-size: $theme-font-big-title-size;
+          }
+        }
+      }
+    }
+  }
+  .hall-list-box{
+    background-color: #fff;
+    margin-bottom: $mgb * 2;
+    padding: 10px 5px;
+    .title-box{
+      border-bottom: 1px solid $theme-border-color;
+      .title{font-size: $theme-font-title-size;}
+    }
+    .hall-list{
+      @include clearfix();
+      >li{
+
+        float: left;
+        $space:6px;
+        width: calc(50% - #{$space/2});
+        &:nth-child(2n + 1){
+          margin-right: $space;
+        }
+        .info-box{
+          padding: 5px;
+          height: 80px;
+          .name{font-size: $theme-font-title-size;}
+          ul>li{
+            display: block;
+            span{font-size: $theme-font-detail-size;}
+          }
+        }
+      }
+    }
+  }
+
+  .map-box{
+    background-color: #fff;
+    padding: 10px 5px;
+    .map{height: 66.67vw;width: 100%;min-height: 240px;}
+    img{
+      max-width: inherit;
+      max-height: inherit;
+      width: inherit;
+      height: inherit;
+    }
+  }
+  .store-list-box,
+  .map-box,
+  .title-box{
+    @include wap-title-style-a();
   }
 }
 

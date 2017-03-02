@@ -1,8 +1,278 @@
+//布局样式
+.root{
+  background-color: #f4f4f4;
+  .f-main{
+
+  }
+  @if($CssSwitchWap){
+    &#{$wapClass}{
+      @include square(100%);
+      .f-main{
+        @include square(100%);
+        padding-bottom: $wap-mainNav-height;
+        >.u-nav{
+          background-color: #f0f0f0;
+          height: ($wap-mainNav-height - 1);
+          border-top:1px solid #ddd;
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+        }
+        >.m-view{
+          @include square(100%);
+        }
+      }
+      .f-scrollview{
+        @include square(100%);
+        overflow: auto;-webkit-overflow-scrolling : touch;
+      }
+    }
+  }
+  @if($CssSwitchWeb){
+    max-width: $web-max-screen-width;
+    margin: auto;
+    &#{$webClass}{
+
+    }
+    .f-footer{
+      background-color: #666;
+      padding: 20px;
+      .contact-way-box{
+        width: 1200px;
+        margin:auto;
+        @include clearfix();
+      }
+      .info-box{
+        float: left;
+        margin-left: 30px;
+        span{
+          color: #fff;
+          font-size: ($theme-font-title-size + 1);
+          line-height: 30px;
+          display: block;
+          padding: 4px 30px;
+        }
+        .tel{
+          color: #e27912;
+          font-size: 24px;
+        }
+        .address{}
+        .website{}
+      }
+      .wx-tel{
+        float: right;
+        padding: 10px;
+        .qr-code{
+          margin: auto;
+          @include square(100px);
+        }
+        .title{
+          padding: 4px;
+          color: #e27912;
+          font-size: ($theme-font-title-size + 1);
+        }
+      }
+      .licence-box{
+        text-align: center;
+        p{
+          color: #fff;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+}
+
+//菜单
+.u-nav{
+  background-color: #fff;
+  z-index: $zindex-navbar;
+  @if($CssSwitchWap){
+    &#{$wapClass}{
+      .nav-box{
+        @include square(100%);
+      }
+      .tel-box{display: none;}
+      .logo-box{display: none;}
+      ul{
+        display: table;
+        @include square(100%);
+        >li{
+          display: table-cell;
+          vertical-align: middle;
+          text-align: center;
+          a{
+            font-size: $font-size-h4;
+            .title{color: $mainNav-font-color;}
+            .sub-title{display: none;}
+          }
+          &.active,>a:active>a:hover{
+            .title{color: $mainNav-font-active-color;}
+          }
+        }
+      }
+    }
+  }
+  @if($CssSwitchWeb){
+    &#{$webClass}{
+      position: relative;
+      border-bottom: 1px solid $theme-color-one;
+      $nav-width:1200px;
+      .nav-box{
+        margin: 0 auto;
+        width: 900px;
+        padding: 20px 0;
+        height: $web-mainNav-height;
+        >ul{
+          >li{
+            position: relative;
+            display: inline-block;
+            padding:{
+              right: 20px;
+              left: 20px;
+            }
+            border-right: 1px solid $theme-font-color;
+            >a{
+              min-width: 80px;
+              display:block;
+              span{
+                color: $mainNav-font-color;
+                display: block;
+              }
+              .title{ font-size: $theme-font-big-title-size;}
+              .sub-title{ font-size: $theme-font-value-size;}
+            }
+            &.active>a,>a:hover{
+              >span{
+                color: $mainNav-font-active-color;
+              }
+            }
+            //&.active,
+            &.active{
+              .submenu{
+                display: block;
+              }
+            }
+          }
+        }
+        .submenu{
+          position: absolute;
+          top:100%;
+          left:0;
+          display: none;
+          width: 900px;
+          padding-top: 2px;
+          >li{
+            padding: 4px 8px;
+            display: inline-block;
+            .title{ font-size: $theme-font-small-title-size;color: $theme-font-color;}
+            &.active>a,>a:hover{
+              >span{
+                color: $mainNav-font-active-color;
+              }
+            }
+          }
+        }
+      }
+      .tel-box{
+        position: absolute;
+        top: 0;
+        right: 50%;
+        margin-right: -($nav-width / 2);
+        height: $web-mainNav-height;
+        display: table;
+        .tel-info{
+          display: table-cell;
+          vertical-align: middle;
+          text-align: left;
+          label,span{display: block;}
+          label{
+            font-size:$theme-font-title-size;
+            color: $mainNav-font-color;
+          }
+          span{
+            font-size: 24px;
+            color: $theme-color-one;
+          }
+        }
+      }
+      .logo-box{
+        position: absolute;
+        top: 0;
+        left: 50%;
+        margin-left: -($nav-width / 2);
+        height: $web-mainNav-height;
+        display: table;
+        .logo-icon{
+          font-size: 0;
+          display: table-cell;
+          text-align: center;
+          vertical-align: middle;
+          &:before{
+            content: 'Bafei';
+            display: block;
+            font-size: 28px;
+            line-height: 30px;
+            color: $theme-color-one;
+            font-weight: bolder;
+            font-family: serif;
+          }
+          &:after{
+            content: '芭菲婚礼';
+            display: block;
+            font-size: 24px;
+            color: $theme-color-one;
+          }
+        }
+      }
+    }
+  }
+}
+//wap 芭菲logo
+@if($CssSwitchWap){
+  .u-logo-box{
+    background-color: #fff;
+    width: 100%;
+    height: $wap-log-height;
+    overflow: hidden;
+    margin: 0;
+    .logo-icon{
+      font-size: 0;
+      @include  displayFlex();
+      @include justifyContentCenter();
+      @include alignItemsCenter();
+      @include flexDirectionColumn();
+      &:before{
+        content: 'Bafei';
+        display: block;
+        font-size: 28px;
+        line-height: 30px;
+        color: #bb7f45;
+        font-weight: bolder;
+        font-family: serif;
+      }
+      &:after{
+        content: '芭菲婚礼';
+        display: block;
+        font-size: 10px;
+        color: #999;
+      }
+    }
+  }
+}
+
+
+
+
 //模块首页标题
 .home-title-box{
   width: $web-default-screen-width;
   margin: 40px auto;
   text-align: center;
+  position: relative;
+  @include clearfix();
   h1{
     color: #000;
     font-size: 28px;
@@ -56,7 +326,21 @@
       z-index: 10;
     }
   }
-
+  .more-btn{
+    cursor: pointer;
+    position: absolute;
+    font-size: $theme-font-small-title-size-web;
+    padding: 6px 12px;
+    color: #555;
+    bottom:-30px;
+    right: 0;
+    &:hover{
+      color: $theme-color-one;
+    }
+    &:after{
+      content: ">>";
+    }
+  }
 }
 //模块首页分割线
 .home-space-line{
@@ -95,8 +379,184 @@
   }
 }
 
-//.photo-box{
-//  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
-//  border-radius: 4px;
-//  overflow: hidden;
-//}
+.photo-box{
+  font-size: 0;
+  .img-box{
+    overflow: hidden;
+    //text-align: center;
+    @include square(100%);
+    @include inlineMiddle();
+  }
+}
+//加载更多
+@if($CssSwitchWap){
+  .u-more-box{
+    text-align: center;
+    padding: 5px 0;
+    .more-btn{
+      display: inline-block;
+      padding: 6px 16px;
+      border: 1px solid $theme-border-color;
+      cursor: pointer;
+      border-radius: 3px;
+      color: #666;
+      &:active{
+        color: #fff;
+        background-color: $theme-color-one;
+      }
+    }
+  }
+}
+
+//分页组件
+@if($CssSwitchWeb){
+  .u-pagination{
+    >.pagination-box{
+      padding: 10px;
+      text-align: center;
+      font-size: 0;
+      .page-number>li,
+      .btn-prev,
+      .btn-next{
+        cursor: pointer;
+        display: inline-block;
+        border: 1px solid $theme-border-color;
+        margin-right: 15px;
+        line-height: 20px;
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-family: $font-family-sans-serif;
+      }
+      .btn-prev,
+      .btn-next{
+        font-size: $theme-font-title-size-web;
+        color: #999;
+        &:hover{
+          color: $theme-color-one;
+        }
+        &.disable{
+          cursor: not-allowed;
+          color:$theme-font-disable-color;
+        }
+      }
+      .page-number {
+        display: inline-block;
+        >li{
+          color: $theme-color-one;
+          font-size: $theme-font-title-size-web;
+          &:hover,&.active{
+            background-color: $theme-color-one;
+            color: #fff;
+          }
+          &.active{
+            cursor: default;
+          }
+          &.omit{
+            cursor: default;
+            background-color: transparent;
+            color: $theme-color-one;
+            padding:{
+              left: 0;
+              right: 0;
+            }
+            border-style: none;
+          }
+        }
+      }
+
+    }
+  }
+}
+
+//弹出筛选框
+@if($CssSwitchWap){
+  .u-sift-popup-box{
+    //弹出布局样式
+    &{
+      position: fixed;
+      left:0;
+      top: 0;
+      z-index: $zindex-popover;
+      visibility: hidden;
+      @include square(100%);
+      @include transition(0.5s);
+      >.close-btn{
+        position: absolute;
+        z-index: 1;
+        background-color: rgba(#000,0);
+        top: 0;
+        left: 0;
+        @include square(100%);
+        @include transition(0.5s);
+
+      }
+      >.sift-popup-box{
+        @include transition(0.5s);
+        position: absolute;
+        z-index: 10;
+        bottom:-100%;
+        left:0;
+        width: 100%;
+      }
+      &.open{
+        visibility: visible;
+        >.close-btn{
+          background-color: rgba(#000,0.5);
+        }
+        >.sift-popup-box{
+          bottom:0;
+        }
+      }
+    }
+    //------------------------------
+    //筛选样式设置
+    >.sift-popup-box{
+      background-color: #fff;
+      .btn-box{
+        width: 100%;
+        height: 40px;
+        @include displayFlex();
+        border-top: 1px solid $theme-border-color;
+        button{
+          @include flex(1);
+          color: #666;
+          font-size: $theme-font-title-size;
+          &.btn-confirm{
+            background-color: $theme-color-one;
+            color: #fff;
+          }
+        }
+      }
+      .sift-condition-box{
+        padding: 10px 5px;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .sift-box{
+        .sift-title{
+          display: block;
+          border-bottom: 1px solid $theme-border-color;
+          font-size: $theme-font-small-title-size;
+          color: #666;
+          padding: 6px 6px 6px 0;
+        }
+        .sift-list{
+          @include clearfix();
+          margin-top: 10px;
+          >li{
+            float: left;
+            padding: 3px 8px;
+            margin:3px 4px;
+            border-radius: 4px;
+            border: 1px solid transparent;
+            &.active{
+              border-color: $theme-color-two;
+              color: $theme-color-two;
+            }
+          }
+        }
+      }
+
+    }
+  }
+}

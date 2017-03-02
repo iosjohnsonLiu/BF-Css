@@ -1,0 +1,523 @@
+@mixin hy-hall-web() {
+  //宴会厅列表页面
+  .hall-list-box {
+    $store-list-w: $web-default-screen-width;
+    width: $store-list-w;
+    margin: 30px auto;
+
+    > .title {
+      position: relative;
+      background-color: #fff;
+      font-size: $theme-font-big-title-size;
+      padding: {
+        top: 10px;
+        left: 10px;
+      }
+      vertical-align: middle;
+      &:before {
+        content: " ";
+        display: inline-block;
+        margin-right: 8px;
+        height: 16px;
+        width: 3px;
+        vertical-align: middle;
+        background-color: $theme-color-one;
+      }
+    }
+    > .sift-box {
+      &+.sift-box{padding-bottom:10px;}
+      padding:{
+        left: 10px;
+        right: 10px;;
+
+      }
+      font-size: 0;
+      background-color: #fff;
+      >.sift-title{
+        font-size: $theme-font-small-value-size-web;
+        display: inline-block;
+        color: #999;
+      }
+      .sift-list {
+        display: inline-block;
+        > li {
+          display: inline-block;
+          padding: 4px 8px;
+          font-size: $theme-font-small-value-size-web;
+          color: #666;
+          font-weight: 400;
+          border-radius: 4px;
+          cursor: pointer;
+          margin: {
+            top: 10px;
+            left: 10px;
+          }
+          &.active {
+            color: $theme-font-active-color;
+          }
+        }
+      }
+    }
+    > .item-list {
+      $space:10px;
+      $pdg-space: 10px;
+      background-color: #fff;
+      margin-top: 2*$space;
+      padding: $space;
+      >li {
+        $li-h: 200px;
+        $img-scale: 2/3;
+
+        border: 1px solid $theme-border-color;
+        position: relative;
+        height: ($li-h + 2);
+        margin-bottom: $space *2;
+        &:last-child{
+          margin-bottom: 0;
+        }
+        .photo-box {
+          height: 100%;
+          width: ($li-h / $img-scale);
+        }
+        .info-box {
+          height: 100%;
+          width: $store-list-w - ($li-h / $img-scale) - $space*2 - 2;
+          position: absolute;
+          top: 0;
+          right: 0;
+          padding: $space;
+          >.title{font-size: $theme-font-big-title-size-web;padding: $space 0;display: block;}
+          .store-box{
+            margin-bottom: $space;
+            span{font-size:$theme-font-detail-size-web;}
+            .store-name{font-size:$theme-font-detail-size-web;color: #999;margin: $space*2 0;}
+          }
+          .parameter-list{
+            padding-top: $space * 2;
+            border-top: 1px dashed $theme-border-color;
+            @include clearfix();
+            li{
+              float: left;
+              width: 25%;
+              span{
+                display: block;
+                width: 100%;
+                height: 30px;
+                line-height: 30px;
+                padding: 0 12px;
+                font-size: $theme-font-small-value-size-web;
+              }
+              .title{background-color: #efefef;}
+            }
+          }
+          .detail-btn{
+
+            display: block;
+            cursor: pointer;
+            padding: 6px 12px;
+            position: absolute;
+            bottom: $space;
+            right: $space;
+            font-size: $theme-font-detail-size-web;
+            color: #999;
+            &:after{content: " >";}
+          }
+        }
+      }
+    }
+    .u-pagination{
+      background-color: #fff;
+    }
+  }
+
+  //宴会厅列表详情
+  $content-w:1100px;
+  $space:10px;
+
+
+  .hall-info-box{
+    $big-w:600px;
+    $photoWidth:0;
+    $photoHeight:0;
+    //background-color: #fff;
+    padding: {
+      top: $space;
+      bottom: $space;
+    }
+    width: $content-w;
+    margin: 20px auto;
+    position: relative;
+    .hall-photo-box{
+      $space:10px;
+      @include photo-preview-box($big-w:$big-w,$img-scale:2/3,$small-count:4,$space:10px,$small-space:10px,$small-img-pdg:5px,$small-img-border-w:1px,$small-direction-row:false);
+      $photoWidth:get-photo-preview-value($value-type:$photoPreviewValue-Width,$big-w:$big-w,$img-scale:2/3,$small-count:4,$space:10px,$small-space:10px,$small-img-pdg:5px,$small-img-border-w:1px,$small-direction-row:false);
+      $photoHeight:get-photo-preview-value($value-type:$photoPreviewValue-Height,$big-w:$big-w,$img-scale:2/3,$small-count:4,$space:10px,$small-space:10px,$small-img-pdg:5px,$small-img-border-w:1px,$small-direction-row:false);
+      .small-img-box{
+        >li{
+          border: 1px solid #e0e0e0;
+          &.active,&:hover{
+            border-color: $theme-color-one;
+          }
+          &.last-item{
+            position: relative;
+            span{
+              position: absolute;
+              top: 5px;
+              left: 5px;
+              right: 5px;
+              bottom: 5px;
+              color: #fff;
+              text-align: center;
+              @include inlineMiddle();
+              background-color: rgba(#000,0.4);
+              font-size: $theme-font-small-title-size-web;
+            }
+          }
+        }
+      }
+    }
+    .info-box{
+      width: $content-w - $photoWidth - $space*2;
+      height: $photoHeight;
+      position: absolute;
+      right: $space;
+      top: $space;
+      padding: $space;
+      background-color: #fff;
+      text-align: center;
+      display: table;
+      .vertical-middle{
+        display: table-cell;
+        vertical-align: middle;
+      }
+      .hall-name{
+        text-align: center;
+        font-size: $theme-font-big-title-size-web;
+        margin-bottom: $space;
+        background-color: #fff;
+        color: #666;
+      }
+      .store-btn{
+        color: $theme-color-one;
+      }
+      .parameter-box{
+        margin: $space*2 auto;
+        .parameter-list{
+          font-size: 0;
+          padding: $space;
+          background-color: #fff;
+          position: relative;
+          overflow: hidden;
+          text-align: left;
+          @include clearfix();
+          &:before{
+            content: '';
+            width: 0;
+            border-left: 1px dashed #ccc;
+            height: 300px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+          }
+          >li{
+            float: left;
+            width: 50%;
+            font-size: $theme-font-small-value-size-web;
+            color: #666;
+            border-radius: 4px;
+            padding: 8px 12px;
+            .value{float: right;font-family: $font-family-base;position: relative;top: -1px;}
+            .title{color: $theme-font-disable-color;}
+          }
+        }
+      }
+    }
+
+  }
+
+  .video-list-box{
+    $video-scale:2/3;
+    width: $content-w;
+    margin: $space auto;
+    //background-color: #fff;
+
+    .item-list{
+      $li-h:300px;
+      height: $content-w/3;
+      position: relative;
+      background-color: #ccc;
+      >li{
+        width: $li-h/$video-scale;
+        height: $li-h;
+        position: absolute;
+        left: 50%;
+        top:50%;
+        margin-top: -($li-h/2);
+        margin-left: -($li-h/$video-scale/2);
+        .photo-box{
+          width: 100% !important;
+          height:100% !important;
+        }
+      }
+    }
+  }
+  .case-list-box{
+    width: $content-w;
+    margin: $space auto;
+    //background-color: #fff;
+    .item-list{
+      @include  list($width:$content-w,$colum:3,$photo-scale:2/3,$space:20px,$padding:10px);
+      >li{
+        .info-box{
+          text-align: center;
+          padding-top: 10px;
+          .title{
+            font-size: $theme-font-title-size-web;
+          }
+        }
+        .photo-box{
+          position: relative;
+        }
+        .shade-box{
+          position: absolute;
+          top:0;
+          left:0;
+          @include square(100%);
+          background-color: rgba(#000,0.5);
+          display: table;
+          padding: 20px;
+          visibility: hidden;
+        }
+        &:hover{
+          background-color: #eee;
+          .shade-box{visibility: visible;}
+        }
+        .case-info-box{
+          display: table-cell;
+          vertical-align: middle;
+          text-align: center;
+          color: #fff;
+          position: relative;
+          span{font-size: $theme-font-value-size-web;display: block;margin-bottom: 5px;}
+          .title{ font-size: $theme-font-big-title-size-web;padding: 10px;}
+          &:before,&:after{
+            content: '';
+            @include square(25px);
+            position: absolute;
+            border-width: 1px;
+            border-color: #fff;
+          }
+          &:before{
+            bottom: 0;
+            left: 0;
+            border-left-style:solid;
+            border-bottom-style:solid;
+          }
+          &:after{
+            top: 0;
+            right: 0;
+            border-right-style:solid;
+            border-top-style:solid;
+          }
+
+        }
+      }
+    }
+  }
+  //模块标题
+  .title-box{
+    @include title-style-a($space);
+  }
+  .sift-box {
+    .sift-btn{
+      cursor: pointer;
+      font-size: $theme-font-small-title-size-web;
+      line-height: 18px;
+      padding: $space;
+      float: right;
+      color: $theme-color-one;
+    }
+  }
+}
+
+@mixin hy-hall-wap() {
+  //宴会厅列表页面
+  //----------------------------------------
+  .hall-list-box {
+    > .item-list {
+      $space:5px;
+      $li-space:10px;
+      @include wap-list($colum:2,$photo-scale:2/3,$margin:$space,$space:$li-space,$border-w:1px);
+
+      >li {
+        border: 1px solid $theme-border-color;
+        .info-box {
+          position: relative;
+          padding: $space;
+          >.title{font-size: $theme-font-title-size;padding: $space 0;display: block;}
+          .store-box{
+            margin-bottom: $space;
+            span{font-size:$theme-font-detail-size;}
+            .store-name{font-size:$theme-font-detail-size;color: #999;margin: $space*2 0;}
+          }
+          .detail-btn{
+            display: block;
+            text-align: right;
+            cursor: pointer;
+            padding: 6px 0;
+            font-size: $theme-font-detail-size;
+            color: #999;
+            &:after{content: " >";}
+          }
+        }
+      }
+    }
+  }
+  //----------------------------------------
+
+
+  //宴会厅详情
+  //----------------------------------------
+  $mrg-lf:5px;
+  $mrg-b:20px;
+  .hall-info-box{
+    .info-box{
+      margin-bottom: $mrg-b;
+      background-color: #fff;
+      padding: $mrg-lf $mrg-lf*2;
+      text-align: left;
+      position: relative;
+      .hall-name{
+        font-size: $theme-font-big-title-size;
+        background-color: #fff;
+        color: #666;
+        padding: $mrg-lf 0;
+      }
+      .store-box{
+        $size:30px;
+        position: absolute;
+        margin-top: -($size/2);
+        right: $mrg-lf*2;
+        top:50%;
+        @include square($size);
+        display: table;
+        .store-btn{
+          display: table-cell;
+          vertical-align: middle;
+          text-align: center;
+          color: $theme-color-one;
+          line-height: $size - 2;
+          border: 1px solid $theme-color-one;
+          border-radius: 50%;
+        }
+      }
+    }
+    .parameter-box{
+      margin-bottom: $mrg-b;
+      background-color: #fff;
+    }
+    .parameter-list{
+      font-size: 0;
+      padding: $mrg-lf;
+      padding-top: 0;
+      >li{
+        display: inline-block;
+        font-size: $theme-font-detail-size;
+        color: #666;
+        background-color: #f0f0f0;
+        border-radius: 4px;
+        padding: 3px 6px;
+        margin:{
+          bottom: 0.3em;
+          right: 0.6em;
+        }
+
+      }
+    }
+  }
+  .video-list-box{
+    margin-top: $mrg-b;
+    background-color: #fff;
+    .item-list{
+      padding: $mrg-lf;
+      li{
+        margin-bottom: $mrg-lf;
+      }
+    }
+  }
+  .case-list-box{
+    margin-top: $mrg-b;
+    background-color: #fff;
+    .item-list{
+      @include wap-list($colum:2,$space:10px,$margin:5px,$photo-scale:2/3);
+      >li{
+        .info-box{
+          text-align: center;
+          .title{font-size: $theme-font-title-size;padding: 6px 12px;}
+        }
+      }
+    }
+  }
+  //----------------------------------------
+
+
+  //----------------------------------------
+  //宴会列表页面:宴会厅列表 和 宴会厅详情页面:案例列表 共用样式
+  .sift-box {
+    background-color: #fff;
+    //border-bottom: 1px solid $theme-border-color;
+    >.title-box{
+      @include displayFlex();
+      @include justifyContentSpaceBetween();
+      padding: 4px;
+      font-size: $theme-font-title-size;
+      .sift-btn{
+        padding: 5px;
+        &.acitve{
+          color: $theme-color-one;
+        }
+      }
+    }
+    .sift-condition {
+      border-top: 1px dashed #efefef;
+      font-size: 0;
+      > li {
+        display: inline-block;
+        padding: 2px 4px;
+        font-size: $theme-font-small-value-size;
+        border: 1px solid rgba($theme-color-one,0.7);
+        color: $theme-color-one;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 4px;
+        &.active {
+          color: #fff;
+          background-color: $theme-color-one;
+        }
+      }
+    }
+  }
+  //模块标题
+  .title-box{
+    @include wap-title-style-a($mrg-lf);
+  }
+  //----------------------------------------
+}
+
+@mixin hy-hall() {
+  @if ($CssSwitchWeb) {
+    &#{$webClass} {
+      @include hy-hall-web();
+    }
+  }
+
+  @if ($CssSwitchWap) {
+    &#{$wapClass} {
+      @include hy-hall-wap();
+    }
+  }
+}
+
+.m-hy-hall {
+  @include hy-hall();
+}

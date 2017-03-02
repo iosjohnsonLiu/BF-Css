@@ -1,3 +1,65 @@
+
+@mixin itemInfoDirection-row($item-w,$padding:0,$photo-scale:0,$info-w:0,$item-h:0,$item-border-w:0){
+
+  @if($item-h > 0){
+    height: $item-h;
+  }
+  @include clearfix();
+
+  .photo-box,.info-box{float: left;}
+
+  @if($photo-scale > 0 ){
+    $photo-w:0;
+    $photo-h:0;
+    @if ($info-w > 0 ){
+      $photo-w:$item-w - $info-w - $padding * 2 - $item-border-w * 2;
+      $photo-h:$photo-w * $photo-scale;
+      .photo-box{
+        width: $photo-w;
+        height: $photo-h;
+      }
+    }@else if($item-h>0){
+      $photo-h:$item-h - $padding * 2 - $item-border-w * 2;
+      $photo-w:$photo-h / $photo-scale;
+      .photo-box{
+        width: $photo-w;
+        height: $photo-h;
+      }
+      .info-box{
+        width: ($item-w - ($item-h / $photo-scale) - $padding * 2);
+        height: 100%;
+      }
+    }
+  }
+  @if($info-w > 0 ){
+    .info-box{
+      width: $info-w;
+      height: 100%;
+    }
+  }
+}
+@mixin itemInfoDirection-colum($item-w,$padding:0,$photo-scale:0,$info-h:0,$item-h:0,$item-border-w:0){
+
+  @if($item-h > 0){
+    height: $item-h;
+  }
+
+  @if($photo-scale > 0 ){
+    $photo-w:$item-w - $padding * 2 - $item-border-w * 2;
+    $photo-h:$photo-w * $photo-scale;
+    .photo-box{
+      width: $photo-w;
+      height: $photo-h;
+    }
+  }
+  @if($info-h > 0 ){
+    .info-box{
+      height: $info-h;
+    }
+  }
+}
+
+
 //列表
 @mixin list(
   $width:$web-default-screen-width,
@@ -6,22 +68,20 @@
   $padding:0,
   $margin:0,
   $photo-scale:0,
-  $info-h:0,
-  $item-h:0
+  $info-size:0,
+  $item-h:0,
+  $item-border-w:0,
+  $infoDirectionColum:true
 ){
   @include clearfix();
-  width: $web-default-screen-width;
+  width: $width;
   margin: 0 auto;
   @if ($margin >0){
     padding: $margin;
   }
-  $item-w:(($web-default-screen-width - ($margin * 2) - ($colum * $space - $space))/$colum);
-  li{
+  $item-w:(($width - ($margin * 2) - ($colum * $space - $space))/$colum);
+  >li{
     float: left;
-    width: $item-w;
-    @if($item-h > 0){
-      height: $item-h;
-    }
     @if($space > 0){
       margin-left: $space;
       &:nth-child(#{$colum}n + 1){
@@ -31,17 +91,32 @@
         margin-top: $space;
       }
     }
-    @if($photo-scale > 0 ){
-     .photo-box{
-       width: ($item-w - $padding*2);
-       height: ($item-w * $photo-scale - $padding*2);
-     }
+    @if($padding){
+      padding: $padding;
     }
-    @if($info-h > 0 ){
-      .info-box{
-        height: $info-h;
-      }
+    width: $item-w;
+    @if($infoDirectionColum){
+      @include itemInfoDirection-colum(
+        $item-w:$item-w,
+        $padding:$padding,
+        $photo-scale:$photo-scale,
+        $info-h:$info-size,
+        $item-h:$item-h,
+        $item-border-w:$item-border-w
+      );
+    }@else{
+      @include itemInfoDirection-row(
+        $item-w:$item-w,
+        $padding:$padding,
+        $photo-scale:$photo-scale,
+        $info-w:$info-size,
+        $item-h:$item-h,
+        $item-border-w:$item-border-w
+      );
     }
+
+
+
   }
 }
 
@@ -52,5 +127,284 @@
     height: 100%;
     width: 0;
     vertical-align: middle;
+  }
+}
+
+
+@mixin wap-list(
+  $max-width-differ:0,
+  $colum:2,
+  $space:0,
+  $padding:0,
+  $margin:0,
+  $photo-scale:0,
+  $info-size:0,
+  $item-h:0,
+  $border-w:0,
+  $infoDirectionColum:true){
+  @include clearfix();
+  @if ($margin >0){
+    padding: $margin;
+  }
+  >li{
+    float: left;
+    @if($space > 0){
+      margin-left: $space;
+      &:nth-child(#{$colum}n + 1){
+        margin-left: 0;
+      }
+      &:nth-child(n + #{$colum + 1}){
+        margin-top: $space;
+      }
+      width: calc( (100% /#{$colum}) - #{$space*($colum - 1)/$colum});
+    }@else {
+      width: (100% /$colum);
+    }
+
+    .photo-box {
+      height: calc( ((100vw - #{$max-width-differ + $margin * 2}) / #{$colum} - #{$space * ($colum - 1)/$colum + $padding*2 + $border-w * 2})*#{$photo-scale});
+    }
+    .info-box{
+      height: $info-size;
+    }
+  }
+
+}
+
+
+@mixin photo-preview-box(
+  $width:0,     //组件宽度
+  $height:0,    //组件高度
+  $padding:0,   //组件内间距
+  $img-scale:2/3,//图片斜率
+  $space:0,     //组件内大图与缩略图间距
+  $big-w:0,     //大图宽度
+  $big-h:0,     //大图高度
+  $small-w:0,   //小图宽度
+  $small-h:0,   //大图高度
+  $small-count:3,//小图个数
+  $small-pdg:0,   //小图组件内间距
+  $small-img-pdg:0,   //小图内间距
+  $small-space:0, //小图之间间距
+  $small-img-border-w:0,//小图边线宽度
+  $big-class:'big-img-box', //大图组件class
+  $small-class:'small-img-box', //小图组件class
+  $small-direction-row: true  //小图排列方式 true横向排列 false纵向排列
+){
+  @if($padding>0){
+    padding: $padding;
+  }
+
+
+
+  @if($small-direction-row){
+    @if($width<($big-w +$padding*2)){$width:($big-w +$padding*2);}
+    @if($big-w <= 0){ $big-w:$width - $padding*2;}
+    $big-h:$big-w*$img-scale;
+    $small-w:($width - $padding*2 - $small-pdg*2 - $small-space*($small-count - 1))/$small-count;
+    $small-h:($small-w - $small-img-pdg*2 - $small-img-border-w*2) *$img-scale + $small-img-pdg*2 +$small-img-border-w*2;
+    $height:$padding*2 + $big-h + $space + $small-pdg*2 + $small-h;
+
+    @include size($width:$width,$height:$height);
+    position: relative;
+    @if($space>0){
+      >*:nth-child(1){
+        margin-bottom: $space;
+      }
+    }
+    .#{$big-class}{
+      @include size($width:$big-w,$height:$big-h);
+      cursor: pointer;
+    }
+    .#{$small-class}{
+      overflow: hidden;
+      width: $big-w;
+      @if($small-pdg>0){
+        padding: $small-pdg;
+      }
+      >li{
+        float: left;
+        cursor: pointer;background-color: #eee;
+        @include size($width:$small-w,$height:$small-h);
+        @if($small-img-pdg>0){
+          padding: $small-img-pdg;
+        }
+        @if($small-space>0){
+          &:nth-child(n+2){margin-left:$small-space;}
+        }
+      }
+    }
+  }@else {
+    @if($big-w>0){
+      $big-h:$big-w*$img-scale;
+      $small-h:($big-h - $small-pdg*2 - $small-space*($small-count - 1))/$small-count;
+      $small-w:($small-h - $small-img-pdg*2 - $small-img-border-w*2)/$img-scale + $small-img-pdg*2 + $small-img-border-w*2;
+      $width:$padding*2 + $big-w + $space + $small-pdg*2 + $small-w;
+      $height:$big-h+$padding*2;
+    }@else if($width > 0 and $height > 0){
+      $big-h:$height - $padding*2;
+      $big-w:$big-h/$img-scale;
+      $small-h:($big-h - $small-pdg*2 - $small-space*($small-count - 1))/$small-count;
+      $small-w:($small-h - $small-img-pdg*2 - $small-img-border-w*2)/$img-scale + $small-img-pdg*2 + $small-img-border-w*2;
+      $space:$width - $big-w - $padding*2 - $small-w - $small-pdg*2;
+    }
+
+    @if($space>0){
+      >*:nth-child(1){
+        margin-right: $space;
+      }
+    }
+    @include size($width:$width,$height:$height);
+    position: relative;
+
+    .#{$big-class}{
+      @include size($width:$big-w,$height:$big-h);
+      float: left;
+      cursor: pointer;
+    }
+    .#{$small-class}{
+      overflow: hidden;
+      float: left;
+      @if($small-pdg>0){
+        padding: $small-pdg;
+      }
+      @include clearfix();
+      >li{
+        cursor: pointer;background-color: #eee;
+        @if($small-img-pdg>0){
+          padding: $small-img-pdg;
+        }
+        @include size($width:$small-w,$height:$small-h);
+        @if($small-space>0){
+          &:nth-child(n+2){margin-top:$small-space;}
+        }
+      }
+    }
+  }
+
+
+}
+
+$photoPreviewValue-Width:0 !default;
+$photoPreviewValue-Height:1 !default;
+$photoPreviewValue-Small-Width:2 !default;
+$photoPreviewValue-Small-Height:3 !default;
+
+@function get-photo-preview-value(
+  $value-type:0,  //获取值类型
+  $width:0,     //组件宽度
+  $height:0,    //组件高度
+  $padding:0,   //组件内间距
+  $img-scale:2/3,//图片斜率
+  $space:0,     //组件内大图与缩略图间距
+  $big-w:0,     //大图宽度
+  $big-h:0,     //大图高度
+  $small-w:0,   //小图宽度
+  $small-h:0,   //大图高度
+  $small-count:3,//小图个数
+  $small-pdg:0,   //小图组件内间距
+  $small-img-pdg:0,   //小图内间距
+  $small-space:0, //小图之间间距
+  $small-img-border-w:0,//小图边线宽度
+  $big-class:'big-img-box', //大图组件class
+  $small-class:'small-img-box', //小图组件class
+  $small-direction-row: true  //小图排列方式 true横向排列 false纵向排列
+  )
+{
+
+  @if($small-direction-row){
+    @if($width<($big-w +$padding*2)){$width:($big-w +$padding*2);}
+    @if($big-w <= 0){ $big-w:$width - $padding*2;}
+    $big-h:$big-w*$img-scale;
+    $small-w:($width - $padding*2 - $small-pdg*2 - $small-space*($small-count - 1))/$small-count;
+    $small-h:($small-w - $small-img-pdg*2 - $small-img-border-w*2) *$img-scale + $small-img-pdg*2 +$small-img-border-w*2;
+    $height:$padding*2 + $big-h + $space + $small-pdg*2 + $small-h;
+
+  }@else {
+    @if($big-w>0){
+      $big-h:$big-w*$img-scale;
+      $small-h:($big-h - $small-pdg*2 - $small-space*($small-count - 1))/$small-count;
+      $small-w:($small-h - $small-img-pdg*2 - $small-img-border-w*2)/$img-scale + $small-img-pdg*2 + $small-img-border-w*2;
+      $width:$padding*2 + $big-w + $space + $small-pdg*2 + $small-w;
+      $height:$big-h+$padding*2;
+    }@else if($width > 0 and $height > 0){
+      $big-h:$height - $padding*2;
+      $big-w:$big-h/$img-scale;
+      $small-h:($big-h - $small-pdg*2 - $small-space*($small-count - 1))/$small-count;
+      $small-w:($small-h - $small-img-pdg*2 - $small-img-border-w*2)/$img-scale + $small-img-pdg*2 + $small-img-border-w*2;
+      $space:$width - $big-w - $padding*2 - $small-w - $small-pdg*2;
+    }
+  }
+  @if($value-type == $photoPreviewValue-Width){
+    @return $width;
+  }@else if($value-type == $photoPreviewValue-Height){
+    @return $height;
+  }@else if($value-type == $photoPreviewValue-Small-Width){
+    @return $small-w;
+  }@else if($value-type == $photoPreviewValue-Small-Height){
+    @return $small-h;
+  }@else{
+    @return  -1;
+  }
+}
+
+//绝对定位垂直水平居中
+@mixin absoluteCenter($width,$height){
+  position: absolute;
+  top:50%;
+  left:50%;
+  margin: {
+    top:-($height/2);
+    left: -($width/2);
+    right: 0;
+    bottom: 0;
+  };
+}
+
+//列表与详情标题样式A
+@mixin title-style-a($padding:10px){
+  >.title{
+    padding: $padding;
+    font-size: $theme-font-title-size-web;
+    line-height: 18px;
+    vertical-align: middle;
+    position: relative;
+    display: inline-block;
+    &:before{
+      content: '';
+      display: inline-block;
+      background-color: $theme-color-one;
+      position: absolute;
+      left: 0;
+      width: 3px;
+      height: 20px;
+      top: 50%;
+      margin-top: -10px;
+    }
+  }
+}
+
+//列表与详情标题样式A
+@mixin wap-title-style-a($padding:5px){
+  //padding:0 $mrg-lf;
+  >.title{
+    padding: $padding;
+    padding-left: ($padding + 4);
+    font-size: $theme-font-title-size;
+    vertical-align: middle;
+    position: relative;
+    display: inline-block;
+    &:before{
+      content: '';
+      display: inline-block;
+      background-color: $theme-color-one;
+      position: absolute;
+      left: 0;
+      width: 3px;
+      height: 16px;
+      top: 50%;
+      margin-top: -8px;
+
+    }
   }
 }

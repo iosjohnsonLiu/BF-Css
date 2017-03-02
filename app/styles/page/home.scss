@@ -1,5 +1,74 @@
 @mixin home-web(){
-
+  $mg-space:30px auto;
+  .recommend-box{
+    margin: $mg-space;
+    width: $web-default-screen-width;
+    &.adv{
+      ul{
+        @include list($colum:3,$space:5px,$photo-scale:2/3);
+      }
+    }
+    &.hall{
+      ul{
+        @include list($colum:3,$space:10px,$photo-scale:2/3,$item-border-w:1px);
+        >li{
+          background-color: #fff;
+          border: 1px solid $theme-border-color;
+          .info-box{
+            text-align: left;
+            padding: 15px 10px 20px;
+            .hall-name{font-size: $theme-font-title-size-web;color: #666;line-height: 20px;}
+            .hotel-name{
+              display: block;
+              line-height: 20px;
+              color: #666;
+              font-size:$theme-font-small-title-size-web;
+              float: right;
+            }
+          }
+        }
+      }
+    }
+    &.case{
+      background-color: #fff;
+      $height:640px;
+      @include photo-preview-box($small-img-border-w:2px,$width:$web-default-screen-width,$height:$height,$img-scale:2/3,$small-count:4,$small-pdg:10px,$small-space:20px,$small-direction-row:false);
+      $small-w: get-photo-preview-value($small-img-border-w:2px,$value-type:$photoPreviewValue-Small-Width,$width:$web-default-screen-width,$height:$height,$img-scale:2/3,$small-count:4,$small-pdg:10px,$small-space:20px,$small-direction-row:false);
+      $small-h: get-photo-preview-value($small-img-border-w:2px,$value-type:$photoPreviewValue-Small-Height,$width:$web-default-screen-width,$height:$height,$img-scale:2/3,$small-count:4,$small-pdg:10px,$small-space:20px,$small-direction-row:false);
+      .small-img-box{
+        width: $small-w;
+        >li{
+          width: $small-h;
+          margin:{
+            left: auto;
+            right: auto;
+          };
+          border-radius: 50%;
+          overflow: hidden;
+          position: relative;
+          .photo-box{
+            @include size($width:$small-w,$height:$small-h);
+            @include absoluteCenter($width:$small-w,$height:$small-h);
+          }
+          border: 2px solid transparent;
+          &.active,&:hover{
+            border-color: $theme-color-one;
+          }
+        }
+      }
+    }
+    &.dress{
+      ul{
+        @include list($colum:3,$space:10px,$padding:10px,$photo-scale:3/2,$item-border-w:1px);
+        >li{
+          border: 1px solid #ffaaa7;
+          &:hover{
+            background-color: #ffaaa7;
+          }
+        }
+      }
+    }
+  }
 }
 
 @mixin home-wap(){
@@ -32,6 +101,7 @@
           vertical-align: middle;
           text-align: center;
           color: #fff;
+          font-size: $font-size-h3;
         }
         @each $index, $color in (1, #f8c560),(2, #76c8d0),(3, #67bc94),(4, #f58b99) {
           &:nth-child(#{$index})>a{

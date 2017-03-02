@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
   <title>芭菲官网</title>
   <!-- Bootstrap -->
 
   <link href="./styles/app.css" rel="stylesheet">
-  <!--<link href="./styles/app-wap.css" rel="stylesheet">-->
-  <!--<link href="./styles/app-web.css" rel="stylesheet">-->
+
   <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-  <script src="./plugin/mobileSlider/mobileSlider.js"></script>
+
   <link href="./plugin/lightGallery/css/lightgallery.css" rel="stylesheet"/>
+
   <script type="text/javascript" src="./plugin/jquery.min.js"></script>
   <script type="text/javascript" src="./plugin/jquery.mousewheel.min.js"></script>
   <script type="text/javascript" src="./plugin/picturefill.min.js"></script>
@@ -28,16 +28,32 @@
 </head>
 
 <body>
-<div id="root" class="root wap">
+<div id="root" class="root web">
   <div class="f-main">
-    <div class="u-nav wap"></div>
-    <div class="m-view m-hy-menu wap">
-      <div class="f-scrollview">
-        <div class="u-logo-box wap">
-          <div class="logo-icon"></div>
+    <div class="u-nav web">
+
+    </div>
+      <div class="u-sub-nav">
+        <ul class="item-list">
+          <li class="item"><a href="/scheme"><i class="icon"></i><span class="title">婚庆首页</span></a></li>
+          <li class="item item-activate"><a href="/case"><i class="icon"></i><span class="title">实景案例</span></a></li>
+          <li class="item"><a href="/followPhoto"><i class="icon"></i><span class="title">婚礼跟拍</span></a></li>
+          <li class="item"><a href="/followVideo"><i class="icon"></i><span class="title">婚礼视频</span></a></li>
+          <li class="item"><a href="/f4"><i class="icon"></i><span class="title">选婚礼人</span></a></li>
+          <li class="item"><a href="/supply"><i class="icon"></i><span class="title">婚礼用品</span></a></li>
+          <li class="item"><a href="/car"><i class="icon"></i><span class="title">婚车租赁</span></a></li>
+        </ul>
+        <div class="open-button">
+          <div class="info-box">
+            <i class="icon"></i>
+            <span class="title">实景案例</span>
+            <div class="bg-box"></div>
+          </div>
         </div>
-        <div class="u-carousel picture wap"></div>
-        <div class="u-carousel adv wap"></div>
+      </div>
+    <div class="m-view m-hy-menu web">
+      <div class="f-scrollview">
+        <div class="u-carousel adv web"></div>
         <div class="menu-list-box">
           <div class="title-box">
             <span class="title">菜单套系列表</span>
@@ -134,18 +150,48 @@
               </div>
             </li>
           </ul>
-          <div class="u-more-box">
-            <button class="more-btn">点击加载更多</button>
+          <div class="u-pagination">
+            <div class="pagination-box">
+              <div class="btn-prev disable">上一页</div>
+              <ul class="page-number">
+                <li class="active">1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li class="omit">...</li>
+                <li>20</li>
+              </ul>
+              <div class="btn-next">下一页</div>
+            </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="f-footer">
+    <div class="contact-way-box">
+      <div class="info-box">
+        <span class="tel">400-015-9999</span>
+        <span class="address">重庆总店</span>
+        <span class="website">www.jsbn.com</span>
+      </div>
+      <div class="wx-tel">
+        <div class="qr-code">
+          <img src="http://www.izhaowo.com/App/images/userwx.png" alt="">
+        </div>
+        <span class="title">芭菲婚礼公众号</span>
+      </div>
+    </div>
+    <div class="licence-box">
+      <p>Copyright © 2013 - 2017 金色百年婚礼服务集团有限公司 版权所有</p>
+      <p>经营许可证:渝ICP备15007161号-1</p>
     </div>
   </div>
   <div id="lightgallery"></div>
 </div>
 
 <script src="./scripts/readydefault.js"></script>
-<script type="application/javascript">
+<script type="text/javascript">
   $(document).ready(function () {
     $(".menu-list-box .item-list>li").click(function(){
       lightGalleryShow();
