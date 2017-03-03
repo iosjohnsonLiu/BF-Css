@@ -93,23 +93,171 @@
     &#{$wapClass}{
       .nav-box{
         @include square(100%);
+        >ul{
+          display: table;
+          @include square(100%);
+          >li{
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+            width: 1%;
+            a{
+              font-size: $font-size-h4;
+              .title{color: $mainNav-font-color;}
+              .sub-title{display: none;}
+            }
+            &.active,>a:active>a:hover{
+              .title{color: $mainNav-font-active-color;}
+            }
+            .submenu{
+              visibility: hidden;
+              z-index: 0;
+            }
+            &.active{
+              .submenu{
+                z-index: $zindex-navbar-fixed;
+                visibility: visible;}
+            }
+          }
+        }
       }
       .tel-box{display: none;}
       .logo-box{display: none;}
-      ul{
-        display: table;
-        @include square(100%);
-        >li{
-          display: table-cell;
-          vertical-align: middle;
-          text-align: center;
-          a{
-            font-size: $font-size-h4;
-            .title{color: $mainNav-font-color;}
-            .sub-title{display: none;}
+
+      .submenu{
+        $menu-w:84px;
+        $li-space:5px;
+        position: fixed;
+        height: 100%;
+        top: 0;
+        right:-($menu-w + $li-space*2 +4);
+        @include transition(0.5s);
+        @include displayFlex();
+        @include flexDirectionColumn();
+        @include justifyContentCenter();
+
+
+        $menu-color:#f9c4d2;
+        $menu-border:2px solid $menu-color;
+        .sub-nav{
+          position: relative;
+          background-color: #fff;
+          @include border-bottom-radius(4px);
+          border: $menu-border;
+          margin-top: 100px;
+          z-index: $zindex-navbar;
+          &:before{
+            content: "";
+            display: block;
+            position: absolute;
+            right: -17px;
+            bottom: calc(100% - #{$li-space});
+            z-index: 10;
+            @include square($menu-w+45);
+            @include icon-submenu-bg();
           }
-          &.active,>a:active>a:hover{
-            .title{color: $mainNav-font-active-color;}
+          .item-list{
+            min-height: 120px;
+            padding: $li-space*2 $li-space $li-space ;
+            position: relative;
+            &:before{
+              content: "";
+              display: block;
+              position: absolute;
+              bottom: -15px;
+              left: -12px;
+              z-index: 10;
+              @include size($width:23.5px,$height:30.5px);
+              @include icon-submenu-bg-left();
+            }
+            &:after{
+              content: "";
+              display: block;
+              position: absolute;
+              top: -20px;
+              right: -14px;
+              z-index: 10;
+              @include size($width:28.5px,$height:30px);
+              @include icon-submenu-bg-right();
+            }
+            >li{
+              text-align: center;
+              width: $menu-w;
+              height: 35px;
+              color: #fff;
+              display: block;
+              background-color: #ff8f8e;
+              border-radius:4px;
+              .title{color: #fff;line-height: 35px;font-size: $theme-font-value-size;}
+              &:nth-child(n+2){
+                margin-top: $li-space;
+              }
+              &.active{
+                background-color: $menu-color;
+                .title{color: #fff;}
+              }
+            }
+          }
+          .open-button{
+            position: absolute;
+            top: 0;
+            left: -42px;
+            width: 40px;
+            height: 73px;
+            z-index: $zindex-navbar;
+            .info-box{
+              position: relative;
+              margin-left: auto;
+              margin-right: 0;
+              display: block;
+              width: 25px;
+              padding: 5px 0 20px;
+              background-color: $menu-color;
+              border-top-left-radius: 8px;
+              border-bottom-left-radius: 60%;
+              border:{
+                top:$menu-border;
+                left:$menu-border;
+                bottom: $menu-border;
+              };
+              .title{
+                color: #fff;
+                font-size: $theme-font-detail-size;
+                line-height: $theme-font-detail-size;
+              }
+              .icon{
+                content: "";
+                display: block;
+                position: absolute;
+                top: -20px;
+                left: -20px;
+                z-index: 10;
+                @include size($width:24.5px,$height:31px);
+                @include icon-submenu-btn-bg();
+                @include transition(0.5s);
+                @include rotate(0deg);
+              }
+            }
+          }
+        }
+        &.show-submenu{
+          right: 8px;
+          &:before{
+            content: "";
+            display: block;
+            position: fixed;
+            z-index: 999;
+            top: -100%;
+            right: -100%;
+            @include square(300%);
+            background-color: rgba(#000,0.5);
+          }
+          .sub-nav{
+            .open-button .icon{
+              top: -13px;
+              left: -22px;
+              @include rotate(-45deg);
+            }
           }
         }
       }
@@ -118,14 +266,16 @@
   @if($CssSwitchWeb){
     &#{$webClass}{
       position: relative;
-      border-bottom: 1px solid $theme-color-one;
       $nav-width:1200px;
       .nav-box{
+        $li-h:35px;
+        $line-color-active:#999;
+        $line-zindex:12;
         margin: 0 auto;
         width: 900px;
-        padding: 20px 0;
-        height: $web-mainNav-height;
+        padding: ( $web-mainNav-height - $li-h)/2 0;
         >ul{
+
           >li{
             position: relative;
             display: inline-block;
@@ -160,19 +310,72 @@
         .submenu{
           position: absolute;
           top:100%;
-          left:0;
+          left:50%;
           display: none;
           width: 900px;
-          padding-top: 2px;
-          >li{
-            padding: 4px 8px;
+          margin-left: -450px;
+          padding-top: ($web-mainNav-height - $li-h)/2;
+          text-align: center;
+          $arrow-size:6px;
+          &:before,&:after{
+            content: "";
+            display: block;
+            position: absolute;
+            border-style: solid;
+            left: 50%;
+            z-index: $line-zindex;
+            top: ($web-mainNav-height - $li-h)/2 - $arrow-size;
+            margin-left: -$arrow-size;
+            border-width: $arrow-size;
+            border-color: transparent;
+            border-top-width: 0;
+            border-bottom-color: $line-color-active;
+          }
+          &:after{
+            z-index: $line-zindex+1;
+            top: ($web-mainNav-height - $li-h)/2 - $arrow-size + 2;
+            margin-left: -$arrow-size - 1;
+            border-width: $arrow-size - 2;
+            border-bottom-color: #fff;
+          }
+          .item-list>li{
+            height: $li-h;
             display: inline-block;
-            .title{ font-size: $theme-font-small-title-size;color: $theme-font-color;}
+            .title{ line-height: $li-h;font-size: $theme-font-title-size;color: $theme-font-color;
+              margin: {
+                left: $li-h/4;
+                right: $li-h/4;
+              };
+            }
             &.active>a,>a:hover{
               >span{
                 color: $mainNav-font-active-color;
               }
             }
+          }
+          .open-button{display: none;}
+        }
+
+        &:before{
+          content: '';
+          display: block;
+          position: absolute;
+          top:$web-mainNav-height;
+          left: 0;
+          right: 0;
+          height: 1px;
+          z-index: $line-zindex;
+          background-color: $theme-color-one;
+        }
+        &.show-submenu{
+          &:after{
+            content: '';
+            width: 100%;
+            display: block;
+            height: $li-h ;
+          }
+          &:before{
+            background-color: $line-color-active;
           }
         }
       }

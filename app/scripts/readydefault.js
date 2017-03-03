@@ -3,7 +3,7 @@ $(document).ready(function () {
 
   insertMainnav();
   insertCarousel();
-
+  insertFootet();
   //barcode();
 
   //if ($(".u-carousel.picture.wap").length > 0 ){
@@ -15,6 +15,9 @@ $(document).ready(function () {
   //if ($(".u-carousel.web").length > 0 ){
   //  $(".u-carousel.picture").mobileSlider({during:6000,width:1920,height:1920/3});
   //}
+  $('.u-nav.wap .nav-box>ul>li.active .submenu .sub-nav .open-button').click(function(){
+    $('.u-nav.wap .nav-box>ul>li.active .submenu').toggleClass('show-submenu')
+  });
 });
 
 
@@ -52,93 +55,92 @@ function insertMainnav() {
   if (platClass){
     var $mainNav = $(".f-main > .u-nav"+platClass)[0];
     var menuList = [];
-    if (platClass == '.wap'){
-      menuList = [
-        {
-          url:"'home"+ platClass +".html'",
-          title:"首页",
-          icon:"",
-          subtitle:""
-        },
-        {
-          url:"'hq-home"+ platClass +".html'",
-          title:"婚庆",
-          icon:"",
-          subtitle:"",
-        },
-        {
-          url:"'hy-home"+ platClass +".html'",
-          title:"婚宴",
-          icon:"",
-          subtitle:""
-        },
-        {
-          url:"'lf-home"+ platClass +".html'",
-          title:"礼服",
-          icon:"",
-          subtitle:""
-        },
-      ];
-    }else {
-      menuList = [
-        {
-          url:"'home"+ platClass +".html'",
-          title:"首页",
-          icon:"",
-          subtitle:"home"
-        },
-        {
-          url:"'hy-home"+ platClass +".html'",
-          title:"婚宴",
-          icon:"",
-          subtitle:"wedding banquet",
-          submenu:[
-            {
-              url:"'hy-store-list"+ platClass +".html'",
-              title:"婚宴酒店",
-            },
-            {
-              url:"'hy-hall-list"+ platClass +".html'",
-              title:"宴会厅",
-            },
-            {
-              url:"'hy-menu-list"+ platClass +".html'",
-              title:"菜品套系",
-            },
-          ]
-        },
-        {
-          url:"'hq-home"+ platClass +".html'",
-          title:"婚庆",
-          icon:"",
-          subtitle:"wedding",
-          submenu:[
-            {
-              url:"'hy-store-list"+ platClass +".html'",
-              title:"婚宴酒店",
-            },
-          ]
-        },
-        {
-          url:"'lf-home"+ platClass +".html'",
-          title:"婚纱礼服",
-          icon:"",
-          subtitle:"Wedding dress",
-          submenu:[
-            {
-              url:"'hy-store-list"+ platClass +".html'",
-              title:"婚宴酒店",
-            },
-          ]
-        },
-        {
-          url:"#",
-          title:"一站式服务",
-          icon:"",
-          subtitle:"One stop service"
-        },
-      ];
-    }
+
+    //if (platClass == '.wap'){
+    //  menuList = [
+    //    {
+    //      url:"'home"+ platClass +".html'",
+    //      title:"首页",
+    //      icon:"",
+    //      subtitle:""
+    //    },
+    //    {
+    //      url:"'hq-home"+ platClass +".html'",
+    //      title:"婚庆",
+    //      icon:"",
+    //      subtitle:"",
+    //    },
+    //    {
+    //      url:"'hy-home"+ platClass +".html'",
+    //      title:"婚宴",
+    //      icon:"",
+    //      subtitle:""
+    //    },
+    //    {
+    //      url:"'lf-home"+ platClass +".html'",
+    //      title:"礼服",
+    //      icon:"",
+    //      subtitle:""
+    //    },
+    //  ];
+    //}else {
+    //
+    //}
+
+    menuList = [
+      {
+        url:"'home"+ platClass +".html'",
+        title:"首页",
+        icon:"",
+        subtitle:"home"
+      },
+      {
+        url:"'hy-home"+ platClass +".html'",
+        title:"婚宴",
+        icon:"",
+        subtitle:"wedding banquet",
+        submenu:[
+          {
+            url:"'hy-store-list"+ platClass +".html'",
+            title:"婚宴酒店",
+          },
+          {
+            url:"'hy-hall-list"+ platClass +".html'",
+            title:"宴会厅",
+          },
+          {
+            url:"'hy-menu-list"+ platClass +".html'",
+            title:"菜品套系",
+          },
+        ]
+      },
+      {
+        url:"'hq-home"+ platClass +".html'",
+        title:"婚庆",
+        icon:"",
+        subtitle:"wedding",
+        submenu:[
+          {
+            url:"'hq-case"+ platClass +".html'",
+            title:"实景案例",
+          },
+        ]
+      },
+      {
+        url:"'lf-home"+ platClass +".html'",
+        title:"婚纱礼服",
+        icon:"",
+        subtitle:"Wedding dress",
+      },
+      {
+        url:"#",
+        title:"一站式服务",
+        icon:"",
+        subtitle:"One stop service"
+      },
+    ];
+
+
 
     var liArray="";
     for (var i in menuList){
@@ -154,8 +156,22 @@ function insertMainnav() {
           "   </a>  "+
           " </li> ";
         }
+
         if (subLi.length>0){
-          submenuHtml = " <ul class='submenu' > " + subLi + " </ul> ";
+          var openClass="$('.u-nav>.nav-box').toggleClass('show-submenu')";
+          submenuHtml =
+            "<div class='submenu'> "+
+            " <div class='sub-nav'>"+
+            "   <ul class='item-list'>" + subLi +"</ul>"+
+            "   <div class='open-button' onclick=''>"+
+            "     <div class='info-box'>"+
+            "       <i class='icon'></i>"+
+            "       <span class='title'>二级导航</span>"+
+            "       <div class='bg-box'></div>"+
+            "     </div>"+
+            "    </div>"+
+            " </div>"+
+            "</div>";
         }
       }
       liArray+=
@@ -187,10 +203,40 @@ function insertMainnav() {
 
     $($mainNav).find("li>a[href^='" + fileName + "']").parent().addClass("active");
     $($mainNav).find(".nav-box>ul>li>a[href^='" + modelName + "']").parent().addClass("active");
-
+    $('.f-main > .u-nav.web .nav-box').removeClass('show-submenu');
+    if ($('.f-main > .u-nav.web .nav-box>ul>li.active .submenu .item-list>li').length > 0){
+      $('.f-main > .u-nav.web .nav-box').addClass('show-submenu');
+    }
   }
 
 }
+
+
+function insertFootet() {
+  if ($(".f-footer").length > 0) {
+    var $insertFootet=$(".f-footer")[0];
+    var footetHtml =
+      "<div class='contact-way-box'>"+
+      " <div class='info-box'>"+
+      "  <span class='tel'>400-015-9999</span>"+
+      "  <span class='address'>重庆总店</span>"+
+      "  <span class='website'>www.jsbn.com</span>"+
+      " </div>"+
+      " <div class='wx-tel'>"+
+      "  <div class='qr-code'>"+
+      "   <img src='http://www.izhaowo.com/App/images/userwx.png' alt=''>"+
+      "  </div>"+
+      "  <span class='title'>芭菲婚礼公众号</span>"+
+      " </div>"+
+      "</div>"+
+      "<div class='licence-box'>"+
+      "  <p>Copyright © 2013 - 2017 金色百年婚礼服务集团有限公司 版权所有</p>"+
+      "  <p>经营许可证:渝ICP备15007161号-1</p>"+
+      "</div>";
+    $(footetHtml).prependTo($insertFootet);
+  }
+}
+
 
 function insertCarousel() {
   //app 主导航

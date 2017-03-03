@@ -164,8 +164,10 @@
     .photo-box {
       height: calc( ((100vw - #{$max-width-differ + $margin * 2}) / #{$colum} - #{$space * ($colum - 1)/$colum + $padding*2 + $border-w * 2})*#{$photo-scale});
     }
-    .info-box{
-      height: $info-size;
+    @if($info-size>0){
+      .info-box{
+        height: $info-size;
+      }
     }
   }
 

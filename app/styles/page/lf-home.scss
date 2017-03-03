@@ -1,0 +1,208 @@
+@mixin lf-home-web() {
+  //宴会厅列表页面
+  $space:10px;
+  .dress-list-box {
+    $dress-list-w: $web-default-screen-width;
+    width: $dress-list-w;
+    margin: 30px auto;
+    > .title {
+      position: relative;
+      background-color: #fff;
+      font-size: $theme-font-big-title-size;
+      padding: {
+        top: 10px;
+        left: 10px;
+      }
+      vertical-align: middle;
+      &:before {
+        content: " ";
+        display: inline-block;
+        margin-right: 8px;
+        height: 16px;
+        width: 3px;
+        vertical-align: middle;
+        background-color: $theme-color-one;
+      }
+    }
+    > .sift-box {
+      &+.sift-box{padding-bottom:10px;}
+      padding:{
+        left: 10px;
+        right: 10px;;
+
+      }
+      font-size: 0;
+      background-color: #fff;
+      >.sift-title{
+        font-size: $theme-font-small-value-size-web;
+        display: inline-block;
+        color: #999;
+      }
+      .sift-list {
+        display: inline-block;
+        > li {
+          display: inline-block;
+          padding: 4px 8px;
+          font-size: $theme-font-small-value-size-web;
+          color: #666;
+          font-weight: 400;
+          border-radius: 4px;
+          cursor: pointer;
+          margin: {
+            top: 10px;
+            left: 10px;
+          }
+          &.active {
+            color: $theme-font-active-color;
+          }
+        }
+      }
+    }
+    > .item-list {
+      $space:10px;
+      @include list($width:$dress-list-w,$colum:3,$space:20px,$photo-scale:3/2);
+      margin-top: $space*2;
+      >li{
+        cursor: pointer;
+
+        position: relative;
+        &:hover{
+          .photo-box{
+            overflow: hidden;
+            img{
+              @include scale(1.2);
+            }
+          }
+          .info-box{
+            background-color: rgba(#fff,0.8);
+            visibility: visible;
+          }
+        }
+        .photo-box{
+          overflow: hidden;
+          img{
+            @include transition(0.5s);
+            //@include scale(1.0);
+          }
+        }
+        .info-box{
+          position: absolute;
+          top:20px;
+          left: 20px;
+          right: 20px;
+          bottom: 20px;
+          //border: 20px solid transparent;
+          //@include square(100%);
+          text-align: center;
+          @include inlineMiddle();
+          @include transition(0.5s);
+          background-color: rgba(#fff,0);
+          visibility: hidden;
+          .title{
+            font-size: $theme-font-title-size-web;
+          }
+        }
+      }
+    }
+    .u-pagination{
+      margin-top: 2*$space;
+      //background-color: #fff;
+    }
+  }
+  //模块标题
+  .title-box{
+    @include title-style-a($space);
+  }
+  .sift-box {
+    .sift-btn{
+      cursor: pointer;
+      font-size: $theme-font-small-title-size-web;
+      line-height: 18px;
+      padding: $space;
+      float: right;
+      color: $theme-color-one;
+    }
+  }
+}
+
+@mixin lf-home-wap() {
+  //宴会厅列表页面
+  //----------------------------------------
+  .dress-list-box {
+    > .item-list {
+      $space:5px;
+      $li-space:10px;
+      @include wap-list($colum:2,$photo-scale:3/2,$margin:$space,$space:$li-space,$border-w:1px);
+      >li {
+        border: 1px solid $theme-border-color;
+        .info-box {
+          position: relative;
+          padding: $space;
+          text-align: center;
+          >.title{font-size: $theme-font-title-size;padding: $space 0;display: block;}
+        }
+      }
+    }
+  }
+
+
+  //----------------------------------------
+  //宴会列表页面:宴会厅列表 和 宴会厅详情页面:案例列表 共用样式
+  .sift-box {
+    background-color: #fff;
+    //border-bottom: 1px solid $theme-border-color;
+    >.title-box{
+      @include displayFlex();
+      @include justifyContentSpaceBetween();
+      padding: 4px;
+      font-size: $theme-font-title-size;
+      .sift-btn{
+        padding: 5px;
+        &.acitve{
+          color: $theme-color-one;
+        }
+      }
+    }
+    .sift-condition {
+      border-top: 1px dashed #efefef;
+      font-size: 0;
+      > li {
+        display: inline-block;
+        padding: 2px 4px;
+        font-size: $theme-font-small-value-size;
+        border: 1px solid rgba($theme-color-one,0.7);
+        color: $theme-color-one;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 4px;
+        &.active {
+          color: #fff;
+          background-color: $theme-color-one;
+        }
+      }
+    }
+  }
+  //模块标题
+  .title-box{
+    @include wap-title-style-a(10px);
+  }
+  //----------------------------------------
+}
+
+@mixin lf-home() {
+  @if ($CssSwitchWeb) {
+    &#{$webClass} {
+      @include lf-home-web();
+    }
+  }
+
+  @if ($CssSwitchWap) {
+    &#{$wapClass} {
+      @include lf-home-wap();
+    }
+  }
+}
+
+.m-lf-home {
+  @include lf-home();
+}

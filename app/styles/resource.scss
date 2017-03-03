@@ -1,0 +1,56 @@
+
+
+@mixin icon-submenu-bg(){
+  background-image: url("../images/icon-submenu-bg.png");
+  background-size: cover;
+}
+@mixin icon-submenu-btn-bg(){
+  background-image: url("../images/icon-submenu-btn-bg.png");
+  background-size: cover;
+}
+@mixin icon-submenu-bg-left(){
+  background-image: url("../images/icon-submenu-bg-left.png");
+  background-size: cover;
+}
+@mixin icon-submenu-bg-right(){
+  background-image: url("../images/icon-submenu-bg-right.png");
+  background-size: cover;
+}
+
+/////根据图片大小自动选择图片  竖排列
+//.iconSetupX($iconWidth;$iconHeight;$index;$count;$setupSize:0;){
+//@if ($i) when ($setupSize = 1) {
+//.iconSetupSize($iconWidth;$iconHeight;$count);
+//}
+//@if ($i) when ($i = 0) {
+//.iconSetupSize($iconWidth;$iconHeight;$count);
+//}
+//@if ($i) when ($i > 0) {
+//  background-position:calc(($iconWidth) * (0 - ($index - 1))) 0;
+//}
+//@if($index);
+//}
+//
+/////根据图片大小自动选择图片  横排列
+//.iconSetupY($iconWidth;$iconHeight;$index;$count;$setupSize:0;){
+//@if ($i) when ($setupSize =1) {
+//.iconSetupSize($iconWidth;$iconHeight;1);
+//}
+//@if ($i) when ($i = 0) {
+//.iconSetupSize($iconWidth;$iconHeight;1);
+//}
+//@if ($i) when ($i > 0) {
+//  background-position:0 calc(($iconWidth) * (0 - ($index - 1)));
+//}
+//@if($index);
+//}
+
+//.iconSetupSize($iconWidth;$iconHeight;$count){
+//  width:calc($iconWidth);
+//  height: calc($iconHeight);
+//  background-size: calc($iconWidth * $count);
+//  display: block;
+//  background-repeat: no-repeat;
+//}
+ 
+ 

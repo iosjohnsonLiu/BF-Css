@@ -63,10 +63,15 @@
     &.hall{
       $space:10px;
       $adv-width:540px;
+      $adv-scale:9/8;
+      $hall-scale:2/3;
+      $adv-height:(($adv-width - $space * 2 - 2)*$adv-scale + $space * 2 + 2);
       $hall-width:(($web-default-screen-width - $adv-width)/2);
       @include clearfix();
+
       width: $web-default-screen-width;
-      height: (($adv-width - $space * 2)/2*3 + $space * 2);
+      height: $adv-height;
+
       ul{
         margin: auto;
         height: 100%;
@@ -96,15 +101,18 @@
         height: 50%;
         .photo-box{
           @include square(($hall-width - ($space * 2)));
+          width: $hall-width - ($space * 2);
+          height: ($hall-width - ($space * 2))*($hall-scale);
         }
       }
       .info-box{
-        padding: $space 0;
+        padding: $space*1.5 $space*0.5;
         position: relative;
         .title{
           display: block;
           font-size: 20px;
           line-height: 30px;
+          margin-bottom: $space/2;
         }
         .address,.detail-btn{
           font-size: $theme-font-title-size;
@@ -114,8 +122,8 @@
           cursor: pointer;
           background-color: transparent;
           position: absolute;
-          right: $space;
-          bottom: $space;
+          right: $space*0.5;
+          bottom: $space*1.5;
           &:after{
             content: '>>>';
             padding-left: 10px;
