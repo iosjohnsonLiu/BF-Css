@@ -1,0 +1,204 @@
+@-webkit-keyframes load{
+  from { @include opacity(0);}
+  to { @include opacity(1);}
+}
+
+@mixin load-animation($index){
+  $time:1.0s;
+  &::before{
+    @include  animation(load $time linear (($time/12) * ($index - 1)) infinite)
+  }
+  &::after{
+    @include  animation(load $time linear (($time/12) * ($index - 1 + 6)) infinite)
+  }
+}
+
+@mixin u-load(){
+  @include inlineMiddle();
+  text-align: center;
+  $load-color:#fff;
+  .load-box{
+    position:relative;
+    text-align: center;
+    display: inline-block;
+  }
+  .load-img{
+    position: relative;
+    i{
+      font-size: inherit;
+      background-color: transparent;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      bottom: 0;
+      right: 50%;
+      &::before,&::after{
+        content: '';
+        height: 18%;
+        position: absolute;
+        left: 50%;
+        display: block;
+        border: 0.04em solid;
+        border-radius: 20px;
+      }
+      &::before{ bottom: 0;}
+      &::after{ top:0; }
+      &:nth-child(1){
+        @include rotate(0deg);
+        @include  load-animation(1);
+      }
+      &:nth-child(2){
+        @include rotate(30deg);
+        @include  load-animation(2);
+      }
+      &:nth-child(3){
+        @include rotate(60deg);
+        @include  load-animation(3);
+      }
+      &:nth-child(4){
+        @include rotate(90deg);
+        @include  load-animation(4);
+      }
+      &:nth-child(5){
+        @include rotate(120deg);
+        @include  load-animation(5);
+      }
+      &:nth-child(6){
+        @include rotate(150deg);
+        @include  load-animation(6);
+      }
+
+    }
+    @include square(2em);
+  }
+  .load-title{
+    color: $load-color;
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  position: absolute;
+  top:0;left: 0;right: 0;bottom: 0;
+  z-index: 10;
+  font-size: 16px;
+  @media (min-width: 768px) {
+    font-size:36px;
+  }
+
+  &.overspread{
+    background-color: rgba(0, 0, 0, 0.40);
+    @media (min-width: 769px) {
+      font-size: 48px;
+    }
+    @media (max-width: 768px){
+      font-size: 24px;
+    }
+
+    position: absolute;
+    top:0;left: 0;right: 0;bottom: 0;
+    .load-img{
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.50);
+      border-radius: 0.3em;
+      border: 0.145em solid transparent;
+    }
+    .load-title{
+      font-size: 16px;
+    }
+  }
+  &.fixed{
+    background-color: rgba(0, 0, 0, 0.40);
+    $img-size:10em;
+    position: fixed;
+    top:0;left: 0;right: 0;bottom: 0;
+    z-index: $zindex-dropdown;
+    .load-img{
+      color: #fff;
+      border-radius: 0.5em;
+      border: 0.25em solid transparent;
+      background-color: rgba(0, 0, 0, 0.50);
+    }
+    .load-box{padding: 20px;  }
+    .load-title{font-size: 0.2em;}
+    @media (min-width: 769px) {
+      font-size: 99px;
+    }
+    @media (max-width: 768px){
+      font-size: 48px;
+      .load-title.center{
+        position: absolute;
+        top:35%;
+        left:25%;
+        width: 50%;
+        height: 30%;
+        font-size: 10px;
+        @include displayFlex();
+        @include justifyContentCenter();
+        @include alignItemsCenter();
+      }
+    }
+  }
+}
+
+.u-load{
+  @include u-load();
+}
+@media (min-width: 769px) {
+  .u-loading-box{
+    position: relative;
+    min-height: 120px;
+    >.u-load,>*>.u-load{
+      color: #333;
+      //font-size: $font-size-h1;
+      z-index: $zindex-navbar;
+      background-color: rgba(#000,0.05);
+      font-size:60px;
+    }
+  }
+}
+@media  (max-width: 768px){
+  .u-loading-box{
+    >.u-load,>*>.u-load{
+      font-size: 48px;
+      position: fixed;
+      $img-size:10em;
+      top:0;left: 0;right: 0;bottom: 0;
+      z-index: $zindex-navbar;
+      background-color: rgba(#000,0.4);
+      .load-img{
+        color: #fff;
+        border-radius: 0.4em;
+        border: 0.2em solid transparent;
+        background-color: rgba(0, 0, 0, 0.50);
+      }
+      .load-box{padding: 15px; }
+      .load-title{font-size: 0.2em;}
+      .load-title.center{
+        position: absolute;
+        top:35%;
+        left:25%;
+        width: 50%;
+        height: 30%;
+        font-size: 10px;
+        @include displayFlex();
+        @include justifyContentCenter();
+        @include alignItemsCenter();
+      }
+    }
+  }
+}
+
+//<!--u-load fixed overspread  (fixed 全屏模式  overspread 弹出框模式)">-->
+//<div class="u-load fixed">
+//    <div class="load-box">
+//        <div class="load-img">
+//            <i></i>
+//            <i></i>
+//            <i></i>
+//            <i></i>
+//            <i></i>
+//            <i></i>
+//        </div>
+//        <!--load-title 加上 center 在fixed下字体显示在加载动画中间-->
+//        <div class="load-title center">加载中..</div>
+//    </div>
+//</div>

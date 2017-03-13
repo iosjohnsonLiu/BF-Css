@@ -1,0 +1,86 @@
+@mixin hq-follow-web(){
+  $space:10px;
+
+  //跟拍列表页面
+  .follow-list-box {
+    $follow-list-w: $web-default-screen-width;
+    width: $follow-list-w;
+    margin: 30px auto;
+    .item-list {
+      $space:10px;
+      margin-top: 2*$space;
+      margin-bottom: 2*$space;
+
+      @include list($width:$follow-list-w,$colum:4,$padding:10px,$info-size:40px,$photo-scale:9/16);
+      >li{
+        @include list-li-border($colum:4);
+        background-color: #fff;
+        cursor: pointer;
+        .info-box{
+          padding: $space;
+          text-align: center;
+          position: relative;
+          .title{display: block; font-size: $theme-font-title-size-web;}
+        }
+        @include img-shabox-sytle();
+      }
+    }
+  }
+
+  .follow-list-box{
+    @include title-style-a($space);
+  }
+}
+
+@mixin hq-follow-wap(){
+  $space:10px;
+
+  //跟拍列表页面
+  .follow-list-box {
+    $space:10px;
+    padding: $space/2;
+    >.item-list {
+      @include wap-list($colum:2,$space:10px,$photo-scale:9/16,$max-width-differ:$space);
+      >li{
+        background-color: #fff;
+        cursor: pointer;
+        @include wap-img-shabox-sytle(0);
+        .info-box{
+          text-align: center;
+          padding: $space/2;
+          position: relative;
+          .title{
+            display: block;
+            font-size: $theme-font-title-size;
+            line-height: 20px;
+          }
+        }
+      }
+    }
+    .u-pagination{
+      margin-top: $space * 2;
+    }
+  }
+
+  //模块标题
+  .title-box{
+    @include wap-title-style-a();
+  }
+}
+
+@mixin hq-follow(){
+  @if($CssSwitchWeb){
+    &#{$webClass}{
+      @include hq-follow-web();
+    }
+  }
+  @if($CssSwitchWap){
+    &#{$wapClass}{
+      @include hq-follow-wap();
+    }
+  }
+}
+
+.m-hq-follow{
+  @include hq-follow();
+}

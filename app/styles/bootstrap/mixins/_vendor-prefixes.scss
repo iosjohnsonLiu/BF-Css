@@ -109,6 +109,12 @@
 }
 
 // Transformations
+@mixin transform($value) {
+  -webkit-transform: $value;
+      -ms-transform: $value;
+       -o-transform: $value;
+          transform: $value;
+}
 @mixin scale($ratio...) {
   -webkit-transform: scale($ratio);
       -ms-transform: scale($ratio); // IE9 only

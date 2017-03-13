@@ -1,6 +1,6 @@
 //布局样式
 .root{
-  background-color: #f4f4f4;
+  //background-color: #f4f4f4;
   .f-main{
 
   }
@@ -36,55 +36,43 @@
 
     }
     .f-footer{
-      background-color: #666;
-      padding: 20px;
+      background-color: #fff;
+      padding-top: 60px;
+      padding-bottom: 30px;
       .contact-way-box{
         width: 1200px;
         margin:auto;
-        @include clearfix();
+        margin-bottom: 20px;
+        text-align: center;
       }
-      .info-box{
-        float: left;
-        margin-left: 30px;
+      .tel-box{
+        display: inline-block;
+        padding: 0 14px;
+        &:nth-child(1){border-right: 1px solid #999;}
         span{
-          color: #fff;
+          color: #999;
           font-size: ($theme-font-title-size + 1);
-          line-height: 30px;
-          display: block;
-          padding: 4px 30px;
+          line-height: 20px;
+          padding: 0 4px;
         }
         .tel{
-          color: #e27912;
-          font-size: 24px;
+          font-size: 18px;
         }
-        .address{}
-        .website{}
-      }
-      .wx-tel{
-        float: right;
-        padding: 10px;
-        .qr-code{
-          margin: auto;
-          @include square(100px);
-        }
-        .title{
-          padding: 4px;
-          color: #e27912;
-          font-size: ($theme-font-title-size + 1);
-        }
+        .name{}
       }
       .licence-box{
         text-align: center;
+        margin:auto;
         p{
-          color: #fff;
+          margin-top: 10px;
+          color: #999;
           font-size: 12px;
+          padding: 0 10px;
         }
       }
     }
   }
-
 }
-
 //菜单
 .u-nav{
   background-color: #fff;
@@ -123,7 +111,6 @@
       }
       .tel-box{display: none;}
       .logo-box{display: none;}
-
       .submenu{
         $menu-w:84px;
         $li-space:5px;
@@ -134,8 +121,7 @@
         @include transition(0.5s);
         @include displayFlex();
         @include flexDirectionColumn();
-        @include justifyContentCenter();
-
+        @include justifyContentFlexEnd();
 
         $menu-color:#f9c4d2;
         $menu-border:2px solid $menu-color;
@@ -145,6 +131,7 @@
           @include border-bottom-radius(4px);
           border: $menu-border;
           margin-top: 100px;
+          margin-bottom: 50px;
           z-index: $zindex-navbar;
           &:before{
             content: "";
@@ -200,10 +187,10 @@
           }
           .open-button{
             position: absolute;
-            top: 0;
+            bottom: 10px;
             left: -42px;
             width: 40px;
-            height: 73px;
+            min-height: 70px;
             z-index: $zindex-navbar;
             .info-box{
               position: relative;
@@ -225,7 +212,7 @@
                 font-size: $theme-font-detail-size;
                 line-height: $theme-font-detail-size;
               }
-              .icon{
+              .bg-box{
                 content: "";
                 display: block;
                 position: absolute;
@@ -237,7 +224,15 @@
                 @include transition(0.5s);
                 @include rotate(0deg);
               }
+              .icon{
+
+              }
             }
+          }
+
+          .item-list,&:before{
+            @include opacity(0);
+            @include transition(opacity 0.5s);
           }
         }
         &.show-submenu{
@@ -253,6 +248,9 @@
             background-color: rgba(#000,0.5);
           }
           .sub-nav{
+            .item-list,&:before{
+              @include opacity(1);
+            }
             .open-button .icon{
               top: -13px;
               left: -22px;
@@ -267,15 +265,15 @@
     &#{$webClass}{
       position: relative;
       $nav-width:1200px;
+      $ul-w:800px;
       .nav-box{
         $li-h:35px;
         $line-color-active:#999;
         $line-zindex:12;
         margin: 0 auto;
-        width: 900px;
-        padding: ( $web-mainNav-height - $li-h)/2 0;
+        width: $nav-width;
+        padding: ( $web-mainNav-height - $li-h)/2 ($nav-width - $ul-w)/2;
         >ul{
-
           >li{
             position: relative;
             display: inline-block;
@@ -283,6 +281,7 @@
               right: 20px;
               left: 20px;
             }
+            height: $li-h;
             border-right: 1px solid $theme-font-color;
             >a{
               min-width: 80px;
@@ -333,8 +332,8 @@
           }
           &:after{
             z-index: $line-zindex+1;
-            top: ($web-mainNav-height - $li-h)/2 - $arrow-size + 2;
-            margin-left: -$arrow-size - 1;
+            top: (($web-mainNav-height - $li-h)/2 - $arrow-size - 1);
+            margin-left: -($arrow-size - 2);
             border-width: $arrow-size - 2;
             border-bottom-color: #fff;
           }
@@ -355,7 +354,6 @@
           }
           .open-button{display: none;}
         }
-
         &:before{
           content: '';
           display: block;
@@ -433,6 +431,7 @@
     }
   }
 }
+
 //wap 芭菲logo
 @if($CssSwitchWap){
   .u-logo-box{
@@ -465,9 +464,6 @@
     }
   }
 }
-
-
-
 
 //模块首页标题
 .home-title-box{
@@ -586,34 +582,54 @@
   font-size: 0;
   .img-box{
     overflow: hidden;
-    //text-align: center;
     @include square(100%);
-    @include inlineMiddle();
   }
 }
+.img-box{
+  position: relative;
+  .u-load{
+    z-index: $zindex-img-load;
+  }
+  img{
+    position: relative;
+    z-index: $zindex-img;
+  }
+}
+
 //加载更多
 @if($CssSwitchWap){
   .u-more-box{
+    clear: both;
     text-align: center;
     padding: 5px 0;
     .more-btn{
       display: inline-block;
-      padding: 6px 16px;
+      padding: 0 16px;
+      line-height: 30px;
       border: 1px solid $theme-border-color;
       cursor: pointer;
       border-radius: 3px;
       color: #666;
+      >*{
+        vertical-align: middle;
+      }
       &:active{
         color: #fff;
         background-color: $theme-color-one;
       }
+      .u-load{
+        vertical-align: middle;
+        position: relative;
+        display: inline-block;
+        font-size: 8px;
+      }
     }
   }
 }
-
 //分页组件
 @if($CssSwitchWeb){
   .u-pagination{
+    margin-top: 60px;
     >.pagination-box{
       padding: 10px;
       text-align: center;
@@ -625,14 +641,15 @@
         display: inline-block;
         border: 1px solid $theme-border-color;
         margin-right: 15px;
-        line-height: 20px;
-        padding: 6px 12px;
-        border-radius: 4px;
+        line-height: 30px;
+        min-width: 30px;
+        padding: 0 8px;
+        //border-radius: 4px;
         font-family: $font-family-sans-serif;
+        font-size: $theme-font-small-title-size-web + 2;
       }
       .btn-prev,
       .btn-next{
-        font-size: $theme-font-title-size-web;
         color: #999;
         &:hover{
           color: $theme-color-one;
@@ -646,10 +663,11 @@
         display: inline-block;
         >li{
           color: $theme-color-one;
-          font-size: $theme-font-title-size-web;
+
           &:hover,&.active{
             background-color: $theme-color-one;
             color: #fff;
+            border-color:transparent;
           }
           &.active{
             cursor: default;
@@ -667,6 +685,19 @@
         }
       }
 
+    }
+    &.style-2{
+      >.pagination-box{
+        .page-number>li,
+        .btn-prev,
+        .btn-next{
+          line-height: 38px;
+          height: 40px;
+          min-width: 40px;
+          padding: 0;
+          border-radius: 50%;
+        }
+      }
     }
   }
 }
@@ -731,21 +762,24 @@
         }
       }
       .sift-condition-box{
-        padding: 10px 5px;
+        padding: 0 5px;
         overflow: auto;
         -webkit-overflow-scrolling: touch;
       }
       .sift-box{
+        &:nth-child(-n + 2){
+          border-bottom: 1px solid $theme-border-color;
+        }
+        padding: 5px 0;
         .sift-title{
           display: block;
-          border-bottom: 1px solid $theme-border-color;
           font-size: $theme-font-small-title-size;
           color: #666;
-          padding: 6px 6px 6px 0;
+          padding: 4px 4px 4px 0;
         }
         .sift-list{
           @include clearfix();
-          margin-top: 10px;
+
           >li{
             float: left;
             padding: 3px 8px;
@@ -756,10 +790,123 @@
               border-color: $theme-color-two;
               color: $theme-color-two;
             }
+            &.custom-condition{
+              display: block;
+              width: 100%;
+              cursor: default;
+              margin: 0;
+              margin-bottom: 6px;
+              padding: 0;
+              text-align: center;
+              input,
+              button,
+              span{
+                height: 24px;
+                line-height: 24px;
+              }
+              .input-box{
+                display: inline-block;
+                >input{
+                  text-align: left;
+                  border: 1px solid $theme-border-color;
+                  color: #666;
+                  width: 60px;
+                  padding: 0 4px;
+                  vertical-align: middle;
+                  font-family: $font-family-sans-serif;
+                  margin:0 10px;
+                }
+              }
+              .btn-confirm{
+                padding: 0 10px;
+                background-color: $theme-color-one;
+                color: #fff;
+                cursor: pointer;
+              }
+            }
           }
         }
       }
 
     }
+  }
+}
+
+
+@mixin case-li-style(){
+  .info-box{
+    text-align: center;
+    padding-top: 10px;
+    .title{
+      font-size: $theme-font-title-size-web - 2;
+    }
+  }
+  .photo-box{
+    position: relative;
+    overflow: hidden;
+  }
+  .shade-box{
+    position: absolute;
+    top:100%;
+    left:0;
+    z-index: 100;
+    @include square(100%);
+    background-color: rgba(#000,0.5);
+    display: table;
+    padding: 20px;
+    @include transition(top 0.6s);
+  }
+  &:hover{
+    //background-color: #eee;
+    .shade-box{
+      top:0;
+    }
+  }
+  .case-info-box{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    @include square(100%);
+    padding: 0;
+    border: 0;
+    span{font-size: $theme-font-value-size-web;display: block;margin-bottom: 5px;}
+    .title{ font-size: $theme-font-big-title-size-web;padding: 10px;}
+    &:before,&:after{
+      content: '';
+      @include square(25px);
+      position: absolute;
+      border-width: 1px;
+      border-color: #fff;
+    }
+    &:before{
+      bottom: 0;
+      left: 0;
+      border-left-style:solid;
+      border-bottom-style:solid;
+    }
+    &:after{
+      top: 0;
+      right: 0;
+      border-right-style:solid;
+      border-top-style:solid;
+    }
+  }
+}
+//顶部菜单显示
+.u-sift-top-box{
+  position: fixed;
+  left: 0;
+  top:0;
+  right: 0;
+  z-index: $zindex-navbar;
+  display: none;
+  &.open{
+    display: block;
+  }
+  .sift-box{
+    @include wap-sift-box();
+    .title-box{ @include wap-title-style-a();}
   }
 }

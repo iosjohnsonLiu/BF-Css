@@ -18,6 +18,12 @@
         width: $photo-w;
         height: $photo-h;
       }
+      @if($info-w > 0 ){
+        .info-box{
+          width: $info-w;
+          height: $photo-h;
+        }
+      }
     }@else if($item-h>0){
       $photo-h:$item-h - $padding * 2 - $item-border-w * 2;
       $photo-w:$photo-h / $photo-scale;
@@ -27,16 +33,11 @@
       }
       .info-box{
         width: ($item-w - ($item-h / $photo-scale) - $padding * 2);
-        height: 100%;
+        height: $photo-h;
       }
     }
   }
-  @if($info-w > 0 ){
-    .info-box{
-      width: $info-w;
-      height: 100%;
-    }
-  }
+
 }
 @mixin itemInfoDirection-colum($item-w,$padding:0,$photo-scale:0,$info-h:0,$item-h:0,$item-border-w:0){
 
@@ -84,10 +85,10 @@
     float: left;
     @if($space > 0){
       margin-left: $space;
-      &:nth-child(#{$colum}n + 1){
+      &:nth-of-type(#{$colum}n + 1){
         margin-left: 0;
       }
-      &:nth-child(n + #{$colum + 1}){
+      &:nth-of-type(n + #{$colum + 1}){
         margin-top: $space;
       }
     }
@@ -142,25 +143,31 @@
   $item-h:0,
   $border-w:0,
   $infoDirectionColum:true){
-  @include clearfix();
+  //@include clearfix();
+  @include displayFlex();
+  @include flexWrapWrap();
+  @include justifyContentFlexStart();
+  @include alignItemsFlexStart();
   @if ($margin >0){
     padding: $margin;
   }
   >li{
-    float: left;
+    //float: left;
     @if($space > 0){
       margin-left: $space;
-      &:nth-child(#{$colum}n + 1){
+      &:nth-of-type(#{$colum}n + 1){
         margin-left: 0;
       }
-      &:nth-child(n + #{$colum + 1}){
+      &:nth-of-type(n + #{$colum + 1}){
         margin-top: $space;
       }
       width: calc( (100% /#{$colum}) - #{$space*($colum - 1)/$colum});
     }@else {
       width: (100% /$colum);
     }
-
+    @if($padding > 0){
+      padding: $padding;
+    }
     .photo-box {
       height: calc( ((100vw - #{$max-width-differ + $margin * 2}) / #{$colum} - #{$space * ($colum - 1)/$colum + $padding*2 + $border-w * 2})*#{$photo-scale});
     }
@@ -272,7 +279,7 @@
       }
       @include clearfix();
       >li{
-        cursor: pointer;background-color: #eee;
+        cursor: pointer;
         @if($small-img-pdg>0){
           padding: $small-img-pdg;
         }
@@ -379,9 +386,9 @@ $photoPreviewValue-Small-Height:3 !default;
       position: absolute;
       left: 0;
       width: 3px;
-      height: 20px;
+      height: 16px;
       top: 50%;
-      margin-top: -10px;
+      margin-top: -8px;
     }
   }
 }
@@ -390,14 +397,14 @@ $photoPreviewValue-Small-Height:3 !default;
 @mixin wap-title-style-a($padding:5px){
   //padding:0 $mrg-lf;
   >.title{
-    padding: $padding;
-    padding-left: ($padding + 4);
+    padding: $padding 0;
+    //padding-left: ($padding + 4);
     font-size: $theme-font-title-size;
     vertical-align: middle;
     position: relative;
     display: inline-block;
     &:before{
-      content: '';
+      //content: '';
       display: inline-block;
       background-color: $theme-color-one;
       position: absolute;
@@ -406,7 +413,178 @@ $photoPreviewValue-Small-Height:3 !default;
       height: 16px;
       top: 50%;
       margin-top: -8px;
-
     }
   }
+}
+//$style-type 遮罩类型
+// 0号样式 默认样式 照片缩放 无背景
+// 1号样式 照片缩放 无信息 浮动在照片上 黑色透明背景
+// 2号样式 婚纱列表 info-box 浮动在照片上 白色透明背景显示信息
+//
+@mixin img-shabox-sytle($style-type:0,$isWeb:true){
+  $hov:'hover';
+  $time:0.5s;
+  @if($isWeb == false){
+    $hov:'active';
+    $time:0.3s;
+  }
+  &:#{$hov}{
+    .photo-box{
+      overflow: hidden;
+      position: relative;
+      img{
+        @include scale(1.1);
+      }
+    }
+    @if($style-type == 1){
+      .photo-box:after{
+        content: "";
+        display: block;
+        position: absolute;
+        top:0;left: 0;right: 0;bottom: 0;
+        z-index: $zindex-shabox;
+        background-color: rgba(#000,0.5);
+      }
+    }@else if($style-type == 2){
+      .info-box{
+        background-color: rgba(#fff,0.8);
+        visibility: visible;
+      }
+    }
+  }
+  .photo-box{
+    overflow: hidden;
+    img{
+      @include transition($time);
+    }
+  }
+}
+@mixin wap-img-shabox-sytle($style-type:0){
+  @include img-shabox-sytle($style-type,$isWeb:false);
+}
+
+//web筛选样式
+@mixin web-sift-box(){
+  >.sift-box {
+    padding:{
+      left: 10px;
+      right: 10px;
+      //bottom:5px;
+    }
+    font-size: 0;
+    background-color: #fff;
+    >.sift-title{
+      font-size: $theme-font-small-value-size-web;
+      display: inline-block;
+      color: #999;
+    }
+    .sift-list {
+      display: inline-block;
+      > li {
+        display: inline-block;
+        padding: 0 8px;
+        font-size: $theme-font-small-value-size-web;
+        color: #666;
+        height: 24px;
+        line-height: 24px;
+        font-weight: 400;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: {
+          top: 4px;
+          left: 10px;
+        }
+        &.active {
+          color: $theme-font-active-color;
+        }
+        &.custom-condition{
+          cursor: default;
+          padding: 0;
+          padding-left:100px;
+          input,
+          button,
+          span{
+            height: 24px;
+            line-height: 24px;
+          }
+          .input-box{
+            display: inline-block;
+            >input{
+              border: 1px solid $theme-border-color;
+              color: #666;
+              width: 60px;
+              padding: 0 4px;
+              vertical-align: middle;
+              font-family: $font-family-sans-serif;
+              margin:0 10px;
+            }
+          }
+          .btn-confirm{
+            padding: 0 10px;
+            background-color: $theme-color-one;
+            color: #fff;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
+@mixin wap-sift-box(){
+  background-color: #fff;
+  >.title-box{
+    @include displayFlex();
+    @include justifyContentSpaceBetween();
+    padding: 4px;
+    font-size: $theme-font-title-size;
+    .sift-btn{
+      padding: 5px;
+      &.active{
+        color: $theme-color-one;
+      }
+    }
+  }
+  .sift-condition {
+    border-top: 1px dashed #efefef;
+    font-size: 0;
+    > li {
+      display: inline-block;
+      padding: 2px 4px;
+      font-size: $theme-font-small-value-size;
+      border: 1px solid rgba($theme-color-one,0.7);
+      color: $theme-color-one;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: {
+        top:4px;
+        bottom: 4px;
+        right: 8px;
+      };
+      &.active {
+        color: #fff;
+        background-color: $theme-color-one;
+      }
+    }
+  }
+}
+
+//video样式 强制设置video大小
+@mixin set-video-style(){
+  background-color: #000;
+  *{height: 100% !important;width: 100% !important;}
+  video{height: 100% !important;width: 100% !important;}
+}
+
+@mixin scale-loadImage($scale:1.0){
+  @include square(100% * $scale);
+  position: absolute;
+  top:-(100% * ($scale - 1)/2);
+  left:-(100% * ($scale - 1)/2);
+  @include scale(1 / ($scale));
+}
+//li之间无间距情况下 设置li的边线
+@mixin list-li-border($colum:2,$border:1px solid $theme-border-color){
+  border: {right: $border;bottom: $border;};
+  &:nth-child(-n + #{$colum}){border-top: $border;}
+  &:nth-child(#{$colum}n + 1) {border-left: $border;}
 }

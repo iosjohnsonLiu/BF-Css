@@ -1,0 +1,86 @@
+@mixin hq-video-web(){
+  $space:10px;
+
+  //视频列表页面
+  .video-list-box {
+    $video-list-w: $web-default-screen-width;
+    width: $video-list-w;
+    margin: 30px auto;
+    .item-list {
+      $space:10px;
+      margin-top: 2*$space;
+      margin-bottom: 2*$space;
+      @include list($width:$video-list-w,$colum:3,$padding:10px,$info-size:40px,$photo-scale:9/16);
+      >li{
+        background-color: #fafafa;
+        @include list-li-border($colum:3);
+        .info-box{
+          padding: $space;
+          text-align: center;
+          position: relative;
+          .title{display: block; font-size: $theme-font-title-size-web;}
+        }
+        .photo-box{
+          @include set-video-style();
+        }
+      }
+    }
+  }
+
+  .video-list-box{
+    @include title-style-a($space);
+  }
+}
+
+@mixin hq-video-wap(){
+  $space:10px;
+  //视频列表页面
+  .video-list-box {
+    $space:10px;
+    padding: $space/2;
+    >.item-list {
+      @include wap-list($colum:2,$space:8px,$photo-scale:9/16,$max-width-differ:$space);
+      >li{
+        background-color: #fff;
+        cursor: pointer;
+        .info-box{
+          text-align: center;
+          padding: $space/2;
+          position: relative;
+          .title{
+            display: block;
+            font-size: $theme-font-title-size;
+            line-height: 20px;
+          }
+        }
+        .photo-box{
+          @include set-video-style();
+        }
+      }
+    }
+    .u-pagination{
+      margin-top: $space * 2;
+    }
+  }
+  //模块标题
+  .title-box{
+    @include wap-title-style-a();
+  }
+}
+
+@mixin hq-video(){
+  @if($CssSwitchWeb){
+    &#{$webClass}{
+      @include hq-video-web();
+    }
+  }
+  @if($CssSwitchWap){
+    &#{$wapClass}{
+      @include hq-video-wap();
+    }
+  }
+}
+
+.m-hq-video{
+  @include hq-video();
+}

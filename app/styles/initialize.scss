@@ -44,8 +44,8 @@ $font-size-h6:            ($rem * 8);
   @return ($rem * $size);
 }
 
-$font-size-h1-px:            (24px);
-$font-size-h2-px:            (18px);
+$font-size-h1-px:            (22px);
+$font-size-h2-px:            (17px);
 $font-size-h3-px:            (14px);
 $font-size-h4-px:            (12px);
 $font-size-h5-px:            (10px);
@@ -72,10 +72,17 @@ $zindex-modal-background:  1040;
 $zindex-modal:             1050;
 $zindex-detail-view:       1100;
 
+//遮罩
+$zindex-shabox:           30;
+$zindex-img-load:         15;
+$zindex-img:              20;
 
 //主题色
-$theme-color-one:#ff6357;
-$theme-color-two: #ff9c10;
+$theme-color-one:#ff8f8e;
+$theme-color-two: #ffd471;
+$theme-color-theer: #cdb05c;
+
+
 //字体颜色
 $theme-font-active-color: $theme-color-one;
 $theme-font-color:#666;
@@ -83,16 +90,18 @@ $theme-font-disable-color:#999;
 $theme-font-detail-color:#999;
 $theme-border-color:#e0e0e0;
 
-$theme-font-big-title-size: $font-size-h2-px;
-$theme-font-title-size: $font-size-h3-px;
-$theme-font-small-title-size: ($font-size-h3-px - ($font-size-h3-px - $font-size-h4-px) / 2);
+
+$theme-font-big-title-size: 18px;
+$theme-font-title-size: 15px;
+$theme-font-small-title-size: 12px;
+
 $theme-font-value-size:$font-size-h4-px;
 $theme-font-small-value-size:($font-size-h4-px - 1);
 $theme-font-detail-size:$font-size-h5-px;
 
 $theme-font-big-title-size-web: $font-size-h2-px-web;
 $theme-font-title-size-web: $font-size-h3-px-web;
-$theme-font-small-title-size-web: ($font-size-h3-px-web - ($font-size-h3-px-web - $font-size-h4-px-web) / 2);
+$theme-font-small-title-size-web: 12px;
 $theme-font-value-size-web:$font-size-h4-px-web;
 $theme-font-small-value-size-web:($font-size-h4-px-web - 1);
 $theme-font-detail-size-web:$font-size-h5-px-web;
@@ -104,7 +113,6 @@ $mainNav-font-active-color:$theme-font-active-color;
 
 //初始化
 *{outline:none;
-  font-family: $font-family-serif;
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
   -webkit-user-select:auto;
@@ -124,13 +132,17 @@ a:link { text-decoration: none;}
 a:active { text-decoration:blink}
 a:hover { text-decoration:none;}
 a:visited { text-decoration: none;}
-html{
-  font-size: 12px;
-  font-weight: 400;
-  color: $theme-font-color;
-}
 body{
-  font-size: 12px;
+  font-weight: 200;
+  color: #555;
+  letter-spacing: 0.04em;
+  font:12px/1.5 $font-family-base;
+  ////强制不换行
+  //white-space:nowrap;
+  //自动换行：
+  word-wrap:break-word; word-break:normal;
+  ////强制英文单词断行
+  //word-break:break-all;
 }
 html,body{
   width: 100%;

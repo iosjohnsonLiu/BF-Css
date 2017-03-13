@@ -59,7 +59,8 @@
   @if($CssSwitchWap){
     &#{$wapClass}{
       //轮播图片
-      &.picture{  height: (100vw / 3 * 2);}
+      &.picture{  height: (100vw * (2/3));}
+
       //轮播广告
       &.adv{
         $pdg:5px;

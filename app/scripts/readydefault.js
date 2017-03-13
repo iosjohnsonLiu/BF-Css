@@ -18,6 +18,25 @@ $(document).ready(function () {
   $('.u-nav.wap .nav-box>ul>li.active .submenu .sub-nav .open-button').click(function(){
     $('.u-nav.wap .nav-box>ul>li.active .submenu').toggleClass('show-submenu')
   });
+  $('.img-box img').load(function(){
+    $(this).siblings(".u-load").remove();
+  })
+
+  var topMain = 0;
+  if ($("#siftNav").length > 0){
+    topMain=$("#siftNav").offset().top;
+  }
+  console.log('topMain'+topMain);
+
+  $("#scrollview").scroll(function(){
+    var scrollTop=$("#scrollview").scrollTop();
+    if (scrollTop>topMain){
+      $(".u-sift-top-box").addClass("open");
+    }else{
+      $(".u-sift-top-box").removeClass("open");
+    }
+    console.log('scrollTop'+scrollTop);
+  });
 });
 
 
@@ -56,91 +75,125 @@ function insertMainnav() {
     var $mainNav = $(".f-main > .u-nav"+platClass)[0];
     var menuList = [];
 
-    //if (platClass == '.wap'){
-    //  menuList = [
-    //    {
-    //      url:"'home"+ platClass +".html'",
-    //      title:"首页",
-    //      icon:"",
-    //      subtitle:""
-    //    },
-    //    {
-    //      url:"'hq-home"+ platClass +".html'",
-    //      title:"婚庆",
-    //      icon:"",
-    //      subtitle:"",
-    //    },
-    //    {
-    //      url:"'hy-home"+ platClass +".html'",
-    //      title:"婚宴",
-    //      icon:"",
-    //      subtitle:""
-    //    },
-    //    {
-    //      url:"'lf-home"+ platClass +".html'",
-    //      title:"礼服",
-    //      icon:"",
-    //      subtitle:""
-    //    },
-    //  ];
-    //}else {
-    //
-    //}
-
-    menuList = [
-      {
-        url:"'home"+ platClass +".html'",
-        title:"首页",
-        icon:"",
-        subtitle:"home"
-      },
-      {
-        url:"'hy-home"+ platClass +".html'",
-        title:"婚宴",
-        icon:"",
-        subtitle:"wedding banquet",
-        submenu:[
-          {
-            url:"'hy-store-list"+ platClass +".html'",
-            title:"婚宴酒店",
-          },
-          {
-            url:"'hy-hall-list"+ platClass +".html'",
-            title:"宴会厅",
-          },
-          {
-            url:"'hy-menu-list"+ platClass +".html'",
-            title:"菜品套系",
-          },
-        ]
-      },
-      {
-        url:"'hq-home"+ platClass +".html'",
-        title:"婚庆",
-        icon:"",
-        subtitle:"wedding",
-        submenu:[
-          {
-            url:"'hq-case"+ platClass +".html'",
-            title:"实景案例",
-          },
-        ]
-      },
-      {
-        url:"'lf-home"+ platClass +".html'",
-        title:"婚纱礼服",
-        icon:"",
-        subtitle:"Wedding dress",
-      },
-      {
-        url:"#",
-        title:"一站式服务",
-        icon:"",
-        subtitle:"One stop service"
-      },
-    ];
-
-
+    if (platClass == '.wap'){
+      menuList = [
+        {
+          url:"'home"+ platClass +".html'",
+          title:"首页",
+          icon:"",
+          subtitle:"home"
+        },
+        {
+          url:"'hy-home"+ platClass +".html'",
+          title:"婚宴",
+          icon:"",
+          subtitle:"wedding banquet",
+          submenu:[
+            {
+              url:"'hy-store-list"+ platClass +".html'",
+              title:"婚宴酒店",
+            },
+            {
+              url:"'hy-hall-list"+ platClass +".html'",
+              title:"宴会厅",
+            },
+            {
+              url:"'hy-menu-list"+ platClass +".html'",
+              title:"菜品套系",
+            },
+          ]
+        },
+        {
+          url:"'hq-home"+ platClass +".html'",
+          title:"婚庆",
+          icon:"",
+          subtitle:"wedding",
+          submenu:[
+            {
+              url:"'hq-case-list"+ platClass +".html'",
+              title:"实景案例",
+            },
+            {
+              url:"'hq-follow-list"+ platClass +".html'",
+              title:"婚礼跟拍",
+            },
+            {
+              url:"'hq-video-list"+ platClass +".html'",
+              title:"婚礼视频",
+            },
+            {
+              url:"'hq-f4-list"+ platClass +".html'",
+              title:"选婚礼人",
+            },
+          ]
+        },
+        {
+          url:"'lf-home"+ platClass +".html'",
+          title:"礼服",
+          icon:"",
+          subtitle:"Wedding dress",
+        },
+      ];
+    }else {
+      menuList = [
+        {
+          url:"'home"+ platClass +".html'",
+          title:"首页",
+          icon:"",
+          subtitle:"home"
+        },
+        {
+          url:"'hy-home"+ platClass +".html'",
+          title:"婚宴预订",
+          icon:"",
+          subtitle:"wedding banquet",
+          submenu:[
+            {
+              url:"'hy-store-list"+ platClass +".html'",
+              title:"婚宴酒店",
+            },
+            {
+              url:"'hy-hall-list"+ platClass +".html'",
+              title:"宴会厅",
+            },
+            {
+              url:"'hy-menu-list"+ platClass +".html'",
+              title:"菜品套系",
+            },
+          ]
+        },
+        {
+          url:"'hq-home"+ platClass +".html'",
+          title:"婚庆定制",
+          icon:"",
+          subtitle:"wedding",
+          submenu:[
+            {
+              url:"'hq-case-list"+ platClass +".html'",
+              title:"实景案例",
+            },
+            {
+              url:"'hq-follow-list"+ platClass +".html'",
+              title:"婚礼跟拍",
+            },
+            {
+              url:"'hq-video-list"+ platClass +".html'",
+              title:"婚礼视频",
+            },
+            {
+              url:"'hq-f4-list"+ platClass +".html'",
+              title:"选婚礼人",
+            },
+          ]
+        },
+        {
+          url:"'lf-home"+ platClass +".html'",
+          title:"婚纱礼服",
+          icon:"",
+          subtitle:"Wedding dress",
+        },
+      ];
+    }
 
     var liArray="";
     for (var i in menuList){
@@ -199,7 +252,7 @@ function insertMainnav() {
     var pathNmae = window.location.pathname;
     var fileName = pathNmae.substring(pathNmae.lastIndexOf('/') + 1, pathNmae.length);
     var modelName= fileName.substring(0,fileName.indexOf('-'));
-    console.log("["+modelName+"]","["+fileName+"]","["+pathNmae+"]");
+    //console.log("["+modelName+"]","["+fileName+"]","["+pathNmae+"]");
 
     $($mainNav).find("li>a[href^='" + fileName + "']").parent().addClass("active");
     $($mainNav).find(".nav-box>ul>li>a[href^='" + modelName + "']").parent().addClass("active");
@@ -217,16 +270,13 @@ function insertFootet() {
     var $insertFootet=$(".f-footer")[0];
     var footetHtml =
       "<div class='contact-way-box'>"+
-      " <div class='info-box'>"+
-      "  <span class='tel'>400-015-9999</span>"+
-      "  <span class='address'>重庆总店</span>"+
-      "  <span class='website'>www.jsbn.com</span>"+
+      " <div class='tel-box'>"+
+      "  <span class='name'>婚宴致电</span>"+
+      "  <span class='tel'>400-023-2929</span>"+
       " </div>"+
-      " <div class='wx-tel'>"+
-      "  <div class='qr-code'>"+
-      "   <img src='http://www.izhaowo.com/App/images/userwx.png' alt=''>"+
-      "  </div>"+
-      "  <span class='title'>芭菲婚礼公众号</span>"+
+      " <div class='tel-box'>"+
+      "  <span class='name'>客服致电</span>"+
+      "  <span class='tel'>400-023-6655</span>"+
       " </div>"+
       "</div>"+
       "<div class='licence-box'>"+
@@ -260,8 +310,8 @@ function insertCarousel() {
       if ($($carouselPicture).hasClass('web')){
         imageArray=[
           "http://img2.jsbn.com/venus/vda/20170209/14866093553445685_1920x680.jpg",
-          "http://img2.jsbn.com/venus/vda/20161014/14764385303891824_1920x680.jpg",
-          "http://img2.jsbn.com/venus/vda/20161014/14764383886687387_1920x680.jpg",
+          //"http://img2.jsbn.com/venus/vda/20161014/14764385303891824_1920x680.jpg",
+          //"http://img2.jsbn.com/venus/vda/20161014/14764383886687387_1920x680.jpg",
           "http://img2.jsbn.com/venus/vda/20170207/14864371388686494_1920x680.jpg",
         ];
       }else {
@@ -282,15 +332,15 @@ function insertCarousel() {
       if ($($carouselAdv).hasClass('web')){
         imageArray=[
           "http://img2.jsbn.com/venus/vda/20170209/14866093553445685_1920x680.jpg",
-          "http://img2.jsbn.com/venus/vda/20161014/14764385303891824_1920x680.jpg",
-          "http://img2.jsbn.com/venus/vda/20161014/14764383886687387_1920x680.jpg",
+          //"http://img2.jsbn.com/venus/vda/20161014/14764385303891824_1920x680.jpg",
+          //"http://img2.jsbn.com/venus/vda/20161014/14764383886687387_1920x680.jpg",
           "http://img2.jsbn.com/venus/vda/20170207/14864371388686494_1920x680.jpg",
         ];
       }else {
         imageArray=[
           "http://img2.jsbn.com/venus/vda/20170209/14866093553445685_1920x680.jpg@640w_95q",
-          "http://img2.jsbn.com/venus/vda/20161014/14764385303891824_1920x680.jpg@640w_95q",
-          "http://img2.jsbn.com/venus/vda/20161014/14764383886687387_1920x680.jpg@640w_95q",
+          //"http://img2.jsbn.com/venus/vda/20161014/14764385303891824_1920x680.jpg@640w_95q",
+          //"http://img2.jsbn.com/venus/vda/20161014/14764383886687387_1920x680.jpg@640w_95q",
           "http://img2.jsbn.com/venus/vda/20170207/14864371388686494_1920x680.jpg@640w_95q",
         ];
       }

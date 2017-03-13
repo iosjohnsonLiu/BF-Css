@@ -5,88 +5,47 @@
     $store-list-w:$web-default-screen-width;
     width: $store-list-w;
     margin: 30px auto;
-    >.title,>.sift-box{
-      background-color: #fff;
-    }
 
-    >.title{
-      position: relative;
-      font-size: $theme-font-big-title-size;
-      padding: {
-        top: 20px;
-        left: 10px;
-      };
-      vertical-align: middle;
-      &:before{
-        content: " ";
-        display: inline-block;
-        margin-right: 4px;
-        height: 16px;
-        width: 3px;
-        vertical-align: middle;
-        background-color: $theme-color-one;
-      }
-    }
-    >.sift-box{
-      padding: {
-        bottom: 20px;
-        left: 10px;
-      };
-      @include clearfix();
-      >li{
-        float: left;
-        padding: 4px 12px;
-        font-size: $font-size-h4-px-web;
-        border: 1px solid $theme-border-color;
-        color: #666;
-        font-weight: 400;
-        border-radius: 4px;
-        cursor: pointer;
-        margin: {
-          top: 10px;
-          right: 10px;
-        };
-        &.active{
-          color: $theme-font-active-color;
-          border-color: $theme-font-active-color;
-        }
-      }
-    }
+    @include web-sift-box();
+
     >.item-list{
-      @include list($width:$store-list-w,$colum:3,$space:20px,$margin:0px,$photo-scale:2/3,$info-size:120px);
+      @include list($item-border-w:1px,$padding:1px,$width:$store-list-w,$colum:3,$space:20px,$margin:0px,$photo-scale:2/3,$info-size:100px);
       margin-top: 30px;
       li{
-        background-color: #fff;
         $space:10px;
+
+        border:1px solid $theme-border-color;
+        &:hover{
+          border-color: $theme-color-one;
+        }
+
         .info-box{
-          padding: $space $space*2;
+          padding: $space*2 $space*2;
           position: relative;
         }
-        .title{ font-size:$theme-font-title-size-web;margin-bottom: $space;display: block;}
+        .title{ font-size:$theme-font-title-size-web;margin-bottom: $space;display: block; line-height: 20px;}
         .address{
-          margin-bottom: ($space/2);
-          color: $theme-font-color;font-size: $theme-font-value-size-web;display: block;
+          color: $theme-font-color;
+          font-size: $theme-font-small-title-size-web;
+          display: block;
           &:before{
-            content: "门店地址:";
-            color: $theme-font-disable-color;
+            @include icon-map();
+            padding-right: 3px;
           }
         }
         .tel{
           margin-bottom: ($space/2);
-          color: $theme-color-one;font-size: $theme-font-value-size-web;display: block;
-          &:before{
-            content: "联系电话:";
-            color: $theme-font-disable-color;
-          }
+          color: $theme-font-color;
+          font-size: $theme-font-value-size-web;
+          line-height: 20px;
+          display: block;
+
+          position: absolute;
+          top: $space*2;
+          right: $space*2;
         }
         .map{
-          cursor: pointer;
-          position: absolute;
-          bottom: $space;
-          right: $space*2;
-          background-color: transparent;
-          color: $theme-color-one;
-
+          display: none;
         }
       }
     }
@@ -94,20 +53,19 @@
 
   //酒店列表详情
   $content-w:1100px;
-  $photo-w:720px;
+  $photo-w:640px;
   $photo-h:0;
   $colum:6;
+  $scale:2/3;
+  $space:10px;
+
   .header-box{
     width: 100%;
     padding:{
       top: 20px;
-      bottom: 20px;
     }
     background-color: #fff;
   }
-  $scale:2/3;
-
-  $space:10px;
   .photo-preview-box{
     @include photo-preview-box($big-w:$photo-w,$img-scale:$scale,$small-count:$colum,$space:$space,$small-space:$space);
     //计算高度
@@ -138,8 +96,7 @@
       }
     }
   }
-
-  .hotel-info-box{
+  .store-info-box{
     $hotel-info-w:$content-w;
     width: $hotel-info-w;
     height: $photo-h;
@@ -148,7 +105,8 @@
     position: relative;
     .info-box{
       $mgf:20px;
-      $mgb:8px;
+      $mgb:10px;
+
       padding: 20px 10px;
       height: 100%;
       margin-left: $mgf;
@@ -161,7 +119,7 @@
         text-align: center;
         font-size: $font-size-h1-px-web;
         color: #555;
-        margin-bottom: $mgb;
+        margin-bottom: $mgb*2;
       }
       .detail-text{
         font-size: $theme-font-detail-size-web;
@@ -206,7 +164,13 @@
         padding: 10px 0;
         margin-bottom: $mgb*2;
         margin-top: $mgb*2;
-        .address{font-size: $theme-font-value-size-web;color: #666;}
+        .address{
+          font-size: $theme-font-value-size-web;color: #666;
+          &:before{
+            @include icon-map();
+            padding-right: 3px;
+          }
+        }
       }
       .contact-box{
         margin-bottom: $mgb*2;
@@ -215,6 +179,11 @@
           font-size: $font-size-h1-px-web;
           color: $theme-color-one;
           line-height: 43px;
+          &:before{
+            @include icon-phone();
+            padding-right: 3px;
+            font-size: 14px;
+          }
         }
         button{
           cursor: pointer;
@@ -247,8 +216,9 @@
         margin-bottom: $mgb*2;
         margin-top: $mgb*2;
         padding: 10px 12px;
-        background-color: #eee;
+        background-color: #f9f9f9;
         color: #666;
+        text-align: center;
         font-size: $theme-font-value-size-web;
         .count{
           color: $theme-color-one;
@@ -257,14 +227,16 @@
       }
     }
   }
-
   .hall-list-box{
     width: $content-w;
     margin: 30px auto;
     .hall-list{
-      @include list($width:$content-w,$colum:2,$space:30px,$infoDirectionColum:false,$info-size:250px,$photo-scale:2/3);
-      li{
-        background-color: #fff;
+      @include list($padding:1px,$item-border-w:1px,$width:$content-w,$colum:2,$space:30px,$infoDirectionColum:false,$info-size:250px,$photo-scale:2/3);
+      >li{
+        border: 1px solid $theme-border-color;
+        &:hover{
+          box-shadow: 0 0 2px 2px #eceaea;
+        }
         .info-box{
           padding:20px;
           .name{
@@ -285,19 +257,20 @@
               padding: 6px 0;
             }
           }
-          >button{
-            width: 100%;
-            height: 44px;
-            margin: 15px 0;
-            border: 1px solid $theme-color-one;
-            font-size: 16px;
-            color: $theme-color-one;
-            cursor: pointer;
-            &:hover{
-              background-color: $theme-color-one;
-              color: #fff;
-            }
-          }
+
+          //>button{
+          //  width: 100%;
+          //  height: 44px;
+          //  margin: 15px 0;
+          //  border: 1px solid $theme-color-one;
+          //  font-size: 16px;
+          //  color: $theme-color-one;
+          //  cursor: pointer;
+          //  &:hover{
+          //    background-color: $theme-color-one;
+          //    color: #fff;
+          //  }
+          //}
         }
       }
     }
@@ -317,6 +290,8 @@
     }
   }
 
+  //统一标题
+  .store-list-box,
   .map-box,
   .title-box{
     @include title-style-a();
@@ -325,35 +300,10 @@
 
 @mixin hy-store-wap(){
 
-  overflow: auto;
-  -webkit-overflow-scrolling : touch;
-
   //酒店列表页面
   .store-list-box{
-    >.title{
-      position: relative;
-      left: 5px;
-    }
     >.sift-box{
-      padding: 5px;
-      @include clearfix();
-      >li{
-        float: left;
-        padding: 3px 8px;
-        font-size: $font-size-h4-px;
-        border: 1px solid $theme-border-color;
-        color: #666;
-        font-weight: 400;
-        border-radius: 4px;
-        margin: {
-          bottom: 4px;
-          right: 4px;
-        };
-        &.active{
-          color: $theme-font-active-color;
-          border-color: $theme-font-active-color;
-        }
-      }
+      @include wap-sift-box();
     }
     >.item-list{
       >li{
@@ -366,38 +316,60 @@
         .photo-box{
           padding:$space;
           width: 40%;
-          min-height: calc(40vw / 3 * 2 + #{$space * 2});
-          @include displayFlex();
-          @include justifyContentCenter();
-          @include alignItemsCenter();
+          height: calc(40vw / 3 * 2 + #{$space * 2});
+          display: table;
+          .img-box{
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+          }
+          //img{
+          //  @include scale(0.9);
+          //}
+
         }
         .info-box{
           @include flex(1);
           @include displayFlex();
           @include flexDirectionColumn();
+          @include justifyContentSpaceAround();
           padding: $space;
           position: relative;
-          .title{ font-size:$theme-font-title-size;margin-bottom: 5px;@include order(2);}
-          .address{color: $theme-font-color;font-size: $theme-font-value-size;@include order(3);}
-          .tel{
-            color: $theme-color-one;font-size: $theme-font-value-size;@include order(5);
+          .title{
+            font-size:$theme-font-title-size;
+            //margin-top: 5px;
+            //margin-bottom: 5px;
+            @include order(2);}
+          .address{
+            color: $theme-font-detail-color;
+            font-size: $theme-font-small-title-size;
+            @include order(3);
+            line-height: 16px;
+            //margin-bottom: 8px;
+            max-height: 16px*2;
+            overflow: hidden;
             &:before{
-              content: "tel:";
+              @include icon-map();
+              padding-right: 3px;
             }
           }
-          &:before{
-            content: "";
-            display: block;
-            @include flex(1);
-            @include order(4);
+          .tel{
+            color: $theme-color-one;
+            font-size: $theme-font-small-title-size;@include order(5);
+            line-height: 16px;
+            &:before{
+              @include icon-phone();
+              padding-right: 3px;
+            }
           }
+          //&:before{
+          //  content: "";
+          //  display: block;
+          //  @include flex(1);
+          //  @include order(4);
+          //}
           .map{
-            background-color: transparent;
-            font-size: $theme-font-detail-size;
-            //&:before{ content: "地图";}
-            position: absolute;
-            bottom: $space;
-            right: $space;
+            display: none;
           }
         }
       }
@@ -405,43 +377,43 @@
   }
 
 
-  //酒店列表详情
+  //酒店详情
+
   $mgb:8px;
-  .hotel-info-box {
+  $border-bottom:10px solid #f5f7f9;
+  .store-info-box {
     .info-box{
       background-color: #fff;
-      margin-bottom: $mgb * 2;
+      border-bottom: $border-bottom;
       padding:{
-        top:$mgb * 2;
-        bottom: $mgb;
-        left: $mgb;
-        right: $mgb;
+        top:$mgb*2;
+        left: 10px;
+        right: 10px;
       };
       h1{
         text-align: center;
         font-size: $theme-font-big-title-size;
         margin-bottom: $mgb;
       }
-
       .detail-text{
         margin-bottom: $mgb;
         color: $theme-font-detail-color;
       }
-
       .label-box{
         margin-top: $mgb*2;
         margin-bottom: $mgb;
         text-align: left;
         font-size: 0;
-        .title{font-size: $theme-font-value-size;}
+        .title{font-size: $theme-font-value-size;display: none;}
         ul{
           display: inline-block;
           li{
             display: inline-block;
-            background-color: #eee;
+            background-color: #f5f7f9;
             border-radius: 3px;
-            padding: 3px 6px;
+            padding: 6px 8px;
             margin-left: 6px;
+            margin-bottom: 4px;
             font-size: $theme-font-value-size;
           }
         }
@@ -458,28 +430,52 @@
     }
     >ul{
       background-color: #fff;
-      margin-bottom: $mgb * 2;
+      border-bottom: $border-bottom;
       li{
-        padding: $mgb;
-        @include displayFlex();
-        @include alignContentCenter();
 
-        &:before{
-          content: "";
-          display: block;
-          @include flex(1);
-          @include order(5);
-        }
-        .title,.value{line-height: 30px;font-size: $theme-font-value-size;}
-        .title{color: $theme-font-disable-color;@include order(2);}
-        .value{color: $theme-font-color;@include order(6);}
+        .value{
+          line-height: 16px;font-size: $theme-font-value-size;color: $theme-font-color;@include order(6);}
         &:nth-child(n + 2){
           border-top: 1px solid $theme-border-color;
         }
-        &.contact-item{
-          >.value{
-            color: $theme-color-one;
-            font-size: $theme-font-big-title-size;
+        a{
+          display: block;
+          @include displayFlex();
+          @include alignItemsCenter();
+          padding: 10px 20px 10px 10px;
+          position: relative;
+          &:after{
+            @include icon-right-arror();
+            color:$theme-font-detail-color;
+            position: absolute;
+            right: 0;
+            top:50%;
+            display: block;
+            @include square(20px);
+            line-height: 20px;
+            margin-top: -10px;;
+          }
+          //padding: $mgb;
+          &.contact-item{
+            .value{
+              color: $theme-color-one;
+              font-size: $theme-font-title-size;
+              &:before{
+                @include icon-phone();
+                padding-right: 4px;
+                //display: inline-block;
+                font-size: $theme-font-value-size;
+              }
+            }
+          }
+          &.address-item{
+            .value{
+              &:before{
+                @include icon-map();
+                padding-right: 4px;
+                //display: inline-block;
+              }
+            }
           }
         }
       }
@@ -487,25 +483,24 @@
   }
   .hall-list-box{
     background-color: #fff;
-    margin-bottom: $mgb * 2;
-    padding: 10px 5px;
+    border-bottom: $border-bottom;
+    padding: 0 10px 10px;
     .title-box{
-      border-bottom: 1px solid $theme-border-color;
-      .title{font-size: $theme-font-title-size;}
+      //.title{font-size: $theme-font-title-size;}
     }
     .hall-list{
-      @include clearfix();
+      //@include clearfix();
+      @include wap-list($border-w:1px,$max-width-differ:20px,$colum:2,$padding:1px,$margin:0,$space:10px,$photo-scale:2/3);
+      padding:{
+        top:10px;
+        bottom: 10px;
+      }
       >li{
-
-        float: left;
-        $space:6px;
-        width: calc(50% - #{$space/2});
-        &:nth-child(2n + 1){
-          margin-right: $space;
-        }
+        border: 1px solid $theme-border-color;
+        @include wap-img-shabox-sytle();
         .info-box{
-          padding: 5px;
-          height: 80px;
+          padding: 10px;
+          height: 90px;
           .name{font-size: $theme-font-title-size;}
           ul>li{
             display: block;
@@ -515,10 +510,9 @@
       }
     }
   }
-
   .map-box{
-    background-color: #fff;
-    padding: 10px 5px;
+    padding:0 10px 10px;
+    .title{margin-bottom: 10px;}
     .map{height: 66.67vw;width: 100%;min-height: 240px;}
     img{
       max-width: inherit;
@@ -527,10 +521,16 @@
       height: inherit;
     }
   }
-  .store-list-box,
+
+  //.store-list-box,
   .map-box,
-  .title-box{
+  .hall-list-box .title-box{
     @include wap-title-style-a();
+    .title{
+      //padding: 5px 0;
+      border-bottom: 1px solid #e0e0e0;
+      display: block;
+    }
   }
 }
 

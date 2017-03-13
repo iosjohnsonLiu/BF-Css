@@ -3,7 +3,7 @@
 * $fileName    文件名
 * $path        路径
 */
-@mixin lg($familyName,$fileName,$path){
+@mixin icon-font($familyName,$fileName,$path){
   @font-face {
     font-family: $familyName;
     src: url("#{$path}#{$fileName}.eot?n1z373");
@@ -14,4 +14,38 @@
     font-weight: normal;
     font-style: normal;
   }
+}
+@mixin icon-font-name($familyName){
+  font-family: $familyName;
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+$familyName-glyphicons:'glyphicons';
+$fileName-glyphicons:'glyphicons-halflings-regular';
+$filePath-glyphicons:'../fonts/';
+
+@include icon-font($familyName:$familyName-glyphicons,$fileName:$fileName-glyphicons,$path:$filePath-glyphicons);
+@mixin icon-font-glyphicons(){
+  @include icon-font-name($familyName-glyphicons);
+}
+
+
+@mixin icon-phone(){
+  @include icon-font-glyphicons();
+  content: "\e182";
+}
+@mixin icon-map(){
+  @include icon-font-glyphicons();
+  content: "\e062";
+}
+@mixin icon-right-arror(){
+  @include icon-font-glyphicons();
+  content: "\e258";
 }

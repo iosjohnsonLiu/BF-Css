@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <title>芭菲官网</title>
+  <!-- Bootstrap -->
+
+  <link href="./styles/app.css" rel="stylesheet">
+  <!--<link href="./styles/app-wap.css" rel="stylesheet">-->
+  <!--<link href="./styles/app-web.css" rel="stylesheet">-->
+
+  <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+  <script src="./plugin/mobileSlider/mobileSlider.js"></script>
+</head>
+
+<body>
+<div id="root" class="root wap">
+  <div class="f-main">
+    <div class="u-nav wap"></div>
+    <div class="m-view m-hq-case list wap">
+      <div class="u-sift-popup-box">
+        <button class="close-btn" onclick="$('.u-sift-popup-box').removeClass('open')"></button>
+        <div class="sift-popup-box">
+          <div class="sift-condition-box">
+            <div class="sift-box style">
+              <span class="sift-title">婚礼风格:</span>
+              <ul class="sift-list">
+                <li class="active">不限</li>
+                <li>中式</li>
+                <li>西式</li>
+                <li>韩式</li>
+                <li>唯美</li>
+                <li>简洁</li>
+                <li>主题</li>
+                <li>森系</li>
+                <li>甜美</li>
+              </ul>
+            </div>
+            <div class="sift-box type">
+              <span class="sift-title">婚礼类型:</span>
+              <ul class="sift-list">
+                <li class="active">不限</li>
+                <li>主题婚礼</li>
+                <li>套系婚礼</li>
+              </ul>
+            </div>
+            <div class="sift-box price">
+              <span class="sift-title">婚礼价格:</span>
+              <ul class="sift-list">
+                <li class="active">不限</li>
+                <li>2万以下</li>
+                <li>2-4万</li>
+                <li>4-6万</li>
+                <li>6-8万</li>
+                <li>8万以上</li>
+                <li class="custom-condition">
+                  <span class="title">自定义价格</span>
+                  <div class="input-box">
+                    <input type="text"/>
+                    <span class="">-</span>
+                    <input type="text"/>
+                  </div>
+                  <button class="btn-confirm">确定</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="btn-box">
+            <button class="btn-reset">重置</button>
+            <button class="btn-confirm">确定</button>
+          </div>
+        </div>
+      </div>
+      <div class="u-sift-top-box">
+        <div class="sift-box">
+          <div class="title-box">
+            <span class="title">婚庆案例列表</span>
+            <span class="sift-btn acitve" onclick="$('.u-sift-popup-box').toggleClass('open')">筛选</span>
+          </div>
+          <ul class="sift-condition">
+            <li>唯美</li>
+            <li>套系婚礼</li>
+          </ul>
+        </div>
+      </div>
+      <div id="scrollview" onscroll="console.log(1)" class="f-scrollview">
+        <div class="u-logo-box wap">
+          <div class="logo-icon"></div>
+        </div>
+        <div class="u-carousel picture wap"></div>
+        <div class="case-list-box u-loading-box">
+
+          <div id="siftNav" class="sift-box">
+            <div class="title-box">
+              <span class="title">婚庆案例列表</span>
+              <span class="sift-btn acitve" onclick="$('.u-sift-popup-box').toggleClass('open')">筛选</span>
+            </div>
+            <ul class="sift-condition">
+              <li>唯美</li>
+              <li>套系婚礼</li>
+            </ul>
+          </div>
+          <ul class="item-list">
+            <!--<div class="u-load">-->
+              <!--<div class="load-box">-->
+                <!--<div class="load-img">-->
+                  <!--<i></i>-->
+                  <!--<i></i>-->
+                  <!--<i></i>-->
+                  <!--<i></i>-->
+                  <!--<i></i>-->
+                  <!--<i></i>-->
+                <!--</div>-->
+                <!--&lt;!&ndash;load-title 加上 center 在fixed下字体显示在加载动画中间&ndash;&gt;-->
+                <!--<div class="load-title center">加载中..</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <li><a href="hq-case-detail.wap.html">
+              <div class="photo-box">
+                <div class="img-box">
+                  <div class="u-load">
+                    <div class="load-box">
+                      <div class="load-img"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    </div>
+                  </div>
+                  <img src="//bafeiwedding.oss-cn-shenzhen.aliyuncs.com/wh/case/1489114242050_1489114389205_0.jpg">
+                </div>
+              </div>
+            </a>
+              <div class="info-box"><span class="title">心海</span></div>
+            </li>
+            <li><a href="hq-case-detail.wap.html2">
+              <div class="photo-box">
+                <div class="img-box">
+                  <div class="u-load">
+                    <div class="load-box">
+                      <div class="load-img"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    </div>
+                  </div>
+                  <img src="//bafeiwedding.oss-cn-shenzhen.aliyuncs.com/wh/case/1489114221977_1489114502773_0.jpg">
+                </div>
+              </div>
+            </a>
+              <div class="info-box"><span class="title">Me to we</span></div>
+            </li>
+            <li><a href="hq-case-detail.wap.html">
+              <div class="photo-box">
+                <div class="img-box">
+                  <div class="u-load">
+                    <div class="load-box">
+                      <div class="load-img"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    </div>
+                  </div>
+                  <img src="//bafeiwedding.oss-cn-shenzhen.aliyuncs.com/wh/case/1489114268886_1489114715064_0.jpg">
+                </div>
+              </div>
+            </a>
+              <div class="info-box"><span class="title">初见</span></div>
+            </li>
+            <li><a href="hq-case-detail.wap.html">
+              <div class="photo-box">
+                <div class="img-box">
+                  <div class="u-load">
+                    <div class="load-box">
+                      <div class="load-img"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    </div>
+                  </div>
+                  <img src="//bafeiwedding.oss-cn-shenzhen.aliyuncs.com/wh/case/1489114870520_1489115025697_0.jpg">
+                </div>
+              </div>
+            </a>
+              <div class="info-box"><span class="title">梦</span></div>
+            </li>
+            <li><a href="hq-case-detail.wap.html">
+              <div class="photo-box">
+                <div class="img-box">
+                  <div class="u-load">
+                    <div class="load-box">
+                      <div class="load-img"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    </div>
+                  </div>
+                  <img src="//bafeiwedding.oss-cn-shenzhen.aliyuncs.com/wh/case/1489116586292_1489117444189_0.jpg">
+                </div>
+              </div>
+            </a>
+              <div class="info-box"><span class="title">樱缘</span></div>
+            </li>
+            <li><a href="hq-case-detail.wap.html">
+              <div class="photo-box">
+                <div class="img-box">
+                  <div class="u-load">
+                    <div class="load-box">
+                      <div class="load-img"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    </div>
+                  </div>
+                  <img src="//bafeiwedding.oss-cn-shenzhen.aliyuncs.com/wh/case/1489122087708_1489122196805_0.jpg">
+                </div>
+              </div>
+            </a>
+              <div class="info-box"><span class="title">Red love</span></div>
+            </li>
+            <li><a href="hq-case-detail.wap.html">
+              <div class="photo-box">
+                <div class="img-box">
+                  <div class="u-load">
+                    <div class="load-box">
+                      <div class="load-img"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    </div>
+                  </div>
+                  <img src="//bafeiwedding.oss-cn-shenzhen.aliyuncs.com/wh/case/1489122087708_1489122373943_0.jpg">
+                </div>
+              </div>
+            </a>
+              <div class="info-box"><span class="title">Underneath The Star星恋</span></div>
+            </li>
+            <li><a href="hq-case-detail.wap.html">
+              <div class="photo-box">
+                <div class="img-box">
+                  <div class="u-load">
+                    <div class="load-box">
+                      <div class="load-img"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    </div>
+                  </div>
+                  <img src="//bafeiwedding.oss-cn-shenzhen.aliyuncs.com/wh/case/1489122087708_1489122522158_0.jpg">
+                </div>
+              </div>
+            </a>
+              <div class="info-box"><span class="title">爱的定义</span></div>
+            </li>
+            <li><a href="hq-case-detail.wap.html">
+              <div class="photo-box">
+                <div class="img-box">
+                  <div class="u-load">
+                    <div class="load-box">
+                      <div class="load-img"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    </div>
+                  </div>
+                  <img src="//bafeiwedding.oss-cn-shenzhen.aliyuncs.com/wh/case/1489122087708_1489122635001_0.jpg">
+                </div>
+              </div>
+            </a>
+              <div class="info-box"><span class="title">城</span></div>
+            </li>
+            <li><a href="hq-case-detail.wap.html">
+              <div class="photo-box">
+                <div class="img-box">
+                  <div class="u-load">
+                    <div class="load-box">
+                      <div class="load-img"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    </div>
+                  </div>
+                  <img src="//bafeiwedding.oss-cn-shenzhen.aliyuncs.com/wh/case/1489123492399_1489123508075_0.jpg">
+                </div>
+              </div>
+            </a>
+              <div class="info-box"><span class="title">秘密花园</span></div>
+            </li>
+            <li><a href="hq-case-detail.wap.html">
+              <div class="photo-box">
+                <div class="img-box">
+                  <div class="u-load">
+                    <div class="load-box">
+                      <div class="load-img"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    </div>
+                  </div>
+                  <img src="//bafeiwedding.oss-cn-shenzhen.aliyuncs.com/wh/case/1489123367079_1489123588193_0.jpg">
+                </div>
+              </div>
+            </a>
+              <div class="info-box"><span class="title">魔幻森林</span></div>
+            </li>
+            <li><a href="hq-case-detail.wap.html">
+              <div class="photo-box">
+                <div class="img-box">
+                  <div class="u-load">
+                    <div class="load-box">
+                      <div class="load-img"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    </div>
+                  </div>
+                  <img src="//bafeiwedding.oss-cn-shenzhen.aliyuncs.com/wh/case/1489123861764_1489124107203_0.jpg">
+                </div>
+              </div>
+            </a>
+              <div class="info-box"><span class="title">镜</span></div>
+            </li>
+            <li><a href="hq-case-detail.wap.html">
+              <div class="photo-box">
+                <div class="img-box">
+                  <div class="u-load">
+                    <div class="load-box">
+                      <div class="load-img"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    </div>
+                  </div>
+                  <img src="//bafeiwedding.oss-cn-shenzhen.aliyuncs.com/wh/case/1489123905887_1489124365324_0.jpg">
+                </div>
+              </div>
+            </a>
+              <div class="info-box"><span class="title">情牵一线</span></div>
+            </li>
+            <li><a href="hq-case-detail.wap.html">
+              <div class="photo-box">
+                <div class="img-box">
+                  <div class="u-load">
+                    <div class="load-box">
+                      <div class="load-img"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    </div>
+                  </div>
+                  <img src="//bafeiwedding.oss-cn-shenzhen.aliyuncs.com/wh/case/1489123905887_1489124577431_0.jpg">
+                </div>
+              </div>
+            </a>
+              <div class="info-box"><span class="title">柔</span></div>
+            </li>
+            <li><a href="hq-case-detail.wap.html">
+              <div class="photo-box">
+                <div class="img-box">
+                  <div class="u-load">
+                    <div class="load-box">
+                      <div class="load-img"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    </div>
+                  </div>
+                  <img src="//bafeiwedding.oss-cn-shenzhen.aliyuncs.com/wh/case/1489124418407_1489124630345_0.jpg">
+                </div>
+              </div>
+            </a>
+              <div class="info-box"><span class="title">玫瑰的荣耀</span></div>
+            </li>
+            <li><a href="hq-case-detail.wap.html">
+              <div class="photo-box">
+                <div class="img-box">
+                  <div class="u-load">
+                    <div class="load-box">
+                      <div class="load-img"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    </div>
+                  </div>
+                  <img src="//bafeiwedding.oss-cn-shenzhen.aliyuncs.com/wh/case/1489124690168_1489124854729_0.jpg">
+                </div>
+              </div>
+            </a>
+              <div class="info-box"><span class="title">似水流年</span></div>
+            </li>
+            <li><a href="hq-case-detail.wap.html">
+              <div class="photo-box">
+                <div class="img-box">
+                  <div class="u-load">
+                    <div class="load-box">
+                      <div class="load-img"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    </div>
+                  </div>
+                  <img src="//bafeiwedding.oss-cn-shenzhen.aliyuncs.com/wh/case/1489124949514_1489125203511_0.jpg">
+                </div>
+              </div>
+            </a>
+              <div class="info-box"><span class="title">和&amp;樱</span></div>
+            </li>
+            <li><a href="hq-case-detail.wap.html">
+              <div class="photo-box">
+                <div class="img-box">
+                  <div class="u-load">
+                    <div class="load-box">
+                      <div class="load-img"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    </div>
+                  </div>
+                  <img src="//bafeiwedding.oss-cn-shenzhen.aliyuncs.com/wh/case/1489124949514_1489125355354_0.jpg">
+                </div>
+              </div>
+            </a>
+              <div class="info-box"><span class="title">花蕾</span></div>
+            </li>
+          </ul>
+          <div class="u-more-box">
+            <button class="more-btn">点击加载更多</button>
+          </div>
+        </div>
+      </div >
+    </div>
+
+    <!--u-load fixed overspread  (fixed 全屏模式  overspread 弹出框模式)">-->
+
+  </div>
+</div>
+
+<script src="./scripts/readydefault.js"></script>
+<script type="application/javascript">
+</script>
+</body>
+</html>

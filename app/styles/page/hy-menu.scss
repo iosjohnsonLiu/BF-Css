@@ -8,36 +8,39 @@
     width: $menu-list-w;
     margin: 30px auto;
     > .item-list {
-      $space:15px;
-      margin-top: 2*$space;
-      margin-bottom: 2*$space;
-      @include list($width:$menu-list-w,$colum:3,$space:40px,$info-size:60px,$photo-scale:2/3);
+      $space:5px;
+      padding:{
+        top:2*$space;
+        bottom: 2*$space;
+      }
+      @include list($padding:1px,$item-border-w:1px,$width:$menu-list-w,$colum:4,$space:40px,$photo-scale:1);
       >li{
         background-color: #fff;
         cursor: pointer;
+        border: 1px solid $theme-border-color;
+        &:hover{
+          border-color: $theme-color-one;
+        }
         .info-box{
-          padding: $space;
+          text-align: center;
+          padding: 35px 0;
           position: relative;
-          .title{display: block; font-size: $theme-font-big-title-size-web;margin-bottom:$space;}
+          .title{
+            font-size: $theme-font-title-size-web;
+          }
           .price{
-            position: absolute;
-            right: $space;
-            top: $space - 3;
             line-height: 20px;
             display: block;
-            font-size: $theme-font-title-size-web;color: $theme-color-one;
+            font-size: $theme-font-title-size-web;
+            color: $theme-color-one;
             &:before{
               content: "￥";
               font-size: $theme-font-detail-size-web;
               position: relative;
-              top: 2px;
             }
           }
         }
       }
-    }
-    .u-pagination{
-      margin-top: $space * 2;
     }
   }
 
@@ -55,23 +58,21 @@
     $space:10px;
     padding: $space/2;
     > .item-list {
-      @include wap-list($colum:2,$space:10px,$info-size:40px,$photo-scale:2/3,$max-width-differ:$space);
+      @include wap-list($padding:1px,$border-w:1px,$colum:2,$space:10px,$photo-scale:1,$max-width-differ:$space);
       >li{
-        background-color: #fff;
         cursor: pointer;
+        border: 1px solid $theme-border-color;
+        @include wap-img-shabox-sytle();
         .info-box{
-          padding: $space;
+          padding: 20px 0;
           position: relative;
+          text-align: center;
           .title{
-            display: block;
             font-size: $theme-font-title-size;
             margin-bottom:$space/2;
             line-height: 20px;
           }
           .price{
-            position: absolute;
-            right: $space;
-            top: $space - 3;
             line-height: 20px;
             display: block;
             font-size: $theme-font-title-size;color: $theme-color-one;
@@ -79,26 +80,15 @@
               content: "￥";
               font-size: $theme-font-detail-size;
               position: relative;
-              top: 2px;
             }
           }
-          //.describe{
-          //  clear: both;
-          //  display: block;
-          //  font-size: $theme-font-detail-size;
-          //  overflow: hidden;
-          //  max-height: 60px;
-          //  line-height: 15px;}
         }
       }
-    }
-    .u-pagination{
-      margin-top: $space * 2;
     }
   }
   //模块标题
   .title-box{
-    @include title-style-a();
+    @include wap-title-style-a();
   }
 
 }
