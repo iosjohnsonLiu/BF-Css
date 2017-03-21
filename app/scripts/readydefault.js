@@ -6,15 +6,28 @@ $(document).ready(function () {
   insertFootet();
   //barcode();
 
-  //if ($(".u-carousel.picture.wap").length > 0 ){
-  //  $(".u-carousel.picture").mobileSlider({during:6000,width:$(window).width(),height:$(window).width()/3*2});
-  //}
-  //if ($(".u-carousel.adv.wap").length > 0 ){
-  //  $(".u-carousel.adv").mobileSlider({during:6000,width:($(window).width() - 20),height:($(window).width()/3*1 - 20)});
-  //}
-  //if ($(".u-carousel.web").length > 0 ){
-  //  $(".u-carousel.picture").mobileSlider({during:6000,width:1920,height:1920/3});
-  //}
+  //限制微信安卓版网页字体放大
+  (function() {
+    if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
+      handleFontSize();
+    } else {
+      if (document.addEventListener) {
+        document.addEventListener("WeixinJSBridgeReady", handleFontSize, false);
+      } else if (document.attachEvent) {
+        document.attachEvent("WeixinJSBridgeReady", handleFontSize);
+        document.attachEvent("onWeixinJSBridgeReady", handleFontSize);  }
+    }
+    function handleFontSize() {
+      // 设置网页字体为默认大小
+      WeixinJSBridge.invoke('setFontSizeCallback', { 'fontSize' : 0 });
+      // 重写设置网页字体大小的事件
+      WeixinJSBridge.on('menu:setfont', function() {
+        WeixinJSBridge.invoke('setFontSizeCallback', { 'fontSize' : 0 });
+      });
+    }
+  })();
+
+
   $('.u-nav.wap .nav-box>ul>li.active .submenu .sub-nav .open-button').click(function(){
     $('.u-nav.wap .nav-box>ul>li.active .submenu').toggleClass('show-submenu')
   });
@@ -26,16 +39,16 @@ $(document).ready(function () {
   if ($("#siftNav").length > 0){
     topMain=$("#siftNav").offset().top;
   }
-  console.log('topMain'+topMain);
 
   $("#scrollview").scroll(function(){
     var scrollTop=$("#scrollview").scrollTop();
     if (scrollTop>topMain){
+      $("#siftNav").css("visibility","hidden");
       $(".u-sift-top-box").addClass("open");
     }else{
+      $("#siftNav").css("visibility", "visible");
       $(".u-sift-top-box").removeClass("open");
     }
-    console.log('scrollTop'+scrollTop);
   });
 });
 
@@ -146,7 +159,7 @@ function insertMainnav() {
           url:"'hy-home"+ platClass +".html'",
           title:"婚宴预订",
           icon:"",
-          subtitle:"wedding banquet",
+          subtitle:"banquet",
           submenu:[
             {
               url:"'hy-store-list"+ platClass +".html'",
@@ -190,7 +203,13 @@ function insertMainnav() {
           url:"'lf-home"+ platClass +".html'",
           title:"婚纱礼服",
           icon:"",
-          subtitle:"Wedding dress",
+          subtitle:"dress",
+        },
+        {
+          url:"#",
+          title:"婚礼知识",
+          icon:"",
+          subtitle:"knowledge",
         },
       ];
     }
@@ -219,7 +238,7 @@ function insertMainnav() {
             "   <div class='open-button' onclick=''>"+
             "     <div class='info-box'>"+
             "       <i class='icon'></i>"+
-            "       <span class='title'>二级导航</span>"+
+            "       <span class='title'>导航</span>"+
             "       <div class='bg-box'></div>"+
             "     </div>"+
             "    </div>"+

@@ -4,11 +4,7 @@
     $store-list-w: $web-default-screen-width;
     width: $store-list-w;
     margin: 30px auto;
-
     @include web-sift-box();
-    >.sift-box.table{
-      padding-bottom: 10px;
-    }
     > .item-list {
       $space:10px;
       $pdg-space: 10px;
@@ -181,7 +177,6 @@
         }
       }
     }
-
   }
 
   .video-list-box{
@@ -193,7 +188,7 @@
       $li-h:300px;
       height: $content-w/3;
       position: relative;
-      background-color: #ccc;
+      @include icon-hall-video-bg();
       >li{
         width: $li-h/$video-scale;
         height: $li-h;
@@ -276,9 +271,8 @@
   //----------------------------------------
   $mrg-lf:10px;
   $mrg-b:20px;
-  $border-bottom:10px solid #f5f7f9;
+  $border:10px solid #f5f7f9;
   .hall-info-box{
-    border-bottom: $border-bottom;
     .info-box{
       padding: $mrg-lf;
       text-align: left;
@@ -322,7 +316,7 @@
   }
   .video-list-box{
     padding: 5px $mrg-lf $mrg-lf;
-    border-bottom:$border-bottom;
+    border-top: $border;
     .item-list{
       padding-top: 5px;
       li{
@@ -333,19 +327,12 @@
     }
   }
   .case-list-box{
+    border-top: $border;
     background-color: #fff;
     .sift-box{padding: 0 $mrg-lf 0;}
     .item-list{
-      @include wap-list($colum:2,$space:10px,$margin:10px,$photo-scale:9/16);
-      padding-top: 0;
-      >li{
-        @include wap-img-shabox-sytle(0);
-        .info-box{
-          padding: 5px;
-          text-align: center;
-          .title{font-size: $theme-font-small-title-size;padding: 6px 12px;}
-        }
-      }
+      padding-top: 0; 
+      @include wap-case-list();
     }
   }
   //----------------------------------------

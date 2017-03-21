@@ -23,38 +23,36 @@
      //border-top: 1px solid $theme-border-color;
      >li{
        &:nth-child(4n + 3),&:nth-child(4n + 4){ .photo-box{float: right;} }
-       &:nth-child(4n + 2){
-         .info-box{
-           position: relative;
-           &:before{
-             content: "";
-             display: block;
-             background-color: #eee;
-             position: absolute;
-             top:0;
-             left: 20px;
-             right: 0;
-             height: 50%;
-             z-index: 1;
-           }
-         }
-       }
-       &:nth-child(4n + 3){
-         .info-box{
-           position: relative;
-           &:before{
-             content: "";
-             display: block;
-             background-color: #eee;
-             position: absolute;
-             bottom:0;
-             right: 20px;
-             left: 0;
-             height: 50%;
-             z-index: 1;
-           }
-         }
-       }
+       //&:nth-child(4n + 2){
+       //  .info-box{
+       //    position: relative;
+       //    &:before{
+       //      content: "";
+       //      display: block;
+       //      background-color: #eee;
+       //      position: absolute;
+       //      top:0;
+       //      right: 0;
+       //      @include square(40px);
+       //      z-index: 1;
+       //    }
+       //  }
+       //}
+       //&:nth-child(4n + 3){
+       //  .info-box{
+       //    position: relative;
+       //    &:before{
+       //      content: "";
+       //      display: block;
+       //      background-color: #eee;
+       //      position: absolute;
+       //      bottom:0;
+       //      left: 0;
+       //      @include square(40px);
+       //      z-index: 1;
+       //    }
+       //  }
+       //}
        .info-box{
          $space:10px;
          display: table;
@@ -220,9 +218,6 @@
   //-----------列表页面-----------
   .f4-list-box{
     >.sift-box{@include wap-sift-box();}
-    padding:{
-      top:30px;
-    }
     .item-list{
       $space:8px;
       padding: $space;
@@ -273,8 +268,18 @@
   $space:10px;
   .header-info-box{
     .head-box{
-      background-image: url('http://www.ctps.cn/photonet/Profiles2011/20120502/201252847462783.jpg');
-      background-size: cover;
+      @include icon-f4-detail-bg();
+      position: relative;
+      &:before{
+        content: '';
+        display: block;
+        position: absolute;
+        top:0;
+        left: 0;
+        @include square(100%);
+        z-index: 1;
+        background-color: rgba(#000,0.6);
+      }
       min-height: 180px;
       height: (100vw * (2/3));
       @include displayFlex();
@@ -287,8 +292,12 @@
         overflow: hidden;
         background-color: #eee;
         img{border-radius: 50%;}
+        position: relative;
+        z-index: 10;
       }
       .title{
+        position: relative;
+        z-index: 10;
         margin-top: 10px;
         color: #fff;
         font-size: $theme-font-big-title-size;
@@ -309,7 +318,6 @@
         }
       }
     }
-
     .introduce{
       color: $theme-font-detail-color;
       font-size: $theme-font-detail-size;

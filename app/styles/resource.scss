@@ -16,41 +16,56 @@
   background-image: url("../images/icon-submenu-bg-right.png");
   background-size: cover;
 }
+@mixin icon-logo(){
+  background: url("../images/bf-logo.png") center center no-repeat;
+  background-size: contain;
+}
 
-/////根据图片大小自动选择图片  竖排列
-//.iconSetupX($iconWidth;$iconHeight;$index;$count;$setupSize:0;){
-//@if ($i) when ($setupSize = 1) {
-//.iconSetupSize($iconWidth;$iconHeight;$count);
-//}
-//@if ($i) when ($i = 0) {
-//.iconSetupSize($iconWidth;$iconHeight;$count);
-//}
-//@if ($i) when ($i > 0) {
-//  background-position:calc(($iconWidth) * (0 - ($index - 1))) 0;
-//}
-//@if($index);
-//}
-//
-/////根据图片大小自动选择图片  横排列
-//.iconSetupY($iconWidth;$iconHeight;$index;$count;$setupSize:0;){
-//@if ($i) when ($setupSize =1) {
-//.iconSetupSize($iconWidth;$iconHeight;1);
-//}
-//@if ($i) when ($i = 0) {
-//.iconSetupSize($iconWidth;$iconHeight;1);
-//}
-//@if ($i) when ($i > 0) {
-//  background-position:0 calc(($iconWidth) * (0 - ($index - 1)));
-//}
-//@if($index);
-//}
+@mixin icon-hall-video-bg(){
+  background: url("../images/hall-video-bg.jpg") center center no-repeat;
+  background-size: cover;
+}
 
-//.iconSetupSize($iconWidth;$iconHeight;$count){
-//  width:calc($iconWidth);
-//  height: calc($iconHeight);
-//  background-size: calc($iconWidth * $count);
-//  display: block;
-//  background-repeat: no-repeat;
-//}
- 
+@mixin icon-home-menu(){
+  background-image: url("../images/home-menu.png");
+}
+@mixin icon-main-nav(){
+  background-image: url("../images/main-nav.png");
+}
+@mixin icon-main-nav-active(){
+  background-image: url("../images/main-nav-active.png");
+}
+@mixin icon-f4-detail-bg(){
+  background-image: url("../images/f4-detail-bg.jpg");
+  background-size: cover;
+}
+@mixin icon-slogan-bg($index:1) {
+  background: url("../images/icon-slogan-#{$index}.png") center center no-repeat;
+  background-size: cover;
+}
+@mixin iconSetupSize($iconWidth,$iconHeight,$count){
+  width:$iconWidth;
+  height: $iconHeight;
+  background-size: ($iconWidth * $count);
+  display: block;
+  background-repeat: no-repeat;
+}
+///根据图片大小自动选择图片  竖排列
+@mixin get-vertical-icon-location($iconWidth,$iconHeight,$index:0,$count:1,$setupSize:0){
+  @if($index == 0){
+    @include iconSetupSize($iconWidth,$iconHeight,$count);
+  }
+  @if($index > 0 ){
+    background-position: 0 #{-($iconWidth * $index)};
+  }
+}
+///根据图片大小自动选择图片  横排列
+@mixin get-horizontal-icon-location($iconWidth,$iconHeight,$index:0,$count:1,$setupSize:0){
+  @if($index == 0){
+    @include iconSetupSize($iconWidth,$iconHeight,$count:$count);
+  }@else if($index > 0 ){
+    background-position:#{-($iconHeight * $index)} 0;
+  }
+}
+
  

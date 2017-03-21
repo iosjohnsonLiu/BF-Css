@@ -154,14 +154,20 @@
   >li{
     //float: left;
     @if($space > 0){
-      margin-left: $space;
-      &:nth-of-type(#{$colum}n + 1){
-        margin-left: 0;
+      @if($colum > 1){
+        margin-left: $space;
+        &:nth-of-type(#{$colum}n + 1){
+          margin-left: 0;
+        }
       }
       &:nth-of-type(n + #{$colum + 1}){
         margin-top: $space;
       }
-      width: calc( (100% /#{$colum}) - #{$space*($colum - 1)/$colum});
+      @if($colum == 1){
+        width: 100%;
+      }@else{
+        width: calc( (100% /#{$colum}) - #{$space*($colum - 1)/$colum});
+      }
     }@else {
       width: (100% /$colum);
     }
@@ -169,7 +175,12 @@
       padding: $padding;
     }
     .photo-box {
-      height: calc( ((100vw - #{$max-width-differ + $margin * 2}) / #{$colum} - #{$space * ($colum - 1)/$colum + $padding*2 + $border-w * 2})*#{$photo-scale});
+      $value:($space * ($colum - 1)/$colum + $padding*2 + $border-w * 2);
+      @if($value == 0){
+        height: calc( ((100vw - #{$max-width-differ + $margin * 2}) / #{$colum})*#{$photo-scale});
+      }@else {
+        height: calc( ((100vw - #{$max-width-differ + $margin * 2}) / #{$colum} - #{$value} )*#{$photo-scale});
+      }
     }
     @if($info-size>0){
       .info-box{
@@ -266,6 +277,7 @@
     @include size($width:$width,$height:$height);
     position: relative;
 
+    @include clearfix();
     .#{$big-class}{
       @include size($width:$big-w,$height:$big-h);
       float: left;
@@ -370,6 +382,56 @@ $photoPreviewValue-Small-Height:3 !default;
   };
 }
 
+//$style-type 遮罩类型
+// 0号样式 默认样式 照片缩放 无背景
+// 1号样式 照片缩放 无信息 浮动在照片上 黑色透明背景
+// 2号样式 婚纱列表 info-box 浮动在照片上 白色透明背景显示信息
+//
+@mixin img-shabox-sytle($style-type:0,$isWeb:true){
+  $hov:'hover';
+  $time:0.5s;
+  @if($isWeb == false){
+    $hov:'active';
+    $time:0.3s;
+  }
+  &:#{$hov}{
+    .photo-box{
+      overflow: hidden;
+      position: relative;
+      @if($isWeb == true){
+        img{
+          @include scale(1.1);
+        }
+      }
+    }
+    @if($style-type == 1){
+      .photo-box:after{
+        content: "";
+        display: block;
+        position: absolute;
+        top:0;left: 0;right: 0;bottom: 0;
+        z-index: $zindex-shabox;
+        background-color: rgba(#000,0.5);
+      }
+    }@else if($style-type == 2){
+      .info-box{
+        background-color: rgba(#fff,0.8);
+        z-index: $zindex-shabox;
+        visibility: visible;
+      }
+    }
+  }
+  .photo-box{
+    overflow: hidden;
+    img{
+      @include transition($time);
+    }
+  }
+}
+@mixin wap-img-shabox-sytle($style-type:0){
+  @include img-shabox-sytle($style-type,$isWeb:false);
+}
+
 //列表与详情标题样式A
 @mixin title-style-a($padding:10px){
   >.title{
@@ -393,86 +455,38 @@ $photoPreviewValue-Small-Height:3 !default;
   }
 }
 
-//列表与详情标题样式A
+//标题字体样式A
 @mixin wap-title-style-a($padding:5px){
   //padding:0 $mrg-lf;
   >.title{
     padding: $padding 0;
-    //padding-left: ($padding + 4);
     font-size: $theme-font-title-size;
-    vertical-align: middle;
-    position: relative;
     display: inline-block;
-    &:before{
-      //content: '';
-      display: inline-block;
-      background-color: $theme-color-one;
-      position: absolute;
-      left: 0;
-      width: 3px;
-      height: 16px;
-      top: 50%;
-      margin-top: -8px;
-    }
   }
 }
-//$style-type 遮罩类型
-// 0号样式 默认样式 照片缩放 无背景
-// 1号样式 照片缩放 无信息 浮动在照片上 黑色透明背景
-// 2号样式 婚纱列表 info-box 浮动在照片上 白色透明背景显示信息
-//
-@mixin img-shabox-sytle($style-type:0,$isWeb:true){
-  $hov:'hover';
-  $time:0.5s;
-  @if($isWeb == false){
-    $hov:'active';
-    $time:0.3s;
+
+//列表标题样式
+@mixin wap-list-title-style($padding:5px){
+  .title-box{
+    border-bottom: 1px dashed #efefef;
+    margin-bottom: 10px;
+    @include wap-title-style-a($padding);
   }
-  &:#{$hov}{
-    .photo-box{
-      overflow: hidden;
-      position: relative;
-      img{
-        @include scale(1.1);
-      }
-    }
-    @if($style-type == 1){
-      .photo-box:after{
-        content: "";
-        display: block;
-        position: absolute;
-        top:0;left: 0;right: 0;bottom: 0;
-        z-index: $zindex-shabox;
-        background-color: rgba(#000,0.5);
-      }
-    }@else if($style-type == 2){
-      .info-box{
-        background-color: rgba(#fff,0.8);
-        visibility: visible;
-      }
-    }
-  }
-  .photo-box{
-    overflow: hidden;
-    img{
-      @include transition($time);
-    }
-  }
-}
-@mixin wap-img-shabox-sytle($style-type:0){
-  @include img-shabox-sytle($style-type,$isWeb:false);
 }
 
 //web筛选样式
 @mixin web-sift-box(){
+
   >.sift-box {
-    padding:{
-      left: 10px;
-      right: 10px;
-      //bottom:5px;
-    }
     font-size: 0;
     background-color: #fff;
+    &:nth-of-type(2){
+      margin-top: 10px;
+    }
+    //&:nth-last-of-type(1){
+    //  margin-bottom: 10px;
+    //}
+
     >.sift-title{
       font-size: $theme-font-small-value-size-web;
       display: inline-block;
@@ -528,14 +542,20 @@ $photoPreviewValue-Small-Height:3 !default;
         }
       }
     }
+
+
   }
 }
 @mixin wap-sift-box(){
   background-color: #fff;
+  @include wap-list-title-style();
+
   >.title-box{
     @include displayFlex();
     @include justifyContentSpaceBetween();
-    padding: 4px;
+    @include alignItemsCenter();
+    padding:0 5px;
+    margin-bottom: 0;
     font-size: $theme-font-title-size;
     .sift-btn{
       padding: 5px;
@@ -543,10 +563,12 @@ $photoPreviewValue-Small-Height:3 !default;
         color: $theme-color-one;
       }
     }
+    overflow: hidden;
   }
   .sift-condition {
-    border-top: 1px dashed #efefef;
+
     font-size: 0;
+    padding: 0 5px;
     > li {
       display: inline-block;
       padding: 2px 4px;

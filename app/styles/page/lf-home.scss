@@ -1,5 +1,5 @@
 @mixin lf-home-web() {
-  //宴会厅列表页面
+  //礼服列表页面
   $space:10px;
   .dress-list-box {
     $dress-list-w: $web-default-screen-width;
@@ -10,41 +10,53 @@
 
     > .item-list {
       $space:10px;
-      @include list($width:$dress-list-w,$colum:3,$space:20px,$photo-scale:3/2);
+      @include list($width:$dress-list-w,$colum:4,$space:20px,$photo-scale:3/2);
       margin-top: $space*2;
       >li{
         cursor: pointer;
         position: relative;
-        @include img-shabox-sytle(2);
+        overflow: hidden;
+        @include img-shabox-sytle(0);
+        $info-w:200px;
+        $info-h:($info-w * (2/3));
         .info-box{
-          position: absolute;
-          top:20px;
-          left: 20px;
-          right: 20px;
-          bottom: 20px;
-          text-align: center;
-          @include inlineMiddle();
           @include transition(0.5s);
-          background-color: rgba(#fff,0);
-          visibility: hidden;
+          @include size($width:$info-w,$height:$info-h);
+          background-color: rgba(#000,0.5);
+          position: absolute;
+          z-index: $zindex-shabox;
+          top:100%;
+          left: 50%;
+          margin-left: -($info-w/2);
+          color: #fff;
+          display: table;
+          .vertical-middle{
+            vertical-align: middle;
+            text-align: center;
+            display: table-cell;
+          }
           .title{
             display: block;
             font-size: $theme-font-title-size-web;
-            position: absolute;
-            top:50%;
-            margin-top: 10px;
-            left: 0;
-            width: 100%;
+            //position: absolute;
+            //top:50%;
+            //margin-top: 10px;
+            //left: 0;
+            //width: 100%;
           }
           .brand{
-            position: absolute;
-            bottom:50%;
-            margin-bottom: 10px;
-            left: 0;
-            width: 100%;
+            //position: absolute;
+            //bottom:50%;
+            //margin-bottom: 10px;
+            //left: 0;
+            //width: 100%;
             display: block;
             font-size: $theme-font-big-title-size-web;
           }
+        }
+        &:hover .info-box{
+          top:50%;
+          margin-top: -($info-h/2);
         }
       }
     }
@@ -66,7 +78,7 @@
 }
 
 @mixin lf-home-wap() {
-  //宴会厅列表页面
+  //礼服列表页面
   //----------------------------------------
   .dress-list-box {
     > .item-list {
@@ -80,14 +92,15 @@
           position: relative;
           padding: $space;
           text-align: center;
-          >.title{font-size: $theme-font-title-size;padding: $space 0;display: block;}
+          .title{font-size: $theme-font-title-size;padding: $space/2 0;display: block;}
+          .brand{ font-size: $theme-font-title-size;padding: $space/2 0;display: block;}
+
         }
       }
     }
   }
 
   //----------------------------------------
-  //宴会列表页面:宴会厅列表 和 宴会厅详情页面:案例列表 共用样式
   .sift-box {
     @include wap-sift-box();
   }

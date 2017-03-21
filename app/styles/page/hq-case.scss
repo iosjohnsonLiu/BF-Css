@@ -354,15 +354,7 @@
       @include wap-sift-box();
     }
     > .item-list{
-      @include wap-list($colum:2,$space:10px,$margin:5px,$photo-scale:9/16);
-      >li{
-        @include wap-img-shabox-sytle();
-        .info-box{
-          text-align: center;
-          .title{font-size: $theme-font-title-size;padding: 6px 12px;}
-        }
-
-      }
+      @include wap-case-list();
     }
   }
   //----------------------------------------

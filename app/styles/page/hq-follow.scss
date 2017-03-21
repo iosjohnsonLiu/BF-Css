@@ -39,6 +39,7 @@
   .follow-list-box {
     $space:10px;
     padding: $space/2;
+    @include wap-list-title-style();
     >.item-list {
       @include wap-list($colum:2,$space:10px,$photo-scale:9/16,$max-width-differ:$space);
       >li{
@@ -51,7 +52,8 @@
           position: relative;
           .title{
             display: block;
-            font-size: $theme-font-title-size;
+            font-size: $theme-font-small-title-size;
+
             line-height: 20px;
           }
         }

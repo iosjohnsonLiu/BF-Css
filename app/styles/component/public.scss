@@ -1,14 +1,13 @@
 //布局样式
 .root{
-  //background-color: #f4f4f4;
   .f-main{
 
   }
   @if($CssSwitchWap){
     &#{$wapClass}{
-      @include square(100%);
+      //@include square(100%);
       .f-main{
-        @include square(100%);
+        //@include square(100%);
         padding-bottom: $wap-mainNav-height;
         >.u-nav{
           background-color: #f0f0f0;
@@ -20,12 +19,12 @@
           right: 0;
         }
         >.m-view{
-          @include square(100%);
+          //@include square(100%);
         }
       }
       .f-scrollview{
-        @include square(100%);
-        overflow: auto;-webkit-overflow-scrolling : touch;
+        //@include square(100%);
+        //overflow: auto;-webkit-overflow-scrolling : touch;
       }
     }
   }
@@ -73,364 +72,7 @@
     }
   }
 }
-//菜单
-.u-nav{
-  background-color: #fff;
-  z-index: $zindex-navbar;
-  @if($CssSwitchWap){
-    &#{$wapClass}{
-      .nav-box{
-        @include square(100%);
-        >ul{
-          display: table;
-          @include square(100%);
-          >li{
-            display: table-cell;
-            vertical-align: middle;
-            text-align: center;
-            width: 1%;
-            a{
-              font-size: $font-size-h4;
-              .title{color: $mainNav-font-color;}
-              .sub-title{display: none;}
-            }
-            &.active,>a:active>a:hover{
-              .title{color: $mainNav-font-active-color;}
-            }
-            .submenu{
-              visibility: hidden;
-              z-index: 0;
-            }
-            &.active{
-              .submenu{
-                z-index: $zindex-navbar-fixed;
-                visibility: visible;}
-            }
-          }
-        }
-      }
-      .tel-box{display: none;}
-      .logo-box{display: none;}
-      .submenu{
-        $menu-w:84px;
-        $li-space:5px;
-        position: fixed;
-        height: 100%;
-        top: 0;
-        right:-($menu-w + $li-space*2 +4);
-        @include transition(0.5s);
-        @include displayFlex();
-        @include flexDirectionColumn();
-        @include justifyContentFlexEnd();
 
-        $menu-color:#f9c4d2;
-        $menu-border:2px solid $menu-color;
-        .sub-nav{
-          position: relative;
-          background-color: #fff;
-          @include border-bottom-radius(4px);
-          border: $menu-border;
-          margin-top: 100px;
-          margin-bottom: 50px;
-          z-index: $zindex-navbar;
-          &:before{
-            content: "";
-            display: block;
-            position: absolute;
-            right: -17px;
-            bottom: calc(100% - #{$li-space});
-            z-index: 10;
-            @include square($menu-w+45);
-            @include icon-submenu-bg();
-          }
-          .item-list{
-            min-height: 120px;
-            padding: $li-space*2 $li-space $li-space ;
-            position: relative;
-            &:before{
-              content: "";
-              display: block;
-              position: absolute;
-              bottom: -15px;
-              left: -12px;
-              z-index: 10;
-              @include size($width:23.5px,$height:30.5px);
-              @include icon-submenu-bg-left();
-            }
-            &:after{
-              content: "";
-              display: block;
-              position: absolute;
-              top: -20px;
-              right: -14px;
-              z-index: 10;
-              @include size($width:28.5px,$height:30px);
-              @include icon-submenu-bg-right();
-            }
-            >li{
-              text-align: center;
-              width: $menu-w;
-              height: 35px;
-              color: #fff;
-              display: block;
-              background-color: #ff8f8e;
-              border-radius:4px;
-              .title{color: #fff;line-height: 35px;font-size: $theme-font-value-size;}
-              &:nth-child(n+2){
-                margin-top: $li-space;
-              }
-              &.active{
-                background-color: $menu-color;
-                .title{color: #fff;}
-              }
-            }
-          }
-          .open-button{
-            position: absolute;
-            bottom: 10px;
-            left: -42px;
-            width: 40px;
-            min-height: 70px;
-            z-index: $zindex-navbar;
-            .info-box{
-              position: relative;
-              margin-left: auto;
-              margin-right: 0;
-              display: block;
-              width: 25px;
-              padding: 5px 0 20px;
-              background-color: $menu-color;
-              border-top-left-radius: 8px;
-              border-bottom-left-radius: 60%;
-              border:{
-                top:$menu-border;
-                left:$menu-border;
-                bottom: $menu-border;
-              };
-              .title{
-                color: #fff;
-                font-size: $theme-font-detail-size;
-                line-height: $theme-font-detail-size;
-              }
-              .bg-box{
-                content: "";
-                display: block;
-                position: absolute;
-                top: -20px;
-                left: -20px;
-                z-index: 10;
-                @include size($width:24.5px,$height:31px);
-                @include icon-submenu-btn-bg();
-                @include transition(0.5s);
-                @include rotate(0deg);
-              }
-              .icon{
-
-              }
-            }
-          }
-
-          .item-list,&:before{
-            @include opacity(0);
-            @include transition(opacity 0.5s);
-          }
-        }
-        &.show-submenu{
-          right: 8px;
-          &:before{
-            content: "";
-            display: block;
-            position: fixed;
-            z-index: 999;
-            top: -100%;
-            right: -100%;
-            @include square(300%);
-            background-color: rgba(#000,0.5);
-          }
-          .sub-nav{
-            .item-list,&:before{
-              @include opacity(1);
-            }
-            .open-button .icon{
-              top: -13px;
-              left: -22px;
-              @include rotate(-45deg);
-            }
-          }
-        }
-      }
-    }
-  }
-  @if($CssSwitchWeb){
-    &#{$webClass}{
-      position: relative;
-      $nav-width:1200px;
-      $ul-w:800px;
-      .nav-box{
-        $li-h:35px;
-        $line-color-active:#999;
-        $line-zindex:12;
-        margin: 0 auto;
-        width: $nav-width;
-        padding: ( $web-mainNav-height - $li-h)/2 ($nav-width - $ul-w)/2;
-        >ul{
-          >li{
-            position: relative;
-            display: inline-block;
-            padding:{
-              right: 20px;
-              left: 20px;
-            }
-            height: $li-h;
-            border-right: 1px solid $theme-font-color;
-            >a{
-              min-width: 80px;
-              display:block;
-              span{
-                color: $mainNav-font-color;
-                display: block;
-              }
-              .title{ font-size: $theme-font-big-title-size;}
-              .sub-title{ font-size: $theme-font-value-size;}
-            }
-            &.active>a,>a:hover{
-              >span{
-                color: $mainNav-font-active-color;
-              }
-            }
-            //&.active,
-            &.active{
-              .submenu{
-                display: block;
-              }
-            }
-          }
-        }
-        .submenu{
-          position: absolute;
-          top:100%;
-          left:50%;
-          display: none;
-          width: 900px;
-          margin-left: -450px;
-          padding-top: ($web-mainNav-height - $li-h)/2;
-          text-align: center;
-          $arrow-size:6px;
-          &:before,&:after{
-            content: "";
-            display: block;
-            position: absolute;
-            border-style: solid;
-            left: 50%;
-            z-index: $line-zindex;
-            top: ($web-mainNav-height - $li-h)/2 - $arrow-size;
-            margin-left: -$arrow-size;
-            border-width: $arrow-size;
-            border-color: transparent;
-            border-top-width: 0;
-            border-bottom-color: $line-color-active;
-          }
-          &:after{
-            z-index: $line-zindex+1;
-            top: (($web-mainNav-height - $li-h)/2 - $arrow-size - 1);
-            margin-left: -($arrow-size - 2);
-            border-width: $arrow-size - 2;
-            border-bottom-color: #fff;
-          }
-          .item-list>li{
-            height: $li-h;
-            display: inline-block;
-            .title{ line-height: $li-h;font-size: $theme-font-title-size;color: $theme-font-color;
-              margin: {
-                left: $li-h/4;
-                right: $li-h/4;
-              };
-            }
-            &.active>a,>a:hover{
-              >span{
-                color: $mainNav-font-active-color;
-              }
-            }
-          }
-          .open-button{display: none;}
-        }
-        &:before{
-          content: '';
-          display: block;
-          position: absolute;
-          top:$web-mainNav-height;
-          left: 0;
-          right: 0;
-          height: 1px;
-          z-index: $line-zindex;
-          background-color: $theme-color-one;
-        }
-        &.show-submenu{
-          &:after{
-            content: '';
-            width: 100%;
-            display: block;
-            height: $li-h ;
-          }
-          &:before{
-            background-color: $line-color-active;
-          }
-        }
-      }
-      .tel-box{
-        position: absolute;
-        top: 0;
-        right: 50%;
-        margin-right: -($nav-width / 2);
-        height: $web-mainNav-height;
-        display: table;
-        .tel-info{
-          display: table-cell;
-          vertical-align: middle;
-          text-align: left;
-          label,span{display: block;}
-          label{
-            font-size:$theme-font-title-size;
-            color: $mainNav-font-color;
-          }
-          span{
-            font-size: 24px;
-            color: $theme-color-one;
-          }
-        }
-      }
-      .logo-box{
-        position: absolute;
-        top: 0;
-        left: 50%;
-        margin-left: -($nav-width / 2);
-        height: $web-mainNav-height;
-        display: table;
-        .logo-icon{
-          font-size: 0;
-          display: table-cell;
-          text-align: center;
-          vertical-align: middle;
-          &:before{
-            content: 'Bafei';
-            display: block;
-            font-size: 28px;
-            line-height: 30px;
-            color: $theme-color-one;
-            font-weight: bolder;
-            font-family: serif;
-          }
-          &:after{
-            content: '芭菲婚礼';
-            display: block;
-            font-size: 24px;
-            color: $theme-color-one;
-          }
-        }
-      }
-    }
-  }
-}
 
 //wap 芭菲logo
 @if($CssSwitchWap){
@@ -440,27 +82,11 @@
     height: $wap-log-height;
     overflow: hidden;
     margin: 0;
+    padding: 10px;
     .logo-icon{
-      font-size: 0;
-      @include  displayFlex();
-      @include justifyContentCenter();
-      @include alignItemsCenter();
-      @include flexDirectionColumn();
-      &:before{
-        content: 'Bafei';
-        display: block;
-        font-size: 28px;
-        line-height: 30px;
-        color: #bb7f45;
-        font-weight: bolder;
-        font-family: serif;
-      }
-      &:after{
-        content: '芭菲婚礼';
-        display: block;
-        font-size: 10px;
-        color: #999;
-      }
+      @include icon-logo();
+      @include square(100%);
+
     }
   }
 }
@@ -473,18 +99,22 @@
   position: relative;
   @include clearfix();
   h1{
-    color: #000;
+    color: #444;
     font-size: 28px;
+    font-weight: normal;
   }
   i{
-    $line-w:120px;
-    font-size: 26px;
+    $line-w:15px;
+    $line-space:50px;
+    font-size: 18px;
+    font-style: normal;
+    line-height: 20px;
     color: $theme-font-disable-color;
     display: inline-block;
-    font-family: $font-family-serif;
     word-spacing: 10px;
     letter-spacing: 2px;
-    padding: 4px $line-w;
+    padding: 0 ($line-w + $line-space);
+    margin-top: 3px;
     position: relative;
     border: {
       left: 1px solid $theme-font-disable-color;
@@ -495,7 +125,7 @@
       display: block;
       position: absolute;
       top:50%;
-      width: ($line-w - 20);
+      width: $line-w;
       height: 1px;
       background-color: $theme-font-disable-color;
     }
@@ -507,13 +137,14 @@
     }
   }
   span{
-    font-size: $theme-font-big-title-size;
+    font-size: 14px;
     display: block;
     color: $theme-font-disable-color;
     position: relative;
-    padding: 8px;
+    padding: 3px 0 6px;
+    line-height: 20px;
     &:before{
-      $line-width:90px;
+      $line-width:50px;
       content: "";
       position: absolute;
       bottom: 0;
@@ -530,12 +161,13 @@
     position: absolute;
     font-size: $theme-font-small-title-size-web;
     padding: 6px 12px;
-    color: #555;
+    //color: #555;
     bottom:-30px;
     right: 0;
-    &:hover{
-      color: $theme-color-one;
-    }
+    color: $theme-color-one;
+    //&:hover{
+    //  color: $theme-color-one;
+    //}
     &:after{
       content: ">>";
     }
@@ -543,7 +175,7 @@
 }
 //模块首页分割线
 .home-space-line{
-  background-color: #999;
+  background-color: #eee;
   height: 1px;
   width: $web-default-screen-width;
   margin: 5px auto;
@@ -554,7 +186,7 @@
     $size:18px;
     @include square($size);
     border-radius: 50%;
-    background-color: rgba(#000,0.3);
+    background-color: #ccc;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -686,7 +318,7 @@
       }
 
     }
-    &.style-2{
+    &{
       >.pagination-box{
         .page-number>li,
         .btn-prev,
@@ -722,7 +354,6 @@
         left: 0;
         @include square(100%);
         @include transition(0.5s);
-
       }
       >.sift-popup-box{
         @include transition(0.5s);
@@ -767,8 +398,8 @@
         -webkit-overflow-scrolling: touch;
       }
       .sift-box{
-        &:nth-child(-n + 2){
-          border-bottom: 1px solid $theme-border-color;
+        &:nth-of-type(n + 2){
+          border-top: 1px solid $theme-border-color;
         }
         padding: 5px 0;
         .sift-title{
@@ -833,80 +464,20 @@
 }
 
 
-@mixin case-li-style(){
-  .info-box{
-    text-align: center;
-    padding-top: 10px;
-    .title{
-      font-size: $theme-font-title-size-web - 2;
-    }
-  }
-  .photo-box{
-    position: relative;
-    overflow: hidden;
-  }
-  .shade-box{
-    position: absolute;
-    top:100%;
-    left:0;
-    z-index: 100;
-    @include square(100%);
-    background-color: rgba(#000,0.5);
-    display: table;
-    padding: 20px;
-    @include transition(top 0.6s);
-  }
-  &:hover{
-    //background-color: #eee;
-    .shade-box{
-      top:0;
-    }
-  }
-  .case-info-box{
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-    color: #fff;
-    position: relative;
-    @include square(100%);
-    padding: 0;
-    border: 0;
-    span{font-size: $theme-font-value-size-web;display: block;margin-bottom: 5px;}
-    .title{ font-size: $theme-font-big-title-size-web;padding: 10px;}
-    &:before,&:after{
-      content: '';
-      @include square(25px);
-      position: absolute;
-      border-width: 1px;
-      border-color: #fff;
-    }
-    &:before{
-      bottom: 0;
-      left: 0;
-      border-left-style:solid;
-      border-bottom-style:solid;
-    }
-    &:after{
-      top: 0;
-      right: 0;
-      border-right-style:solid;
-      border-top-style:solid;
-    }
-  }
-}
 //顶部菜单显示
 .u-sift-top-box{
   position: fixed;
   left: 0;
   top:0;
   right: 0;
-  z-index: $zindex-navbar;
+  z-index: $zindex-u-sift-top;
   display: none;
   &.open{
     display: block;
   }
   .sift-box{
     @include wap-sift-box();
-    .title-box{ @include wap-title-style-a();}
+
+
   }
 }

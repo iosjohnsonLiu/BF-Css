@@ -1,0 +1,91 @@
+
+@mixin case-li-style(){
+  .info-box{
+    text-align: center;
+    padding-top: 10px;
+    .title{
+      font-size: $theme-font-title-size-web - 2;
+    }
+  }
+  .photo-box{
+    position: relative;
+    overflow: hidden;
+  }
+  .shade-box{
+    position: absolute;
+    top:100%;
+    left:0;
+    z-index: 100;
+    @include square(100%);
+    background-color: rgba(#000,0.5);
+    display: table;
+    padding: 20px;
+    @include transition(top 0.6s);
+  }
+  &:hover{
+    //background-color: #eee;
+    .shade-box{
+      top:0;
+    }
+  }
+  .case-info-box{
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    @include square(100%);
+    padding: 0;
+    border: 0;
+    span{font-size: $theme-font-value-size-web;display: block;margin-bottom: 5px;}
+    .title{ font-size: $theme-font-big-title-size-web;padding: 10px;}
+    &:before,&:after{
+      content: '';
+      @include square(25px);
+      position: absolute;
+      border-width: 1px;
+      border-color: #fff;
+    }
+    &:before{
+      bottom: 0;
+      left: 0;
+      border-left-style:solid;
+      border-bottom-style:solid;
+    }
+    &:after{
+      top: 0;
+      right: 0;
+      border-right-style:solid;
+      border-top-style:solid;
+    }
+  }
+}
+@mixin wap-case-li-style(){
+  @include wap-img-shabox-sytle(0);
+  border: 1px solid $theme-border-color;
+  .info-box{
+    padding: 5px 10px;
+    @include displayFlex();
+    @include justifyContentCenter();
+    @include alignItemsCenter();
+    @include flexDirectionColumn();
+    min-height: calc( ((100vw - 10px) / 2 - 7px )*(4/16));
+    text-align: center;
+    span{
+      display: block;
+      line-height:$theme-font-title-size;
+    }
+    .title{font-size: ($theme-font-title-size - 1px);margin-bottom: 3px;height: $theme-font-title-size;overflow: hidden;}
+    .price{font-size: $theme-font-small-title-size;color: $theme-color-theer;
+      &:before{content: '￥';}
+    }
+  }
+}
+
+@mixin wap-case-list(){
+  @include wap-list($colum:2,$space:10px,$margin:5px,$photo-scale:9/16,$border-w:1px);
+  >li{
+    @include wap-case-li-style();
+  }
+}
+

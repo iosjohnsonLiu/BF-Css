@@ -38,18 +38,20 @@
   .video-list-box {
     $space:10px;
     padding: $space/2;
-    >.item-list {
-      @include wap-list($colum:2,$space:8px,$photo-scale:9/16,$max-width-differ:$space);
+    @include wap-list-title-style();
+    >.item-list{
+      @include wap-list($colum:1,$space:$space/2, $photo-scale:9/16,$max-width-differ:$space);
       >li{
         background-color: #fff;
         cursor: pointer;
+
         .info-box{
           text-align: center;
-          padding: $space/2;
+          padding: $space/2 0;
           position: relative;
           .title{
             display: block;
-            font-size: $theme-font-title-size;
+            font-size: 14px;
             line-height: 20px;
           }
         }

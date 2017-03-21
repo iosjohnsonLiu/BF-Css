@@ -5,34 +5,7 @@
   .recommend-box{
     margin: $mg-space;
     width: $web-default-screen-width;
-    &.virtue{
-      ul{
-        @include list($colum:4,$space:50px,$margin:5px);
-        >li{
-          a{cursor: default;}
-          .photo-box{
-            margin: 10px auto;
-            @include square(140px);
-            @include transition(0.5s);
-            position: relative;
-            bottom: 0;
-            &:hover{
-              bottom: 40px;
-            }
-          }
-          .info-box{
-            text-align: center;
-            .title{font-size: $theme-font-big-title-size-web;border-bottom: 2px solid #eee;padding: 4px 12px 8px;color: $theme-font-color;}
-            .sub-title{
-              padding: 12px 0;
-              display: block;
-              font-size:$theme-font-small-title-size-web;
-              color: $theme-font-disable-color;
-            }
-          }
-        }
-      }
-    }
+
     &.hotel{
       ul{
         @include list($colum:5,$space:40px,$margin:10px);
@@ -284,7 +257,8 @@
 @mixin hy-home-wap(){
   .menu-box{
     position: relative;
-    height: calc( 100% - 66.7vw - #{$wap-log-height});
+    //height: calc( 100% - 66.7vw - #{$wap-log-height});
+    height: calc( 100vh - 66.7vw - #{$wap-log-height} - #{$wap-mainNav-height});
     ul{
       $space:8px;
       @include clearfix();
