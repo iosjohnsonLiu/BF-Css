@@ -29,10 +29,10 @@
     }
   }
   @if($CssSwitchWeb){
-    max-width: $web-max-screen-width;
-    margin: auto;
     &#{$webClass}{
-
+      margin: auto;
+      max-width: $web-max-screen-width;
+      min-width: $web-default-screen-width;
     }
     .f-footer{
       background-color: #fff;

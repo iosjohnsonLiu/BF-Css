@@ -37,7 +37,6 @@
       }
     }
   }
-
 }
 @mixin itemInfoDirection-colum($item-w,$padding:0,$photo-scale:0,$info-h:0,$item-h:0,$item-border-w:0){
 
@@ -609,4 +608,24 @@ $photoPreviewValue-Small-Height:3 !default;
   border: {right: $border;bottom: $border;};
   &:nth-child(-n + #{$colum}){border-top: $border;}
   &:nth-child(#{$colum}n + 1) {border-left: $border;}
+}
+
+//解决缩小后border-width变大引起的错位
+@mixin border($width:1px,$color:$theme-border-color,$type:solid){
+  position: relative;
+  >*{
+    position: relative;
+    z-index: 1;
+  }
+  &:before{
+    content: "";
+    position: absolute;
+    display: block;
+    @include square(100%);
+    top:-$width;
+    left: -$width;
+    z-index: 0;
+    border: $width $type $theme-border-color;
+    pointer-events:none;
+  }
 }

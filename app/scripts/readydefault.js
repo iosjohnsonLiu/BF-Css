@@ -97,14 +97,14 @@ function insertMainnav() {
           subtitle:"home"
         },
         {
-          url:"'hy-home"+ platClass +".html'",
+          url:"'hy-store-list"+ platClass +".html'",
           title:"婚宴",
           icon:"",
           subtitle:"wedding banquet",
           submenu:[
             {
               url:"'hy-store-list"+ platClass +".html'",
-              title:"婚宴酒店",
+              title:"婚宴门店",
             },
             {
               url:"'hy-hall-list"+ platClass +".html'",
@@ -117,7 +117,7 @@ function insertMainnav() {
           ]
         },
         {
-          url:"'hq-home"+ platClass +".html'",
+          url:"'hq-case-list"+ platClass +".html'",
           title:"婚庆",
           icon:"",
           subtitle:"wedding",
@@ -156,14 +156,14 @@ function insertMainnav() {
           subtitle:"home"
         },
         {
-          url:"'hy-home"+ platClass +".html'",
+          url:"'hy-store-list"+ platClass +".html'",
           title:"婚宴预订",
           icon:"",
           subtitle:"banquet",
           submenu:[
             {
               url:"'hy-store-list"+ platClass +".html'",
-              title:"婚宴酒店",
+              title:"婚宴门店",
             },
             {
               url:"'hy-hall-list"+ platClass +".html'",
@@ -176,7 +176,7 @@ function insertMainnav() {
           ]
         },
         {
-          url:"'hq-home"+ platClass +".html'",
+          url:"'hq-case-list"+ platClass +".html'",
           title:"婚庆定制",
           icon:"",
           subtitle:"wedding",

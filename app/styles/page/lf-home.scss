@@ -17,8 +17,8 @@
         position: relative;
         overflow: hidden;
         @include img-shabox-sytle(0);
-        $info-w:200px;
-        $info-h:($info-w * (2/3));
+        $info-w:100%;
+        $info-h:50px;
         .info-box{
           @include transition(0.5s);
           @include size($width:$info-w,$height:$info-h);
@@ -26,8 +26,7 @@
           position: absolute;
           z-index: $zindex-shabox;
           top:100%;
-          left: 50%;
-          margin-left: -($info-w/2);
+          left: 0;
           color: #fff;
           display: table;
           .vertical-middle{
@@ -38,25 +37,15 @@
           .title{
             display: block;
             font-size: $theme-font-title-size-web;
-            //position: absolute;
-            //top:50%;
-            //margin-top: 10px;
-            //left: 0;
-            //width: 100%;
           }
           .brand{
-            //position: absolute;
-            //bottom:50%;
-            //margin-bottom: 10px;
-            //left: 0;
-            //width: 100%;
             display: block;
             font-size: $theme-font-big-title-size-web;
           }
         }
         &:hover .info-box{
-          top:50%;
-          margin-top: -($info-h/2);
+          top:100%;
+          margin-top: -($info-h);
         }
       }
     }

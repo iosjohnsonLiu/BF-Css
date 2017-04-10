@@ -6,65 +6,40 @@
     margin: 30px auto;
     @include web-sift-box();
     > .item-list {
-      $space:10px;
-      $pdg-space: 10px;
-      background-color: #fff;
-      margin-top: 2*$space;
-      //padding: $space;
-      >li {
-        $li-h: 200px;
-        $img-scale: 2/3;
+      $img-scale: 2/3;
 
-        border: 1px solid $theme-border-color;
-        position: relative;
-        height: ($li-h + 2);
-        margin-bottom: $space *2;
-        &:last-child{
-          margin-bottom: 0;
-        }
-        .photo-box {
-          height: 100%;
-          width: ($li-h / $img-scale);
-        }
+      $space:10px;
+      @include list($width:$store-list-w,$colum:2,$item-border-w:1px,$padding:1px,$space:$space * 3,$info-size:300px,$photo-scale:$img-scale,$infoDirectionColum:false);
+
+      background-color: #fff;
+      padding-top: $space * 3;
+      >li {
+        @include border();
         .info-box {
-          height: 100%;
-          width: $store-list-w - ($li-h / $img-scale) - $space*2 - 2;
-          position: absolute;
-          top: 0;
-          right: 0;
-          padding: $space;
-          >.title{font-size: $theme-font-big-title-size-web;padding: $space 0;display: block;}
-          .store-box{
-            margin-bottom: $space;
-            span{font-size:$theme-font-detail-size-web;}
-            .store-name{font-size:$theme-font-detail-size-web;color: #999;margin: $space*2 0;}
+          $info-pdg:$space * 2;
+          padding: $info-pdg $space * 3;
+          >.title{
+            font-size: $theme-font-big-title-size-web;
+            padding: $space 0;
+            display: block;
+            border-bottom: 1px dashed $theme-border-color;
+            margin-bottom: $space * 1.5;
           }
-          .parameter-list{
-            padding-top: $space * 2;
-            border-top: 1px dashed $theme-border-color;
-            @include clearfix();
-            li{
-              float: left;
-              width: (100%/6);
-              span{
-                display: block;
-                width: 100%;
-                height: 30px;
-                line-height: 30px;
-                padding: 0 12px;
-                font-size: $theme-font-small-value-size-web;
-              }
-              .title{background-color: #efefef;}
+          .item-box{
+            margin-bottom: $space;
+            .title{font-size:$theme-font-detail-size-web;color: #999;}
+            .value{font-size:$theme-font-detail-size-web;}
+            a{
+              color: #000;
             }
           }
           .detail-btn{
-
             display: block;
             cursor: pointer;
-            padding: 6px 12px;
+            padding: 4px;
             position: absolute;
-            bottom: $space;
-            right: $space;
+            bottom: $info-pdg;
+            right: $info-pdg;
             font-size: $theme-font-detail-size-web;
             color: #999;
             &:after{content: " >";}
@@ -72,7 +47,9 @@
         }
       }
     }
-
+    .u-pagination{
+      margin-top: 30px;
+    }
   }
 
   //宴会厅列表详情
@@ -81,7 +58,7 @@
 
 
   .hall-info-box{
-    $big-w:600px;
+    $big-w:700px;
     $photoWidth:0;
     $photoHeight:0;
     //background-color: #fff;
@@ -112,6 +89,7 @@
               right: 5px;
               bottom: 5px;
               color: #fff;
+              z-index: $zindex-img + 10;
               text-align: center;
               @include inlineMiddle();
               background-color: rgba(#000,0.4);
@@ -131,6 +109,7 @@
       background-color: #fff;
       text-align: center;
       display: table;
+      border: 1px solid $theme-border-color;
       .vertical-middle{
         display: table-cell;
         vertical-align: middle;
@@ -144,35 +123,28 @@
       }
       .store-btn{
         color: $theme-color-one;
+        font-size: 14px;
       }
       .parameter-box{
-        margin: $space*2 auto;
+        //margin: $space*2 auto;
         .parameter-list{
           font-size: 0;
-          padding: $space;
+          //padding: $space;
           background-color: #fff;
           position: relative;
           overflow: hidden;
-          text-align: left;
-          @include clearfix();
-          &:before{
-            content: '';
-            width: 0;
-            border-left: 1px dashed #ccc;
-            height: 300px;
-            position: absolute;
-            top: 0;
-            left: 50%;
-          }
+          text-align: center;
           >li{
-            float: left;
-            width: 50%;
             font-size: $theme-font-small-value-size-web;
             color: #666;
             border-radius: 4px;
             padding: 8px 12px;
-            .value{float: right;font-family: $font-family-base;position: relative;top: -1px;}
+            .value{font-family: $font-family-base;position: relative;}
             .title{color: $theme-font-disable-color;}
+            span{
+              line-height: 18px;
+              display: inline-block;
+            }
           }
         }
       }
@@ -253,12 +225,11 @@
           position: relative;
           padding: $space;
           text-align: center;
-          >.title{font-size: $theme-font-title-size - 2;padding: $space/2 0;display: block;}
-          .store-box{
-            display: none;
-          }
-          .detail-btn{
-            display: none;
+          >.title{
+            font-size: $theme-font-small-title-size + 2;padding: $space/2 0;display: block;}
+          .store-title{
+            font-size: $theme-font-small-title-size + 1;
+            color: $theme-font-color;
           }
         }
       }
@@ -293,24 +264,35 @@
     }
     .parameter-box{
       background-color: #fff;
+      border-top: $border;
     }
     .parameter-list{
       font-size: 0;
-      padding: $mrg-lf*1.5 $mrg-lf;
-      border-top: 1px dashed $theme-border-color;
-      >li{
-        display: inline-block;
-        font-size: $theme-font-detail-size;
-        color: #666;
-        background-color: #f0f0f0;
-        border-radius: 4px;
-        padding: 3px 6px;
-        margin:{
-          top: 0.15em;
-          bottom: 0.15em;
-          right: $mrg-lf;
+      li{
+        .value{
+          line-height: 16px;
+          font-size: $theme-font-value-size + 1 ;
+          color: $theme-font-color;
+          @include order(6);
         }
-
+        .title{ line-height: 16px;
+          font-size: $theme-font-value-size + 1 ;
+          @include order(3);
+          color:$theme-font-detail-color;
+        }
+        &:nth-child(n + 2){
+          border-top: 1px solid $theme-border-color;
+        }
+        display: block;
+        @include displayFlex();
+        @include alignItemsCenter();
+        padding: 10px 20px 10px 10px;
+        position: relative;
+        &:after{
+          content: " ";
+          @include order(4);
+          @include flex(1);
+        }
       }
     }
   }

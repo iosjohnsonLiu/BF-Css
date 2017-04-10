@@ -23,7 +23,7 @@
         }
         .info-box{
           text-align: center;
-          padding: 35px 0;
+          padding: 15px 0;
           position: relative;
           .title{
             font-size: $theme-font-title-size-web;
@@ -65,7 +65,7 @@
         border: 1px solid $theme-border-color;
         @include wap-img-shabox-sytle();
         .info-box{
-          padding: 20px 0;
+          padding: 8px 0 5px;
           position: relative;
           text-align: center;
           .title{

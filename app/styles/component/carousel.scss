@@ -72,10 +72,9 @@
   }
   @if($CssSwitchWeb){
     &#{$webClass}{
-      width: $web-max-screen-width ;
-      left: 50% !important;
-      margin-left: -($web-max-screen-width / 2) !important;
-      height: $web-max-screen-width / 3;
+      $img-scale:1/3;
+      height:  (100vw*$img-scale);
+      max-height: ($web-max-screen-width * $img-scale);
       .point-box{
         >li{font-size: 14px;}
       }
